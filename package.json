@@ -1,0 +1,23 @@
+{
+  "name": "vue-datable",
+  "version": "1.0.0",
+  "description": "Vue component for rendering data-tables",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run unit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darrynten/vue-data-table.git"
+  },
+  "keywords": [
+    "datatable",
+    "table"
+  ],
+  "author": "Steve Ops",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darrynten/vue-data-table/issues"
+  },
+  "homepage": "https://github.com/darrynten/vue-data-table#readme"
+}
