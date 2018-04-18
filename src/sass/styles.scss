@@ -1,0 +1,202 @@
+//COLORS
+$tabbs-blue: rgb(41, 98, 255);
+$tabbs-pink: rgb(255, 43, 104);
+$tabbs-green: rgb(18, 229, 13);
+$tabbs-yellow: rgb(255, 212, 3);
+$tabbs-dark: rgb(59, 71, 102);
+$tabbs-gray: rgb(108, 117, 140);
+$tabbs-gray-1: rgb(108, 117, 140);
+$tabbs-gray-2: rgb(157, 163, 179);
+$tabbs-gray-3: rgb(206, 209, 217);
+$tabbs-gray-4: rgb(216, 218, 225);
+$tabbs-gray-5: rgb(226, 227, 232);
+$tabbs-gray-6: rgb(235, 237, 240);
+$tabbs-gray-7: rgb(245, 246, 247);
+$black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+$blue-1: rgb(10, 25, 64);
+$blue-2: rgb(21, 29, 128);
+$blue-3: rgb(31, 74, 191);
+$blue-4: rgb(84, 129, 255);
+$blue-5: rgb(126, 161, 255);
+$blue-6: rgb(169, 192, 255);
+$blue-7: rgb(212, 224, 255);
+
+$colors-map: (
+        tabbs-blue: $tabbs-blue,
+        tabbs-pink: $tabbs-pink,
+        tabbs-green: $tabbs-green,
+        tabbs-yellow: $tabbs-yellow,
+        tabbs-dark: $tabbs-dark,
+        tabbs-gray: $tabbs-gray-1,
+        tabbs-gray-1: $tabbs-gray-1,
+        tabbs-gray-2: $tabbs-gray-2,
+        tabbs-gray-3: $tabbs-gray-3,
+        tabbs-gray-4: $tabbs-gray-4,
+        tabbs-gray-5: $tabbs-gray-5,
+        tabbs-gray-6: $tabbs-gray-6,
+        tabbs-gray-7: $tabbs-gray-7,
+        black: $black,
+        white: $white,
+        blue-1: $blue-1,
+        blue-2: $blue-2,
+        blue-3: $blue-3,
+        blue-4: $blue-4,
+        blue-5: $blue-5,
+        blue-6: $blue-6,
+        blue-7: $blue-7
+);
+
+$input-height: 38px;
+$input-fat-height: 46px;
+
+//BREAKPOINTS
+$break-point-sm: 720px;
+$break-point-xs: 480px;
+
+//BUTTONS
+button, a.button {
+  height: $input-height;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  &.btn-md {
+    width: 196px;
+  }
+  &.btn-lg {
+    width: 248px;
+  }
+  &.btn-xl {
+    width: 300px;
+  }
+  &.btn-fat {
+    height: $input-fat-height;
+  }
+
+  @each $color in blue, pink, gray {
+
+    $colorValue: map-get($colors-map, tabbs-#{$color});
+
+    &.btn-#{$color} {
+      background-color: $colorValue;
+      color: $white;
+      &:focus {
+        outline: $colorValue auto 1px;
+      }
+      &.disabled, &[disabled] {
+        background-color: lighten($colorValue, 30%);
+        cursor: not-allowed;
+        outline: none;
+      }
+    }
+
+    &.btn-#{$color}-outline {
+      background-color: $white;
+      color: $colorValue;
+      border: solid 1px $colorValue;
+      &:focus {
+        outline: $colorValue auto 1px;
+      }
+      &.disabled, &[disabled] {
+        color: lighten($colorValue, 30%);
+        border-color: lighten($colorValue, 30%);
+        cursor: not-allowed;
+        outline: none;
+      }
+    }
+
+  }
+}
+
+@each $color in blue, pink, gray {
+  $colorValue: map-get($colors-map, tabbs-#{$color});
+
+  .text-#{$color} {
+    color: $colorValue
+  }
+}
+
+a.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+//FORM INPUT
+input:not([type=checkbox]):not([type=radio]), select, textarea {
+  &:not(textarea) {
+    height: $input-height;
+  }
+  &:not([type=file]) {
+    width: 100%;
+  }
+  background-color: $tabbs-gray-7;
+  border: solid 1px $tabbs-gray-4;
+  color: $tabbs-gray-1;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  &::placeholder {
+    color: $tabbs-gray-2;
+  }
+  &:focus {
+    border-color: $blue-5;
+    outline: none;
+  }
+  &[aria-invalid=true] {
+    border-color: $tabbs-pink;
+    color: $tabbs-pink;
+    background-image: url(data:image/png;base64,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);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: right 30px center;
+  }
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: $tabbs-gray-7;
+  border: 1px solid $tabbs-gray-4;
+  display: inline-block;
+  position: relative;
+  padding: 7px !important;
+  top: 0.25rem;
+
+  &:focus {
+    outline: rgba(41, 98, 255, 0.3) solid 2px;
+    outline-offset: 1px;
+  }
+
+  &:checked {
+    border: 1px solid $tabbs-gray-4;
+    background-color: $white;
+    background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20d%3D%22M173.898%20439.404l-166.4-166.4c-9.997-9.997-9.997-26.206%200-36.204l36.203-36.204c9.997-9.998%2026.207-9.998%2036.204%200L192%20312.69%20432.095%2072.596c9.997-9.997%2026.207-9.997%2036.204%200l36.203%2036.204c9.997%209.997%209.997%2026.206%200%2036.204l-294.4%20294.401c-9.998%209.997-26.207%209.997-36.204-.001z%22%20fill%3D%22blue%22/%3E%3C/svg%3E);
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 3px;
+      padding: 0;
+    }
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  padding: 0 0 0 10px;
+  background-size: 15px 13px;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-position: right 10px center;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAflBMVEUAAAAvZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/tg0db9AAAAKXRSTlMAAQUKDhIUFRgcHR4gJCcoNU5WV11eX2FiaH6FlJ63yszP1+bp8ff5/R3tDSEAAAFCSURBVGje7c3HUgNBFENRgcE2Occmwxj0/z/IZso1oaeng3rjenephQ5gWZZlWdYut7h+XIsvz56u9nvD+YbkjdR4Jvmz6gwXfyTJW6HhSJLNamgoFdc+NsuhoVPc9rFVOoZKcZ3HZglg3TU0ius9NgvgnRQrbvD4gj1SrAwNfgNfYmVk8BU4pVQZG5sDAJdKxWMcAX7lTm0IlYAhU4KGSJkxJMqsIVAijGIlyihUIo0iJdrwKvdqI1tJMjKVRCNLSTYylAwjWckyEpVMI0nJNhKUAiNaKTK8yoPaiFKKjQhFYMwqHuMY0CoiI6jIjIAiNCYVqTGhiA2v8qk2vIrciFAExqwiMWYUkRFUflVGQBEak4rUmFDEhleRGx6lgjFSqhgDpZLRU6oZHaWisVWqGq1S2QBOPvh2CMuyLMuyrF3qHzdJFFyfRs27AAAAAElFTkSuQmCC);
+}
