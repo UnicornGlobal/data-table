@@ -158,6 +158,7 @@
         }
 
         this.processedDataset = result
+        return result
       },
       getStyle(field) {
         if (field.grow) {

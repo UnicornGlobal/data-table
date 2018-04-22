@@ -12,8 +12,10 @@
         inputName: this.name || 'date'
       }
     },
-    updated() {
-      this.picker.setDate(this.value)
+    watch: {
+      value(value){
+        this.picker.setDate(value)
+      }
     },
     mounted() {
       const getDate = this.getDate
