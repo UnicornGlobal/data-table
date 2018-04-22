@@ -111,10 +111,6 @@
           if (!tab.from && tab.to) {
             return `${tab.name} (Before ${tab.to})`
           }
-
-          if (tab.from && tab.to) {
-            return `${tab.name} (${tab.from} to ${tab.to})`
-          }
         }
 
         if (tab.type === 'range') {
@@ -128,10 +124,6 @@
 
           if (!tab.from && tab.to) {
             return `${tab.name} (Below ${tab.to})`
-          }
-
-          if (tab.from && tab.to) {
-            return `${tab.name} (${tab.from} to ${tab.to})`
           }
         }
 

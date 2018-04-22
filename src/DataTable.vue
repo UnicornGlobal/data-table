@@ -149,16 +149,19 @@
         }
 
         if (this.options.config.search.term) {
-          result = result.filter(item => {
-            if (item[this.options.config.search.field].toLowerCase().search(this.options.config.search.term.toLowerCase()) > -1) {
-              return true
-            }
-            return false
-          })
+          result = this.search(result)
         }
 
         this.processedDataset = result
         return result
+      },
+      search(data){
+        return data.filter(item => {
+          if (item[this.options.config.search.field].toLowerCase().search(this.options.config.search.term.toLowerCase()) > -1) {
+            return true
+          }
+          return false
+        })
       },
       getStyle(field) {
         if (field.grow) {

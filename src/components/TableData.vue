@@ -33,12 +33,12 @@
         {{ `${field.symbol} ${getSumTotal(data, field)}` }}
     </div>
     <div v-else-if="field.type === 'datetime'" class="field-contents datetime" :class="field.field">
-        <span class="year">{{formatDate(data[field.field]).year}}</span>
+        <span class="year">{{formatDate(data[field.field]).date}}</span>
         <span class="delimiter">,</span>
         <span class="time">{{formatDate(data[field.field]).time}}</span>
     </div>
     <div v-else-if="field.type === 'date'" class="field-contents" :class="field.field">
-        <span class="year">{{formatDate(data[field.field]).year}}</span>
+        <span class="year">{{formatDate(data[field.field]).date}}</span>
     </div>
     <div v-else-if="field.type === 'time'" class="field-contents" :class="field.field">
         <span class="year">{{formatDate(data[field.field]).time}}</span>
@@ -143,11 +143,11 @@
         }
         return this.field.value
       },
-      formatDate(date) {
-        const year = moment(date).format('YYYY-MM-DD')
-        const time = moment(date).format('LT')
+      formatDate(input) {
+        const date = moment(input).format('YYYY-MM-DD')
+        const time = moment(input).format('LT')
         return {
-          year,
+          date,
           time
         }
       }
