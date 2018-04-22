@@ -42,7 +42,7 @@
     },
     methods: {
       closeFilter() {
-        this.$parent.setActive(0)
+        this.$emit('close')
       },
       clearAmountFrom() {
         this.$refs.amountFrom.value = null

@@ -9,9 +9,9 @@
             </div>
             <div>
                 <div v-for="(tab, index) in filter.tabs">
-                    <filter-date-range v-if="tab.type === 'date' && index === activeTab" :filter="tab"
+                    <filter-date-range @close="setActive(0)" v-if="tab.type === 'date' && index === activeTab" :filter="tab"
                                        class="filter-tab-content"></filter-date-range>
-                    <filter-number-range v-if="tab.type === 'range' && index === activeTab" :filter="tab"
+                    <filter-number-range @close="setActive(0)" v-if="tab.type === 'range' && index === activeTab" :filter="tab"
                                          class="filter-tab-content"></filter-number-range>
                 </div>
             </div>

@@ -13,6 +13,12 @@ describe('DatePicker.vue', () => {
     expect(picker.vm.value).toEqual('12-12-1900')
   })
 
+  it('sets default input-name', () => {
+    let localVue = createLocalVue()
+    let picker = mount(DatePicker, {localVue, propsData: {value: '12-12-1900', format: 'DD-MM-YYYY'}})
+    expect(picker.vm.inputName).toEqual('date')
+  })
+
   it('sets new date', async () => {
     let localVue = createLocalVue()
     let picker = mount(DatePicker, {localVue, propsData: {name: 'date', value: '12-12-1900', format: 'DD-MM-YYYY'}})

@@ -95,7 +95,7 @@
     methods: {
       link(rowData) {
         return {
-          name: this.linking.route,
+          name: this.linking.route.name,
           params: {
             [this.linking.param]: rowData[this.linking.field]
           }

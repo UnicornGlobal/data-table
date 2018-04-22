@@ -40,7 +40,7 @@
      */
     methods: {
       closeFilter() {
-        this.$parent.setActive(0)
+        this.$emit('close')
       },
       setDateFrom(e) {
         this.$refs.from.value = e.date
