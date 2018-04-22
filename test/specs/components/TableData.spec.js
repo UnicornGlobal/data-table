@@ -212,32 +212,32 @@ describe('TableData.vue', () => {
     expect(option.vm.formatDate('1900-12-12 23:34:23')).toMatchObject({date: '1900-12-12', time: '11:34 PM'})
   })
 
-  // it('formats the price/amount', () => {
-  //   let localVue = createLocalVue()
-  //   let tableData = shallow(TableData, {
-  //     localVue,
-  //     propsData: {
-  //       data: {
-  //         '_id': '2',
-  //         'is_active': 0,
-  //         'is_deleted': 0,
-  //         'menu_items': [],
-  //         'amount': 20.00,
-  //         'category': 'Cat B',
-  //         'created_at': '2018-01-02',
-  //         'name': 'yy'
-  //       },
-  //       field: {
-  //         type: 'currency',
-  //         symbol: 'R',
-  //         name: 'Total',
-  //         field: 'amount',
-  //         header: true,
-  //         isArray: false,
-  //         selector: 'amount'
-  //       }
-  //     }
-  //   })
-  //   expect(tableData.find('.field-contents').element.innerText).to.equal('\n  R 20.00\n')
-  // })
+  it('formats the price/amount', () => {
+    let localVue = createLocalVue()
+    let tableData = shallow(TableData, {
+      localVue,
+      propsData: {
+        data: {
+          '_id': '2',
+          'is_active': 0,
+          'is_deleted': 0,
+          'menu_items': [],
+          'amount': 20.00,
+          'category': 'Cat B',
+          'created_at': '2018-01-02',
+          'name': 'yy'
+        },
+        field: {
+          type: 'currency',
+          symbol: 'R',
+          name: 'Total',
+          field: 'amount',
+          header: true,
+          isArray: false,
+          selector: 'amount'
+        }
+      }
+    })
+    expect(tableData.find('.field-contents').text()).toBe('R 20.00')
+  })
 })
