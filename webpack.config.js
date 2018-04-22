@@ -3,7 +3,7 @@ var webpack = require('webpack')
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-  entry: 'index.js',
+  entry: './src/DataTable.vue',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
