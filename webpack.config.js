@@ -5,9 +5,17 @@ var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
   entry: './src/DataTable.vue',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    path: path.resolve(__dirname, './'),
+    publicPath: './',
+    filename: 'index.js',
+    libraryTarget: 'umd',
+    library: 'vue-data-table',
+    umdNamedDefine: true
+  },
+  externals: {
+    moment: 'moment',
+    pikaday: 'pikaday',
+    'vue-avatar-or-initials': 'vue-avatar-or-initials'
   },
   resolve: {
     alias: {
