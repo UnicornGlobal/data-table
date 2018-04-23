@@ -103,7 +103,7 @@
         return field.length
       },
       getSumTotal(data, field) {
-        const format = amount => amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+        const format = amount => parseFloat(amount).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
         let value = data[field.field]
         if (value) {
           return format(value)
