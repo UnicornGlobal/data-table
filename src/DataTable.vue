@@ -38,104 +38,56 @@
         required: true
       }
     },
-    data() {
+    data () {
       return {
         processedDataset: []
       }
     },
     watch: {
-      dataset() {
+      dataset () {
         this.processData()
       }
     },
-    mounted() {
+    mounted () {
       this.processData()
-      this.$watch('options.config', () => {
-        this.$nextTick(this.processData())
-      }, {deep: true})
+      this.watchConfig()
     },
     computed: {
-      showHeaders() {
+      showHeaders () {
         return !(this.options.config.headers && this.options.config.headers.enabled === false)
-
       },
-      processedData() {
+      processedData () {
         return this.processedDataset
       }
     },
     methods: {
-      processData() {
-        let result = this.dataset.slice()
+      watchConfig () {
+        this.$watch('options.config', () => {
+          return this.$nextTick(this.processData)
+        }, {deep: true})
+      },
+      processData () {
+        let dataset = this.dataset.slice()
 
         if (this.options.config.filtering.enabled) {
-          for (let i = 0; i < this.options.config.filtering.filters.length; i++) {
-            result = result.filter(item => {
-              let show = false
-              let field = this.options.config.filtering.filters[i].field
-              let enabled = this.options.config.filtering.filters[i].enabled
-              let value = this.options.config.filtering.filters[i].value
-              let type = this.options.config.filtering.filters[i].type
-              let collection = this.options.config.filtering.filters[i].collection
-              let fieldItem = item[field]
+          for (let filter of this.options.config.filtering.filters) {
+            if (!filter.enabled) {
+              continue
+            }
 
-              if (enabled) {
-                show = true
+            dataset = dataset.filter(row => {
+              let show = true
+              if (filter.type === 'checkbox') {
+                show = this.filterCheckbox(row, filter)
               }
 
-              if (type === 'checkbox') {
-
-                show = !collection && fieldItem
-
-                if (!collection && value) {
-                  show = true
-                }
-                // TODO empty collections
-                if (collection && fieldItem.length > 0) {
-                  show = true
-                }
-
-                if (this.options.config.filtering.filters[i].value && collection) {
-                  show = true
-                }
+              if (filter.type === 'tabbed') {
+                show = this.filterTabs(row, filter)
               }
 
-              if (type === 'dropdown') {
-                if (this.options.config.filtering.filters[i].value) {
-                  show = (fieldItem === this.options.config.filtering.filters[i].value)
-                }
-              }
-
-              // TODO each 'type' should run through a method
-              if (type === 'tabbed') {
-                const config = this.options.config.filtering.filters[i]
-                for (let c = 0; c < config.tabs.length; c++) {
-                  if (config.tabs[c].type === 'date') {
-                    let from = config.tabs[c].from
-                    let to = config.tabs[c].to
-                    let date = item[config.tabs[c].field].split(' ')[0]
-
-                    if (from && date < from) {
-                      show = false
-                    }
-
-                    if (to && date > to) {
-                      show = false
-                    }
-                  }
-
-                  if (config.tabs[c].type === 'range') {
-                    let from = config.tabs[c].from
-                    let to = config.tabs[c].to
-                    let value = item[config.tabs[c].field]
-
-                    if (from && value < from) {
-                      show = false
-                    }
-
-                    if (to && value > to) {
-                      show = false
-                    }
-                  }
+              if (filter.type === 'dropdown') {
+                if (filter.value) {
+                  show = row[filter.field] === filter.value
                 }
               }
 
@@ -145,25 +97,79 @@
         }
 
         if (this.options.config.sorting.enabled) {
-          result.sort(this.compare)
+          dataset.sort(this.compare)
         }
 
         if (this.options.config.search.term) {
-          result = this.search(result)
+          dataset = this.search(dataset)
         }
 
-        this.processedDataset = result
-        return result
+        this.processedDataset = dataset
+        return dataset
       },
-      search(data){
-        return data.filter(item => {
-          if (item[this.options.config.search.field].toLowerCase().search(this.options.config.search.term.toLowerCase()) > -1) {
-            return true
-          }
-          return false
+      search (dataset) {
+        return dataset.filter(row => {
+          return row[this.options.config.search.field].toLowerCase().search(this.options.config.search.term.toLowerCase()) > -1
         })
       },
-      getStyle(field) {
+      filterCheckbox (row, filter) {
+        let value = row[filter.field]
+        let show = false
+
+        show = !filter.collection && value
+
+        if (!filter.collection && filter.value) {
+          show = true
+        }
+        // TODO empty collections
+        if (filter.collection && value.length > 0) {
+          show = true
+        }
+
+        if (filter.value && filter.collection) {
+          show = true
+        }
+
+        return show
+      },
+      filterTabs (dataItem, filter) {
+        const config = filter
+        let show = true
+        for (let tab of config.tabs) {
+          if (tab.type === 'date') {
+            show = this.dateTabFilter(dataItem, tab)
+          }
+
+          if (tab.type === 'range') {
+            show = this.rangeTabFilter(dataItem, tab)
+          }
+        }
+        return show
+      },
+      dateTabFilter (dataItem, tab) {
+        let date = dataItem[tab.field].split(' ')[0]
+
+        if (tab.from && date < tab.from) {
+          return false
+        }
+
+        return !(tab.to && date > tab.to)
+      },
+      rangeTabFilter (dataItem, tab) {
+        let value = dataItem[tab.field]
+        let show = true
+
+        if (tab.from && value < tab.from) {
+          show = false
+        }
+
+        if (tab.to && value > tab.to) {
+          show = false
+        }
+
+        return show
+      },
+      getStyle (field) {
         if (field.grow) {
           return 'flex: ' + field.grow
         }
@@ -178,7 +184,7 @@
 
         return 'flex: 1'
       },
-      compare(a, b) {
+      compare (a, b) {
         let field = this.options.config.sorting.field
         if (field.includes('.')) {
           const names = field.split('.')

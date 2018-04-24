@@ -175,6 +175,55 @@ describe('DataTable.vue', () => {
     expect(dataTable.vm.processedData).toEqual(dataTable.vm.processData())
   })
 
+  it('watches config', async () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallow(DataTable, {
+      localVue,
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {
+              enabled: true,
+              field: 'name',
+              term: 'xx'
+            },
+            linking: {}
+          }
+        }
+      }
+    })
+
+    let spy = sinon.stub(dataTable.vm, 'processData').returns(true)
+    dataTable.setProps({
+      options: {
+        config: {
+          sorting: {
+            field: 'address.name',
+            ascending: true
+          },
+          filtering: {},
+          search: {
+            enabled: false,
+            field: 'name',
+            term: 'ddd'
+          },
+          linking: {}
+        }
+      }
+    })
+
+    await dataTable.vm.$nextTick()
+    expect(spy.called).toBe(true)
+    spy.restore()
+  })
+
   it('processes data', () => {
     let localVue = createLocalVue()
 
@@ -214,10 +263,24 @@ describe('DataTable.vue', () => {
             'required': 15,
             'supplied': 13,
             'address': {'place': 'cde'}
+          },
+          {
+            'is_active': true,
+            'closed_on': [1, 2, 3, 4],
+            'menu_items': [],
+            'name': 'xx',
+            'created': '10-12-1992',
+            'updated': '14-12-1992',
+            'required': 15,
+            'supplied': 13,
+            'address': {'place': 'cde'}
           }
         ],
         options: {
           config: {
+            headers: {
+              enabled: true
+            },
             search: {
               enabled: true,
               field: 'name',
@@ -231,6 +294,13 @@ describe('DataTable.vue', () => {
             filtering: {
               enabled: true,
               filters: [
+                {
+                  enabled: false,
+                  field: 'is_active',
+                  value: true,
+                  type: 'checkbox',
+                  collection: false
+                },
                 {
                   enabled: true,
                   field: 'is_active',
@@ -253,9 +323,15 @@ describe('DataTable.vue', () => {
                 },
                 {
                   enabled: true,
+                  field: 'name',
+                  value: '',
+                  type: 'dropdown'
+                },
+                {
+                  enabled: true,
                   field: 'menu_items',
                   type: 'tabbed',
-                  tabbs: [
+                  tabs: [
                     {
                       type: 'date',
                       field: 'created',
@@ -350,6 +426,160 @@ describe('DataTable.vue', () => {
 
     dataTable.vm.processData()
     expect(typeof dataTable.vm.processedDataset).toEqual('object')
+  })
+
+  it('searches if searching is enabled', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallow(DataTable, {
+      localVue,
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {
+              enabled: true,
+              field: 'name',
+              term: 'xx'
+            },
+            linking: {}
+          }
+        }
+      }
+    })
+
+    expect(dataTable.vm.search([{name: 'xxxx'}, {name: 'yyyy'}])).toHaveLength(1)
+  })
+
+  it('filters by checkboxes', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallow(DataTable, {
+      localVue,
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {
+              enabled: true,
+              field: 'name',
+              term: 'xx'
+            },
+            linking: {}
+          }
+        }
+      }
+    })
+
+    expect(dataTable.vm.filterCheckbox({active: true}, {field: 'active', value: true})).toBe(true)
+    expect(dataTable.vm.filterCheckbox({active: [1, 2]}, {field: 'active', value: true, collection: true})).toBe(true)
+    expect(dataTable.vm.filterCheckbox({active: []}, {field: 'active', value: false, collection: true})).toBe(false)
+  })
+
+  it('filters by tabs', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallow(DataTable, {
+      localVue,
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {
+              enabled: true,
+              field: 'name',
+              term: 'xx'
+            },
+            linking: {}
+          }
+        }
+      }
+    })
+
+    let byDate = sinon.stub(dataTable.vm, 'dateTabFilter').returns(true)
+    let byRange = sinon.stub(dataTable.vm, 'rangeTabFilter').returns(true)
+
+    dataTable.vm.filterTabs({}, {tabs: [{type: 'date'}, {type: 'range'}]})
+    expect(byDate.called).toBe(true)
+    expect(byRange.called).toBe(true)
+    byRange.restore()
+    byDate.restore()
+  })
+
+  it('filters by date range', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallow(DataTable, {
+      localVue,
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {
+              enabled: true,
+              field: 'name',
+              term: 'xx'
+            },
+            linking: {}
+          }
+        }
+      }
+    })
+
+    expect(dataTable.vm.dateTabFilter({date: '12-12-1900'}, {field: 'date', from: '13-12-1900'})).toBe(false)
+    expect(dataTable.vm.dateTabFilter({date: '12-12-1900'}, {field: 'date', to: '10-12-1900'})).toBe(false)
+    expect(dataTable.vm.dateTabFilter({date: '12-12-1900'}, {field: 'date', to: '13-12-1900'})).toBe(true)
+  })
+
+  it('filters by number range', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallow(DataTable, {
+      localVue,
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {
+              enabled: true,
+              field: 'name',
+              term: 'xx'
+            },
+            linking: {}
+          }
+        }
+      }
+    })
+
+    expect(dataTable.vm.rangeTabFilter({count: 10}, {field: 'count', from: 11})).toBe(false)
+    expect(dataTable.vm.rangeTabFilter({count: 10}, {field: 'count', to: 9})).toBe(false)
+    expect(dataTable.vm.rangeTabFilter({count: 10}, {field: 'count', from: 9})).toBe(true)
+    expect(dataTable.vm.rangeTabFilter({count: 10}, {field: 'count', to: 15})).toBe(true)
   })
 
   it('gets style', () => {
@@ -462,33 +692,5 @@ describe('DataTable.vue', () => {
     expect(dataTable.vm.compare({name: 'abc'}, {name: 'def'})).toBe(-1)
     expect(dataTable.vm.compare({name: 'def'}, {name: 'abc'})).toBe(1)
     expect(dataTable.vm.compare({name: 'def'}, {name: 'def'})).toBe(0)
-  })
-
-  it('searches if searching is enabled', () => {
-    let localVue = createLocalVue()
-
-    let dataTable = shallow(DataTable, {
-      localVue,
-      propsData: {
-        dataset: [],
-        options: {
-          config: {
-            sorting: {
-              field: 'address.street',
-              ascending: false
-            },
-            filtering: {},
-            search: {
-              enabled: true,
-              field: 'name',
-              term: 'xx'
-            },
-            linking: {}
-          }
-        }
-      }
-    })
-
-    expect(dataTable.vm.search([{name: 'xxxx'}, {name: 'yyyy'}])).toHaveLength(1)
   })
 })
