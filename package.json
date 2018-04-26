@@ -1,6 +1,6 @@
 {
   "name": "unicorn-vue-datatable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue component for rendering data-tables",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
