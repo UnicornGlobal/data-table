@@ -56,13 +56,13 @@
                 text-decoration: none;
             }
             .pika-row td {
-                border: solid 1px $tabbs-gray-4;
+                border: solid 1px $gray-4;
                 &.is-today {
-                    background: $blue-4;
+                    background: $blue;
                     color: $white
                 }
                 &.is-selected {
-                    background: $tabbs-pink;
+                    background: $pink;
                     color: $white;
                     .pika-button {
                         box-shadow: none;

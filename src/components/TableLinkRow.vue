@@ -21,7 +21,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-bottom: 1px solid $tabbs-gray-4;
+        border-bottom: 1px solid $gray-4;
         height: 55px;
         padding-left: 1em;
         color: $black;
