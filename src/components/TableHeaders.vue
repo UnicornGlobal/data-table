@@ -16,7 +16,7 @@
                 </div>
                 <div class="arrow-spacer" v-else></div>
             </div>
-            <div v-else class="empty-header-cell" :style="styler(field)" :secondary="field.secondary"></div>
+            <div v-else class="empty-header-cell" :style="styler(field)" :secondary="field.secondary"><div class="empty-header-cell-inner"></div></div>
             <div v-if="controls && controls.length" class="header-cell" :secondary="false" style="flex: 1 1 0%">
                 <div>
                     Options
@@ -46,10 +46,9 @@
     .headers {
         display: flex;
         justify-content: space-between;
-        border-bottom: 3px solid $tabbs-gray-4;
+        border-bottom: 3px solid $gray-4;
         background-color: $white;
         min-height: 55px;
-        padding-left: 1em;
 
         @media(max-width: 480px) {
             padding-right: 7px;
@@ -58,10 +57,10 @@
         }
 
         .header-cell {
+            padding: 0px 3px;
             display: flex;
 
             div {
-                font-family: 'NunitoSans-Bold';
                 align-self: center;
                 color: $black;
                 display: flex;
@@ -82,8 +81,16 @@
         }
 
         .header-cell:last-child {
-            margin-left: 1em;
+
             justify-content: flex-end;
+
+            .arrow-spacer {
+                display: none;
+            }
+        }
+
+        .empty-header-cell-inner {
+            width: 35px;
         }
     }
 </style>
