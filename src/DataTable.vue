@@ -179,7 +179,7 @@
         }
 
         if (field.type === 'component') {
-          return 'flex: 0; padding-right: 1em;'
+          return 'flex: 0;'
         }
 
         return 'flex: 1'

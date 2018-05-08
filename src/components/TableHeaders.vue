@@ -92,6 +92,10 @@
         .empty-header-cell-inner {
             width: 35px;
         }
+
+        .empty-header-cell {
+            padding: 0 3px;
+        }
     }
 </style>
 

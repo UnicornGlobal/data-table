@@ -23,7 +23,6 @@
         justify-content: center;
         border-bottom: 1px solid $gray-4;
         height: 55px;
-        padding-left: 1em;
         color: $black;
 
         &:hover {

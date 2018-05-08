@@ -31,7 +31,6 @@
         justify-content: center;
         border-bottom: 1px solid $gray-4;
         min-height: 56px;
-        padding-left: 1em;
 
         @media(max-width: 480px) {
             min-height: 65px;
