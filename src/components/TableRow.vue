@@ -29,10 +29,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-bottom: 1px solid $tabbs-gray-4;
+        border-bottom: 1px solid $gray-4;
         min-height: 56px;
-        padding-left: 1em;
-        padding-right: 0.125em;
 
         @media(max-width: 480px) {
             min-height: 65px;

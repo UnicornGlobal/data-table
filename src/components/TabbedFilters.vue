@@ -52,7 +52,7 @@
 
             &.active {
                 background: lightgrey;
-                color: $tabbs-blue;
+                color: $blue;
             }
         }
     }

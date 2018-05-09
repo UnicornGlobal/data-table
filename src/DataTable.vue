@@ -179,7 +179,7 @@
         }
 
         if (field.type === 'component') {
-          return 'flex: 0; padding-right: 1em;'
+          return 'flex: 0;'
         }
 
         return 'flex: 1'
@@ -278,8 +278,8 @@
         }
 
         a {
-            background-color: $tabbs-blue;
-            border: 1px solid $tabbs-gray-3;
+            background-color: $blue;
+            border: 1px solid $gray-4;
             color: $white;
             text-decoration: none;
             padding: 7px 20px;
@@ -288,7 +288,6 @@
         }
 
         .action {
-            margin-left: 1em;
             flex: 0;
         }
     }
