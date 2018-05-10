@@ -640,7 +640,7 @@ describe('DataTable.vue', () => {
 
     expect(dataTable.vm.getStyle({grow: 1})).toEqual('flex: 1')
     expect(dataTable.vm.getStyle({type: 'image'})).toEqual('flex: 0; min-width: 50px;')
-    expect(dataTable.vm.getStyle({type: 'component'})).toEqual('flex: 0; padding-right: 1em;')
+    expect(dataTable.vm.getStyle({type: 'component'})).toEqual('flex: 0;')
     expect(dataTable.vm.getStyle({type: 'text'})).toEqual('flex: 1')
   })
 
