@@ -111,6 +111,11 @@
         return 0
       },
       getProps() {
+
+        if(field.props && typeof field.props === 'function'){
+          return field.props(this.data)
+        }
+
         if (this.field.requireProps.propsFromData.enabled) {
           const propFields = this.field.requireProps.propsFromData.propFields
           const props = {}
