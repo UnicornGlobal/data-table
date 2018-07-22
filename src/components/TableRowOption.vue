@@ -1,9 +1,12 @@
 <template>
-    <router-link v-if="config.type == 'link'" :to="config.href(data)" :class="config.class">
-        {{config.label}}
-    </router-link>
+    <div v-if="config.type == 'link'">
+        <router-link :to="config.href(data)" :class="config.class" :style="config.style">
+            {{config.label}}
+        </router-link>
+    </div>
     <component v-else-if="config.type == 'component'" :is="componentName" v-bind="componentProps"
-               v-on="componentEvents"></component>
+               v-on="componentEvents" :style="config.style">
+    </component>
 </template>
 <script>
   export default {
