@@ -111,9 +111,8 @@
         return 0
       },
       getProps() {
-
-        if(field.props && typeof field.props === 'function'){
-          return field.props(this.data)
+        if(this.field.props && typeof this.field.props === 'function'){
+          return this.field.props(this.data)
         }
 
         if (this.field.requireProps.propsFromData.enabled) {
