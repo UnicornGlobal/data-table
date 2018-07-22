@@ -71,6 +71,40 @@ describe('TableData.vue', () => {
     expect(option.vm.getProps()).toMatchObject({field: 'fakeName'})
   })
 
+  it('computes component props when its a function', () => {
+    let localVue = createLocalVue()
+    let option = shallow(TableData, {
+      localVue,
+      propsData: {
+        field: {
+          type: 'component',
+          component: 'div',
+          props: (data) => {
+            return {
+              name: 'me',
+              age: 10
+            }
+          },
+          requireProps: {
+            propsFromData: {
+              enabled: true,
+              propFields: [{field: 'name'}]
+            },
+            status: true,
+            defaultProps: {
+              prop1: '1',
+              prop2: '2'
+            }
+          }
+        },
+        data: {
+          name: 'fakeName'
+        }
+      }
+    })
+    expect(option.vm.getProps()).toMatchObject({name: 'me', age: 10})
+  })
+
   it('gets component default props', () => {
     let localVue = createLocalVue()
     let option = shallow(TableData, {
