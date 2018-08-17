@@ -51,6 +51,9 @@
 
     .field-contents {
         font-size: .9em;
+        &.image {
+          min-width: 58px;
+        }
     }
 
     .year, .time {

@@ -51,6 +51,7 @@
     mounted () {
       this.processData()
       this.watchConfig()
+      console.log('everyone')
     },
     computed: {
       showHeaders () {

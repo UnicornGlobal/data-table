@@ -1,8 +1,26 @@
 <template>
-    <router-link :to="link(data)" class="list-row">
+    <router-link v-if="!smallScreen" :to="link(data)" class="list-row">
         <div v-for="(field, index) in fields" class="list-row-field" :style="styler(field)"
              :secondary="field.secondary === true">
             <table-data :data="data" :field="field"></table-data>
+        </div>
+    </router-link>
+    <router-link v-else :to="link(data)" class="mobile-screen">
+        <div v-if="imageField" class="thumbnail">
+            <div class="list-row-field">
+                <table-data v-if="imageField" :data="data" :field="imageField"></table-data>
+            </div>
+        </div>
+        <div class="rest">
+            <div v-for="(field, index) in filteredFields" class="list-row-field" :style="styler(field)"
+                :secondary="field.secondary === true">
+                <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data" :field="field"></table-data>
+            </div>
+        </div>
+        <div v-if="displayRight" class="mobile-right">
+            <div :style="getStyle(displayRight, data)" class="list-row-field">
+                <table-data v-if="displayRight" :data="data" :field="displayRight"></table-data>
+            </div>
         </div>
     </router-link>
 </template>
@@ -36,6 +54,8 @@
 
         .list-row-field {
             flex: 1;
+            padding-left: 5px;
+            padding-right: 5px;
         }
 
         .list-row-field:first-child {
@@ -64,6 +84,47 @@
             margin-bottom: 65px;
         }
     }
+    .mobile-screen {
+        display: grid;
+        grid-template-columns: 1fr 4fr 2fr;
+        align-items: center;
+        text-decoration: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $gray-4;
+        color: $black;
+
+        &:hover {
+            background-color: #f7f8f9;
+        }
+
+        .list-row-field {
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        .rest {
+            .list-row-field:nth-of-type(1) {
+                font-weight: 900 !important;
+                font-size: 15px !important;
+                padding-bottom: 5px;
+            }
+            .list-row-field:nth-of-type(2) {
+                color: rgba(0,0,0, 0.6)
+            }
+        }
+
+        .mobile-right {
+            text-align: right;
+            .list-row-field {
+                display: inline-block;
+                background-color: green;
+                padding: 5px;
+                border-radius: 4px;
+                color: white;
+            }
+        }
+    }
 </style>
 
 <script>
@@ -72,6 +133,11 @@
   export default {
     components: {
       TableData
+    },
+    data() {
+        return {
+            windowWidth: null
+        }
     },
     props: {
       data: {
@@ -91,6 +157,39 @@
         required: true
       }
     },
+    mounted() {
+        this.windowWidth = window.innerWidth
+        this.$nextTick(() => {
+            window.addEventListener('resize', () => {
+                this.windowWidth = window.innerWidth
+            });
+        })
+    },
+    computed: {
+        smallScreen() {
+            return this.windowWidth && this.windowWidth <= 500 ? true : false
+        },
+        imageField() {
+            return this.fields.find(field => field.field === 'image')
+        },
+        displayRight() {
+            return this.fields.find(field => field.displayRightOnMobile === true)
+        },
+        filteredFields() {
+            const copied = [...this.fields]
+            const image = copied.findIndex(field => field.field === 'image');
+            if (image >= 0) {
+                copied.splice(image, 1)
+            }
+            const displayRight = copied.findIndex(field => field.displayRightOnMobile === true)
+            if (displayRight >= 0) {
+                copied.splice(displayRight, 1)
+            }
+            console.log(displayRight)
+
+            return copied
+        }
+    },
     methods: {
       link(rowData) {
         return {
@@ -99,6 +198,14 @@
             [this.linking.param]: rowData[this.linking.field]
           }
         }
+      },
+      getStyle(field, data){
+          if (field.styledBackground && field.styledBackground.enabled) {
+              const value = field.field.split('.').reduce((prev, curr) => {
+                return prev ? prev[curr] : null
+            }, data || self)
+            return `background-color: ${field.styledBackground.config[value]}`
+          }
       }
     }
   }
