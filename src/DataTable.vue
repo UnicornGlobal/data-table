@@ -9,7 +9,7 @@
         <table-headers v-if="processedData.length && showHeaders" :config="options.config" :fields="options.fields"
                        :styler="getStyle" :controls="options.controls || []"></table-headers>
         <table-body v-if="processedData.length" :dataset="processedData" :fields="options.fields" :styler="getStyle"
-                    :linking="options.config.linking" :controls="options.controls || []"></table-body>
+                    :linking="options.config.linking" :mobileType="options.config.mobileType" :controls="options.controls || []"></table-body>
         <div v-else class="no-results">No Results. Please broaden your search parameters.</div>
     </div>
 </template>

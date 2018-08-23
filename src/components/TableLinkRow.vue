@@ -5,21 +5,36 @@
             <table-data :data="data" :field="field"></table-data>
         </div>
     </router-link>
-    <router-link v-else :to="link(data)" class="mobile-screen">
-        <div v-if="imageField" class="thumbnail">
-            <div class="list-row-field">
-                <table-data v-if="imageField" :data="data" :field="imageField"></table-data>
+    <router-link v-else :to="link(data)" style="text-decoration: none">
+        <div v-if="mobileType === 'withImage'" class="mobile-screen">
+            <div v-if="imageField" class="thumbnail">
+                <div class="list-row-field">
+                    <table-data v-if="imageField" :data="data" :field="imageField"></table-data>
+                </div>
+            </div>
+            <div class="rest">
+                <div v-for="(field, index) in filteredFields" class="list-row-field" :style="styler(field)"
+                    :secondary="field.secondary === true">
+                    <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data" :field="field"></table-data>
+                </div>
+            </div>
+            <div v-if="displayRight" class="mobile-right">
+                <div :style="getStyle(displayRight, data)" class="list-row-field">
+                    <table-data v-if="displayRight" :data="data" :field="displayRight"></table-data>
+                </div>
             </div>
         </div>
-        <div class="rest">
-            <div v-for="(field, index) in filteredFields" class="list-row-field" :style="styler(field)"
-                :secondary="field.secondary === true">
-                <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data" :field="field"></table-data>
+        <div v-else-if="mobileType === 'scroll'" class="mobile-scroll" :style="`display: grid; grid-template-columns: 100px ${fields.length - 1}fr;`">
+            <div class="first-child">
+                <div class="list-row-field" :style="styler(firstChild)" style="white-space: nowrap">
+                    <table-data :data="data" :field="firstChild"></table-data>
+                </div>
             </div>
-        </div>
-        <div v-if="displayRight" class="mobile-right">
-            <div :style="getStyle(displayRight, data)" class="list-row-field">
-                <table-data v-if="displayRight" :data="data" :field="displayRight"></table-data>
+            <div class="remaining-data" :style="`display: grid; grid-template-columns: repeat(${fields.length - 1}, 1fr); overflow: auto;`">
+                <div v-for="(field, index) in rest" class="list-row-field" style="white-space: nowrap"
+                    :secondary="field.secondary === true">
+                    <table-data :data="data" :field="field"></table-data>
+                </div>
             </div>
         </div>
     </router-link>
@@ -125,11 +140,17 @@
             }
         }
     }
+
+    .mobile-scroll {
+        .list-row-field {
+            padding: 3px;
+        }
+    }
 </style>
 
 <script>
   import TableData from './TableData.vue'
-
+// withImage
   export default {
     components: {
       TableData
@@ -155,6 +176,10 @@
       linking: {
         type: Object,
         required: true
+      },
+      mobileType: {
+        type: String,
+        required: false
       }
     },
     mounted() {
@@ -164,6 +189,23 @@
                 this.windowWidth = window.innerWidth
             });
         })
+        var scrollers = document.getElementsByClassName('remaining-data');
+
+        var scrollerDivs = Array.prototype.filter.call(scrollers, function(testElement) {
+        return testElement.nodeName === 'DIV';
+        });
+
+        function scrollAll(scrollLeft) {
+        scrollerDivs.forEach(function(element, index, array) {
+            element.scrollLeft = scrollLeft;
+        });
+        }
+
+        scrollerDivs.forEach(function(element, index, array) {
+        element.addEventListener('scroll', function(e) {
+            scrollAll(e.target.scrollLeft);
+        });
+        });
     },
     computed: {
         smallScreen() {
@@ -188,6 +230,14 @@
             console.log(displayRight)
 
             return copied
+        },
+        firstChild() {
+            return this.fields[0]
+        },
+        rest() {
+            const fields = [...this.fields]
+            fields.splice(0, 1)
+            return fields
         }
     },
     methods: {

@@ -2,7 +2,7 @@
     <div class="list">
         <div v-if="mustLink()">
             <table-link-row v-for="(data, key) in dataset" :fields="fields" :data="data" :styler="styler" :key="key"
-                            :linking="linking"></table-link-row>
+                            :linking="linking" :mobileType="mobileType"></table-link-row>
         </div>
         <table-row v-for="(data, key) in dataset" :fields="fields" :data="data" :styler="styler" :key="key"
                    :controls="controls" v-else></table-row>
@@ -16,7 +16,7 @@
         position: relative;
         overflow-y: auto;
         max-height: 540px;
-        overflow-x: hidden;
+        overflow-x: scroll;
 
         @media(max-width: 480px) {
             max-height: calc(100vh - 250px);
@@ -55,6 +55,10 @@
       },
       controls: {
         type: Array,
+        required: false
+      },
+      mobileType: {
+        type: String,
         required: false
       }
     },
