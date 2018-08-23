@@ -6,10 +6,10 @@
         <filtering v-if="options.config.filtering.enabled" :filters="options.config.filtering.filters"
                    :dataset="dataset"></filtering>
         <searching v-if="options.config.search.enabled" :config="options.config.search"></searching>
-        <table-headers v-if="processedData.length && showHeaders" :config="options.config" :fields="options.fields"
+        <table-headers v-if="processedData.length && showHeaders && !smallScreen" :config="options.config" :fields="options.fields"
                        :styler="getStyle" :controls="options.controls || []"></table-headers>
         <table-body v-if="processedData.length" :dataset="processedData" :fields="options.fields" :styler="getStyle"
-                    :linking="options.config.linking" :mobileType="options.config.mobileType" :showLabelOnMobile="options.config.showLabelOnMobile" :controls="options.controls || []"></table-body>
+                    :linking="options.config.linking" :mobileType="options.config.mobileType" :showLabelOnMobile="options.config.showLabelOnMobile" :smallScreen="smallScreen" :controls="options.controls || []"></table-body>
         <div v-else class="no-results">No Results. Please broaden your search parameters.</div>
     </div>
 </template>
@@ -40,7 +40,8 @@
     },
     data () {
       return {
-        processedDataset: []
+        processedDataset: [],
+        windowWidth: null
       }
     },
     watch: {
@@ -51,7 +52,12 @@
     mounted () {
       this.processData()
       this.watchConfig()
-      console.log('everyone')
+      this.windowWidth = window.innerWidth
+        this.$nextTick(() => {
+            window.addEventListener('resize', () => {
+                this.windowWidth = window.innerWidth
+            });
+        })
     },
     computed: {
       showHeaders () {
@@ -59,7 +65,10 @@
       },
       processedData () {
         return this.processedDataset
-      }
+      },
+      smallScreen() {
+            return this.windowWidth && this.windowWidth <= 500 ? true : false
+        },
     },
     methods: {
       watchConfig () {

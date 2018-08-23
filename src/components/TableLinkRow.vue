@@ -5,8 +5,8 @@
             <table-data :data="data" :field="field"></table-data>
         </div>
     </router-link>
-    <router-link v-else :to="link(data)" style="text-decoration: none">
-        <div v-if="mobileType === 'withImage'" class="mobile-screen">
+    <router-link v-else :to="link(data)" class="row-link" style="text-decoration: none; display: block;">
+        <div v-if="mobileType === 'with-image'" class="mobile-screen">
             <div v-if="imageField" class="thumbnail">
                 <div class="list-row-field">
                     <table-data v-if="imageField" :data="data" :field="imageField"></table-data>
@@ -119,6 +119,7 @@
         padding-bottom: 10px;
         border-bottom: 1px solid $gray-4;
         color: $black;
+        padding-left: 2px;
 
         &.no-image {
             grid-template-columns: 100px 4fr 2fr;
@@ -190,11 +191,6 @@
     components: {
       TableData
     },
-    data() {
-        return {
-            windowWidth: null
-        }
-    },
     props: {
       data: {
         type: Object,
@@ -219,20 +215,13 @@
       showLabelOnMobile: {
         type: Boolean,
         required: false
+      },
+      smallScreen: {
+        type: Boolean,
+        required: false
       }
     },
-    mounted() {
-        this.windowWidth = window.innerWidth
-        this.$nextTick(() => {
-            window.addEventListener('resize', () => {
-                this.windowWidth = window.innerWidth
-            });
-        })
-    },
     computed: {
-        smallScreen() {
-            return this.windowWidth && this.windowWidth <= 500 ? true : false
-        },
         imageField() {
             return this.fields.find(field => field.field === 'image')
         },
