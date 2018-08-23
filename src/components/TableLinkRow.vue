@@ -238,7 +238,6 @@
             if (displayRight >= 0) {
                 copied.splice(displayRight, 1)
             }
-            console.log(displayRight)
 
             return copied
         },
