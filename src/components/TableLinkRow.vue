@@ -24,16 +24,27 @@
                 </div>
             </div>
         </div>
-        <div v-else-if="mobileType === 'scroll'" class="mobile-scroll" :style="`display: grid; grid-template-columns: 100px ${fields.length - 1}fr;`">
-            <div class="first-child">
-                <div class="list-row-field" :style="styler(firstChild)" style="white-space: nowrap">
-                    <table-data :data="data" :field="firstChild"></table-data>
+        <div v-else-if="mobileType === 'no-image'" class="mobile-screen no-image">
+            <div class="thumbnail">
+                <div class="list-row-field">
+                    <table-data :data="data" :field="firstField"></table-data>
                 </div>
             </div>
-            <div class="remaining-data" :style="`display: grid; grid-template-columns: repeat(${fields.length - 1}, 1fr); overflow: auto;`">
-                <div v-for="(field, index) in rest" class="list-row-field" style="white-space: nowrap"
+            <div class="rest">
+                <div v-for="(field, index) in rest" class="list-row-field" :style="styler(field)"
                     :secondary="field.secondary === true">
-                    <table-data :data="data" :field="field"></table-data>
+                    <div v-if="showLabelOnMobile" class="grid">
+                        <span v-if="!field.displayRightOnMobile" class="label">{{field.name}}: </span>
+                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data" :field="field"></table-data>
+                    </div>
+                    <div v-else>
+                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data" :field="field"></table-data>
+                    </div>
+                </div>
+            </div>
+            <div v-if="displayRight" class="mobile-right">
+                <div :style="getStyle(displayRight, data)" class="list-row-field">
+                    <table-data v-if="displayRight" :data="data" :field="displayRight"></table-data>
                 </div>
             </div>
         </div>
@@ -49,7 +60,7 @@
         }
     }
 
-    .list-row {
+    .list-row, .mobile-scroll {
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -109,8 +120,24 @@
         border-bottom: 1px solid $gray-4;
         color: $black;
 
+        &.no-image {
+            grid-template-columns: 100px 4fr 2fr;
+        }
+
         &:hover {
             background-color: #f7f8f9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 70px 3fr;
+
+            .label {
+                font-size: .9em;
+                display: inline-block;
+                padding-left: 3px;
+                padding-right: 3px;
+            }
         }
 
         .list-row-field {
@@ -119,15 +146,17 @@
         }
 
         .rest {
+            .list-row-field {
+                color: rgba(0,0,0,0.6)
+            }
             .list-row-field:nth-of-type(1) {
+                color: rgb(0,0,0);
                 font-weight: 900 !important;
                 font-size: 15px !important;
                 padding-bottom: 5px;
             }
-            .list-row-field:nth-of-type(2) {
-                color: rgba(0,0,0, 0.6)
-            }
         }
+
 
         .mobile-right {
             text-align: right;
@@ -141,9 +170,15 @@
         }
     }
 
-    .mobile-scroll {
-        .list-row-field {
-            padding: 3px;
+    .no-image {
+        .rest {
+            .list-row-field {
+                color: rgba(0,0,0,0.6)
+            }
+            .list-row-field:nth-of-type(1) {
+                color: rgb(0,0,0);
+                padding-bottom: 0px;
+            }
         }
     }
 </style>
@@ -180,6 +215,10 @@
       mobileType: {
         type: String,
         required: false
+      },
+      showLabelOnMobile: {
+        type: Boolean,
+        required: false
       }
     },
     mounted() {
@@ -189,23 +228,6 @@
                 this.windowWidth = window.innerWidth
             });
         })
-        var scrollers = document.getElementsByClassName('remaining-data');
-
-        var scrollerDivs = Array.prototype.filter.call(scrollers, function(testElement) {
-        return testElement.nodeName === 'DIV';
-        });
-
-        function scrollAll(scrollLeft) {
-        scrollerDivs.forEach(function(element, index, array) {
-            element.scrollLeft = scrollLeft;
-        });
-        }
-
-        scrollerDivs.forEach(function(element, index, array) {
-        element.addEventListener('scroll', function(e) {
-            scrollAll(e.target.scrollLeft);
-        });
-        });
     },
     computed: {
         smallScreen() {
@@ -231,7 +253,7 @@
 
             return copied
         },
-        firstChild() {
+        firstField() {
             return this.fields[0]
         },
         rest() {
