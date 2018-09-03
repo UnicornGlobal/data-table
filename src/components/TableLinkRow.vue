@@ -1,8 +1,55 @@
 <template>
-    <router-link :to="link(data)" class="list-row">
+    <router-link v-if="!smallScreen" :to="link(data)" class="list-row">
         <div v-for="(field, index) in fields" class="list-row-field" :style="styler(field)"
              :secondary="field.secondary === true">
             <table-data :data="data" :field="field"></table-data>
+        </div>
+    </router-link>
+    <router-link v-else :to="link(data)" class="row-link" style="text-decoration: none; display: block;">
+        <div v-if="mobileType === 'with-image'" class="mobile-screen">
+            <div v-if="imageField" class="thumbnail">
+                <div class="list-row-field">
+                    <table-data v-if="imageField" :data="data" :field="imageField"></table-data>
+                </div>
+            </div>
+            <div class="rest">
+                <div v-for="(field, index) in filteredFields" class="list-row-field" :style="styler(field)"
+                     :secondary="field.secondary === true">
+                    <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
+                                :field="field"></table-data>
+                </div>
+            </div>
+            <div v-if="displayRight" class="mobile-right">
+                <div :style="getStyle(displayRight, data)" class="list-row-field">
+                    <table-data v-if="displayRight" :data="data" :field="displayRight"></table-data>
+                </div>
+            </div>
+        </div>
+        <div v-else-if="mobileType === 'no-image'" class="mobile-screen no-image">
+            <div class="thumbnail">
+                <div class="list-row-field">
+                    <table-data :data="data" :field="firstField"></table-data>
+                </div>
+            </div>
+            <div class="rest">
+                <div v-for="(field, index) in rest" class="list-row-field" :style="styler(field)"
+                     :secondary="field.secondary === true">
+                    <div v-if="showLabelOnMobile" class="grid">
+                        <span v-if="!field.displayRightOnMobile" class="label">{{field.name}}: </span>
+                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
+                                    :field="field"></table-data>
+                    </div>
+                    <div v-else>
+                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
+                                    :field="field"></table-data>
+                    </div>
+                </div>
+            </div>
+            <div v-if="displayRight" class="mobile-right">
+                <div :style="getStyle(displayRight, data)" class="list-row-field">
+                    <table-data v-if="displayRight" :data="data" :field="displayRight"></table-data>
+                </div>
+            </div>
         </div>
     </router-link>
 </template>
@@ -16,7 +63,7 @@
         }
     }
 
-    .list-row {
+    .list-row, .mobile-scroll {
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -36,6 +83,8 @@
 
         .list-row-field {
             flex: 1;
+            padding-left: 5px;
+            padding-right: 5px;
         }
 
         .list-row-field:first-child {
@@ -64,11 +113,83 @@
             margin-bottom: 65px;
         }
     }
+
+    .mobile-screen {
+        display: grid;
+        grid-template-columns: 1fr 4fr 2fr;
+        align-items: center;
+        text-decoration: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $gray-4;
+        color: $black;
+        padding-left: 2px;
+
+        &.no-image {
+            grid-template-columns: 100px 4fr 2fr;
+        }
+
+        &:hover {
+            background-color: #f7f8f9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 70px 3fr;
+
+            .label {
+                font-size: .9em;
+                display: inline-block;
+                padding-left: 3px;
+                padding-right: 3px;
+            }
+        }
+
+        .list-row-field {
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        .rest {
+            .list-row-field {
+                color: rgba(0, 0, 0, 0.6)
+            }
+            .list-row-field:nth-of-type(1) {
+                color: rgb(0, 0, 0);
+                font-weight: 900 !important;
+                font-size: 15px !important;
+                padding-bottom: 5px;
+            }
+        }
+
+        .mobile-right {
+            text-align: right;
+            .list-row-field {
+                display: inline-block;
+                background-color: green;
+                padding: 5px;
+                border-radius: 4px;
+                color: white;
+            }
+        }
+    }
+
+    .no-image {
+        .rest {
+            .list-row-field {
+                color: rgba(0, 0, 0, 0.6)
+            }
+            .list-row-field:nth-of-type(1) {
+                color: rgb(0, 0, 0);
+                padding-bottom: 0px;
+            }
+        }
+    }
 </style>
 
 <script>
   import TableData from './TableData.vue'
-
+  // withImage
   export default {
     components: {
       TableData
@@ -89,15 +210,64 @@
       linking: {
         type: Object,
         required: true
+      },
+      mobileType: {
+        type: String,
+        required: false
+      },
+      showLabelOnMobile: {
+        type: Boolean,
+        required: false
+      },
+      smallScreen: {
+        type: Boolean,
+        required: false
+      }
+    },
+    computed: {
+      imageField () {
+        return this.fields.find(field => field.field === 'image')
+      },
+      displayRight () {
+        return this.fields.find(field => field.displayRightOnMobile === true)
+      },
+      filteredFields () {
+        const copied = [...this.fields]
+        const image = copied.findIndex(field => field.field === 'image')
+        if (image >= 0) {
+          copied.splice(image, 1)
+        }
+        const displayRight = copied.findIndex(field => field.displayRightOnMobile === true)
+        if (displayRight >= 0) {
+          copied.splice(displayRight, 1)
+        }
+
+        return copied
+      },
+      firstField () {
+        return this.fields[0]
+      },
+      rest () {
+        const fields = [...this.fields]
+        fields.splice(0, 1)
+        return fields
       }
     },
     methods: {
-      link(rowData) {
+      link (rowData) {
         return {
           name: this.linking.route.name,
           params: {
             [this.linking.param]: rowData[this.linking.field]
           }
+        }
+      },
+      getStyle (field, data) {
+        if (field.styledBackground && field.styledBackground.enabled) {
+          const value = field.field.split('.').reduce((prev, curr) => {
+            return prev ? prev[curr] : null
+          }, data || self)
+          return `background-color: ${field.styledBackground.config[value]}`
         }
       }
     }
