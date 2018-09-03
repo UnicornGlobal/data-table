@@ -14,8 +14,9 @@
             </div>
             <div class="rest">
                 <div v-for="(field, index) in filteredFields" class="list-row-field" :style="styler(field)"
-                    :secondary="field.secondary === true">
-                    <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data" :field="field"></table-data>
+                     :secondary="field.secondary === true">
+                    <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
+                                :field="field"></table-data>
                 </div>
             </div>
             <div v-if="displayRight" class="mobile-right">
@@ -32,13 +33,15 @@
             </div>
             <div class="rest">
                 <div v-for="(field, index) in rest" class="list-row-field" :style="styler(field)"
-                    :secondary="field.secondary === true">
+                     :secondary="field.secondary === true">
                     <div v-if="showLabelOnMobile" class="grid">
                         <span v-if="!field.displayRightOnMobile" class="label">{{field.name}}: </span>
-                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data" :field="field"></table-data>
+                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
+                                    :field="field"></table-data>
                     </div>
                     <div v-else>
-                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data" :field="field"></table-data>
+                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
+                                    :field="field"></table-data>
                     </div>
                 </div>
             </div>
@@ -110,6 +113,7 @@
             margin-bottom: 65px;
         }
     }
+
     .mobile-screen {
         display: grid;
         grid-template-columns: 1fr 4fr 2fr;
@@ -148,16 +152,15 @@
 
         .rest {
             .list-row-field {
-                color: rgba(0,0,0,0.6)
+                color: rgba(0, 0, 0, 0.6)
             }
             .list-row-field:nth-of-type(1) {
-                color: rgb(0,0,0);
+                color: rgb(0, 0, 0);
                 font-weight: 900 !important;
                 font-size: 15px !important;
                 padding-bottom: 5px;
             }
         }
-
 
         .mobile-right {
             text-align: right;
@@ -174,10 +177,10 @@
     .no-image {
         .rest {
             .list-row-field {
-                color: rgba(0,0,0,0.6)
+                color: rgba(0, 0, 0, 0.6)
             }
             .list-row-field:nth-of-type(1) {
-                color: rgb(0,0,0);
+                color: rgb(0, 0, 0);
                 padding-bottom: 0px;
             }
         }
@@ -186,7 +189,7 @@
 
 <script>
   import TableData from './TableData.vue'
-// withImage
+  // withImage
   export default {
     components: {
       TableData
@@ -222,36 +225,36 @@
       }
     },
     computed: {
-        imageField() {
-            return this.fields.find(field => field.field === 'image')
-        },
-        displayRight() {
-            return this.fields.find(field => field.displayRightOnMobile === true)
-        },
-        filteredFields() {
-            const copied = [...this.fields]
-            const image = copied.findIndex(field => field.field === 'image');
-            if (image >= 0) {
-                copied.splice(image, 1)
-            }
-            const displayRight = copied.findIndex(field => field.displayRightOnMobile === true)
-            if (displayRight >= 0) {
-                copied.splice(displayRight, 1)
-            }
-
-            return copied
-        },
-        firstField() {
-            return this.fields[0]
-        },
-        rest() {
-            const fields = [...this.fields]
-            fields.splice(0, 1)
-            return fields
+      imageField () {
+        return this.fields.find(field => field.field === 'image')
+      },
+      displayRight () {
+        return this.fields.find(field => field.displayRightOnMobile === true)
+      },
+      filteredFields () {
+        const copied = [...this.fields]
+        const image = copied.findIndex(field => field.field === 'image')
+        if (image >= 0) {
+          copied.splice(image, 1)
         }
+        const displayRight = copied.findIndex(field => field.displayRightOnMobile === true)
+        if (displayRight >= 0) {
+          copied.splice(displayRight, 1)
+        }
+
+        return copied
+      },
+      firstField () {
+        return this.fields[0]
+      },
+      rest () {
+        const fields = [...this.fields]
+        fields.splice(0, 1)
+        return fields
+      }
     },
     methods: {
-      link(rowData) {
+      link (rowData) {
         return {
           name: this.linking.route.name,
           params: {
@@ -259,13 +262,13 @@
           }
         }
       },
-      getStyle(field, data){
-          if (field.styledBackground && field.styledBackground.enabled) {
-              const value = field.field.split('.').reduce((prev, curr) => {
-                return prev ? prev[curr] : null
-            }, data || self)
-            return `background-color: ${field.styledBackground.config[value]}`
-          }
+      getStyle (field, data) {
+        if (field.styledBackground && field.styledBackground.enabled) {
+          const value = field.field.split('.').reduce((prev, curr) => {
+            return prev ? prev[curr] : null
+          }, data || self)
+          return `background-color: ${field.styledBackground.config[value]}`
+        }
       }
     }
   }
