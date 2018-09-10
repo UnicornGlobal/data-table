@@ -93,6 +93,13 @@
         type: Array,
         required: false
       }
+    },
+    computed: {
+        smallScreen() {
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+            return { w, h }
+        }
     }
   }
 </script>
