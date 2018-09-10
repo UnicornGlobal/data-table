@@ -22,7 +22,10 @@
 
     .controls {
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: start;
+        flex-wrap: wrap;
     }
 
     .list-row {
