@@ -3,25 +3,32 @@
         <avatar-or-initials class="item-avatar"
                             round
                             size="35"
-                            :image="data[field.image]"
+                            :image="getProperty(data, field.image)"
                             :title="data[field.field]">
         </avatar-or-initials>
     </div>
-    <div v-else-if="field.type === 'text'" class="field-contents" :class="field.field">{{ data[field.field] }}</div>
-    <div v-else-if="field.type === 'count'" class="field-contents" :class="field.field">{{ count(data[field.field])}}
+    <div v-else-if="field.type === 'text'" class="field-contents" :class="field.field">{{ getProperty(data, field.field)
+        }}
+    </div>
+    <div v-else-if="field.type === 'count'" class="field-contents" :class="field.field">
+        {{ count(getProperty(data, field.field))}}
     </div>
     <div v-else-if="field.type === 'boolean'" class="field-contents" :class="field.field">
         <template v-if="field.yes">
-            {{ data[field.field] ? field.yes : field.no }}
+            {{ getProperty(data, field.field) ? field.yes : field.no }}
         </template>
         <template v-else>
-            <check-mark v-if="data[field.field]" width="20px" height="20px"></check-mark>
+            <check-mark v-if="getProperty(data, field.field)" width="20px" height="20px"></check-mark>
             <close-button width="20px" height="20px" v-else></close-button>
         </template>
     </div>
     <div v-else-if="field.type === 'boolean-inverted'" class="field-contents" :class="field.field">
-        <check-mark-inverted v-if="data[field.field]" width="20px" height="20px"></check-mark-inverted>
+        <check-mark-inverted v-if="getProperty(data, field.field)" width="20px" height="20px"></check-mark-inverted>
         <close-button-inverted width="20px" height="20px" v-else></close-button-inverted>
+    </div>
+    <div v-else-if="field.type === 'third_party'" class="field-contents" :class="field.field">
+        <span v-if="getProperty(data, field.field)">Pilot</span>
+        <span v-else>Tabbs</span>
     </div>
     <div v-else-if="field.type === 'property'" class="field-contents" :class="field.field">
         {{ field.symbol ? field.symbol : '' }} {{ getProperty(data, field.field) }}
@@ -30,21 +37,20 @@
         <component :is="getComponentName()" v-bind="getProps()" v-on="getComponentEvents()"></component>
     </div>
     <div v-else-if="field.type === 'currency'" class="field-contents" :class="field.field">
-        {{ `${field.symbol} ${getSumTotal(data, field)}` }}
+        {{ formatAsCurrency(getProperty(data, field.field), field.symbol) }}
     </div>
     <div v-else-if="field.type === 'datetime'" class="field-contents datetime" :class="field.field">
-        <span class="year">{{formatDate(data[field.field]).date}}</span>
+        <span class="year">{{formatDate(getProperty(data, field.field)).year}}</span>
         <span class="delimiter">,</span>
-        <span class="time">{{formatDate(data[field.field]).time}}</span>
+        <span class="time">{{formatDate(getProperty(data, field.field)).time}}</span>
     </div>
     <div v-else-if="field.type === 'date'" class="field-contents" :class="field.field">
-        <span class="year">{{formatDate(data[field.field]).date}}</span>
+        <span class="year">{{formatDate(getProperty(data, field.field)).year}}</span>
     </div>
     <div v-else-if="field.type === 'time'" class="field-contents" :class="field.field">
-        <span class="year">{{formatDate(data[field.field]).time}}</span>
+        <span class="year">{{formatDate(getProperty(data, field.field)).time}}</span>
     </div>
-    <div v-else-if="field.type === 'custom'" v-html="getCustomContent()" class="field-contents"
-         :class="field.field"></div>
+    <div v-else-if="field.type === 'custom'" v-html="getCustomContent()" class="field-contents" :class="field.field"></div>
 </template>
 <style lang="scss">
     @import "../sass/styles";
@@ -52,7 +58,7 @@
     .field-contents {
         font-size: .9em;
         &.image {
-          min-width: 58px;
+            min-width: 58px;
         }
     }
 
@@ -83,41 +89,40 @@
 
   export default {
     components: {
+      AvatarOrInitials,
       CheckMark,
       CloseButton,
-      AvatarOrInitials,
       CheckMarkInverted,
       CloseButtonInverted
     },
     props: ['field', 'data'],
     methods: {
-      getProperty(data, field) {
-        let pieces = field.split('.')
-        let fieldVal = data[pieces[0]][pieces[1]]
-        if (typeof (fieldVal) === 'number') {
-          let num = fieldVal.toFixed(2)
-          let parts = num.toString().split('.')
-          parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-          return parts.join('.')
+      getProperty (data, field) {
+        if (!field) {
+          return null
         }
-        return fieldVal
-      },
-      count(field) {
-        return field.length
-      },
-      getSumTotal(data, field) {
-        const format = amount => parseFloat(amount).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
-        let value = data[field.field]
-        if (value) {
-          return format(value)
-        }
-        return 0
-      },
-      getProps() {
-        if(this.field.props && typeof this.field.props === 'function'){
-          return this.field.props(this.data)
+        let path = field.split('.')
+        let value = data
+
+        path.forEach(function (prop) {
+          let index = parseInt(prop)
+          if (isNaN(index)) {
+            value = value[prop]
+          } else {
+            value = value[index]
+          }
+        })
+
+        if (typeof value === 'number') {
+          return value.toLocaleString(undefined, {style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2})
         }
 
+        return value
+      },
+      count (field) {
+        return field.length
+      },
+      getProps () {
         if (this.field.requireProps.propsFromData.enabled) {
           const propFields = this.field.requireProps.propsFromData.propFields
           const props = {}
@@ -130,17 +135,17 @@
         }
         return this.field.requireProps.defaultProps || {}
       },
-      getComponentName() {
+      getComponentName () {
         if (typeof this.field.component === 'function') {
           return this.field.component(this.data)
         }
 
         return this.field.component
       },
-      getComponentEvents() {
+      getComponentEvents () {
         return this.field.events || {}
       },
-      getCustomContent() {
+      getCustomContent () {
         if (!this.field.value) {
           return ''
         }
@@ -150,13 +155,22 @@
         }
         return this.field.value
       },
-      formatDate(input) {
-        const date = moment(input).format('YYYY-MM-DD')
-        const time = moment(input).format('LT')
+      formatDate (date) {
+        const year = moment(date).format('YYYY-MM-DD')
+        const time = moment(date).format('LT')
         return {
-          date,
+          year,
           time
         }
+      },
+      formatAsCurrency(value, symbol = 'R', decimals = 2) {
+        value = Number.parseFloat(value)
+
+        if (Number.isNaN(value)) {
+          value = 0
+        }
+
+        return symbol + String.fromCharCode(160) + value.toLocaleString(undefined, {style: 'decimal', minimumFractionDigits: decimals, maximumFractionDigits: decimals})
       }
     }
   }

@@ -1,46 +1,102 @@
 import TableData from '../../../src/components/TableData.vue'
-import { createLocalVue, shallow } from '@vue/test-utils'
+import { createLocalVue, shallow, mount } from '@vue/test-utils'
 
 describe('TableData.vue', () => {
-  it('it gets nested property value', () => {
+  it('gets number property', () => {
     let localVue = createLocalVue()
+
     let tableData = shallow(TableData, {
       localVue,
       propsData: {
-        field: {},
-        data: {}
+        data: {name: 'test', id: 3},
+        field: {field: 'id', type: 'property'}
       }
     })
 
-    expect(tableData.vm.getProperty({order: {amount: 1234}}, 'order.amount')).toBe('1,234.00')
-    expect(tableData.vm.getProperty({address: {zip: '100110'}}, 'address.zip')).toBe('100110')
+    expect(tableData.vm.getProperty({name: 'test', nested: {id: 3}}, 'nested.id')).toBe('3.00')
+    expect(tableData.vm.getProperty({name: 'test', nested: {id: '3'}}, 'nested.id')).toBe('3')
+    expect(tableData.vm.getProperty({
+      name: 'test',
+      nested: {id: '3', list: [9, 5, 7]}
+    }, 'nested.list.1')).toBe('5.00')
+    expect(tableData.vm.getProperty({name: 'test', nested: {id: '3', list: [9, 5, 7]}}, undefined)).toBe(null)
+    expect(tableData.vm.count([1, 3])).toBe(2)
   })
 
-  it('counts length of array-fields', () => {
+  it('formats price/amount', () => {
     let localVue = createLocalVue()
-    let tableData = shallow(TableData, {
+
+    let tableData = mount(TableData, {
       localVue,
       propsData: {
-        field: {},
-        data: {}
+        data: {
+          '_id': '2',
+          'is_active': 0,
+          'is_deleted': 0,
+          'menu_items': [],
+          'amount': 70,
+          'category': 'Cat B',
+          'created_at': '2018-01-02',
+          'name': 'yy'
+        },
+        field: {
+          type: 'currency',
+          symbol: 'R',
+          name: 'Total',
+          field: 'amount',
+          header: true,
+          isArray: false,
+          selector: 'amount'
+        }
       }
     })
 
-    expect(tableData.vm.count([1,1,1])).toBe(3)
+    expect(tableData.find('.field-contents').text()).toBe(tableData.vm.formatAsCurrency(70))
+
+    tableData.setProps({
+      data: {
+        '_id': '2',
+        'is_active': 0,
+        'is_deleted': 0,
+        'menu_items': [],
+        'amount': 'NaN',
+        'category': 'Cat B',
+        'created_at': '2018-01-02',
+        'name': 'yy'
+      }
+    })
+
+    expect(tableData.find('.field-contents').text()).toBe(tableData.vm.formatAsCurrency('NaN'))
   })
 
-  it('gets sum total', () => {
+  it('formats 0 price/amount', () => {
     let localVue = createLocalVue()
-    let tableData = shallow(TableData, {
+
+    let tableData = mount(TableData, {
       localVue,
       propsData: {
-        field: {},
-        data: {}
+        data: {
+          '_id': '2',
+          'is_active': 0,
+          'is_deleted': 0,
+          'menu_items': [],
+          'amount': 0,
+          'category': 'Cat B',
+          'created_at': '2018-01-02',
+          'name': 'yy'
+        },
+        field: {
+          type: 'currency',
+          symbol: 'R',
+          name: 'Total',
+          field: 'amount',
+          header: true,
+          isArray: false,
+          selector: 'amount'
+        }
       }
     })
-
-    expect(tableData.vm.getSumTotal({amount: 1223}, {field: 'amount'})).toBe('1,223.00')
-    expect(tableData.vm.getSumTotal({amount: 0}, {field: 'amount'})).toBe(0)
+    expect(tableData.find('.field-contents').text()).toBe(tableData.vm.formatAsCurrency(0))
   })
 
   it('computes component props when its an object', () => {
@@ -54,7 +110,10 @@ describe('TableData.vue', () => {
           requireProps: {
             propsFromData: {
               enabled: true,
-              propFields: [{field: 'name'}]
+              propFields: [
+                {name: 'Name'},
+                {age: 'Age'}
+              ]
             },
             status: true,
             defaultProps: {
@@ -64,72 +123,13 @@ describe('TableData.vue', () => {
           }
         },
         data: {
-          name: 'fakeName'
+          Name: 'RealName',
+          Age: 'RealAge'
         }
       }
     })
-    expect(option.vm.getProps()).toMatchObject({field: 'fakeName'})
-  })
-
-  it('computes component props when its a function', () => {
-    let localVue = createLocalVue()
-    let option = shallow(TableData, {
-      localVue,
-      propsData: {
-        field: {
-          type: 'component',
-          component: 'div',
-          props: (data) => {
-            return {
-              name: 'me',
-              age: 10
-            }
-          },
-          requireProps: {
-            propsFromData: {
-              enabled: true,
-              propFields: [{field: 'name'}]
-            },
-            status: true,
-            defaultProps: {
-              prop1: '1',
-              prop2: '2'
-            }
-          }
-        },
-        data: {
-          name: 'fakeName'
-        }
-      }
-    })
-    expect(option.vm.getProps()).toMatchObject({name: 'me', age: 10})
-  })
-
-  it('gets component default props', () => {
-    let localVue = createLocalVue()
-    let option = shallow(TableData, {
-      localVue,
-      propsData: {
-        field: {
-          type: 'component',
-          component: 'div',
-          name: 'fakeName',
-          requireProps: {
-            propsFromData: {
-              enabled: false,
-              propFields: [{field: 'name'}]
-            },
-            status: true,
-            defaultProps: {
-              prop1: '1',
-              prop2: '2'
-            }
-          }
-        },
-        data: {}
-      }
-    })
-    expect(option.vm.getProps()).toMatchObject({prop1: '1', prop2: '2'})
+    expect(typeof option.vm.getProps()).toBe('object')
+    expect(option.vm.getProps()).toMatchObject({name: 'RealName', age: 'RealAge'})
   })
 
   it('computes component name when its a function', () => {
@@ -146,38 +146,13 @@ describe('TableData.vue', () => {
             propsFromData: {
               enabled: false
             },
-            status: true,
-            defaultProps: {
-              prop1: '1',
-              prop2: '2'
-            }
-          }
-        },
-        data: {}
-      }
-    })
-    expect(option.vm.getComponentName()).toBe('div')
-  })
-
-  it('computes component name when its a string', () => {
-    let localVue = createLocalVue()
-    let option = shallow(TableData, {
-      localVue,
-      propsData: {
-        field: {
-          type: 'component',
-          component: 'span',
-          requireProps: {
-            propsFromData: {
-              enabled: false
-            },
             status: true
           }
         },
         data: {}
       }
     })
-    expect(option.vm.getComponentName()).toBe('span')
+    expect(option.vm.getComponentName()).toBe('div')
   })
 
   it('computes component events', () => {
@@ -209,69 +184,51 @@ describe('TableData.vue', () => {
     expect(option.vm.getComponentEvents()).toHaveProperty('click')
   })
 
-  it('its gets custom content value', () => {
+  it('gets custom content', () => {
     let localVue = createLocalVue()
     let option = shallow(TableData, {
       localVue,
       propsData: {
         field: {
           type: 'custom'
-        },
-        data: {name: 'sweet name'}
+        }
       }
     })
 
     expect(option.vm.getCustomContent()).toBe('')
 
-    option.setProps({field: {type: 'custom', value: (data) => {return data.name}}})
-    expect(option.vm.getCustomContent()).toBe('sweet name')
+    option.setProps({
+      field: {
+        type: 'custom',
+        value: function () {
+          return 'customFunctionValue'
+        }
+      }
+    })
 
-    option.setProps({field: {type: 'custom', value: 'sweeter name'}})
-    expect(option.vm.getCustomContent()).toBe('sweeter name')
+    expect(option.vm.getCustomContent()).toBe('customFunctionValue')
+
+    option.setProps({
+      field: {
+        type: 'custom',
+        value: 'customValue'
+      }
+    })
+    expect(option.vm.getCustomContent()).toBe('customValue')
   })
 
-
-  it('formats dates', () => {
+  it('formats date', () => {
     let localVue = createLocalVue()
     let option = shallow(TableData, {
       localVue,
       propsData: {
         field: {
-          type: 'custom'
-        },
-        data: {}
-      }
-    })
-
-    expect(option.vm.formatDate('1900-12-12 23:34:23')).toMatchObject({date: '1900-12-12', time: '11:34 PM'})
-  })
-
-  it('formats the price/amount', () => {
-    let localVue = createLocalVue()
-    let tableData = shallow(TableData, {
-      localVue,
-      propsData: {
-        data: {
-          '_id': '2',
-          'is_active': 0,
-          'is_deleted': 0,
-          'menu_items': [],
-          'amount': 20.00,
-          'category': 'Cat B',
-          'created_at': '2018-01-02',
-          'name': 'yy'
-        },
-        field: {
-          type: 'currency',
-          symbol: 'R',
-          name: 'Total',
-          field: 'amount',
-          header: true,
-          isArray: false,
-          selector: 'amount'
+          type: 'datetime'
         }
       }
     })
-    expect(tableData.find('.field-contents').text()).toBe('R 20.00')
+    let date = option.vm.formatDate('2014-12-24 09:30:00')
+    expect(date.year).toBe('2014-12-24')
+    expect(date.time).toBe('9:30 AM')
   })
 })

@@ -693,4 +693,34 @@ describe('DataTable.vue', () => {
     expect(dataTable.vm.compare({name: 'def'}, {name: 'abc'})).toBe(1)
     expect(dataTable.vm.compare({name: 'def'}, {name: 'def'})).toBe(0)
   })
+
+  it('listens to resize event', async () => {
+    let localVue = createLocalVue()
+    let dataTable = shallow(DataTable, {
+      localVue,
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {},
+            linking: {}
+          }
+        }
+      }
+    })
+
+    let event = document.createEvent('HTMLEvents');
+    event.initEvent('resize', true, false);
+    window.dispatchEvent(event);
+
+    expect(dataTable.vm.windowWidth).toBe(window.innerWidth)
+
+    dataTable.setData({windowWidth: 400})
+    expect(dataTable.vm.smallScreen).toBe(true)
+  })
 })
