@@ -165,6 +165,8 @@
           .field-contents {
             padding-left: 3px;
             padding-right: 3px;
+            display: flex;
+            align-items: flex-end;
           }
         }
 
