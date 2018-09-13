@@ -35,7 +35,7 @@
               <div class="rest">
                 <div v-for="(field, index) in rest" class="list-row-field" :style="styler(field)"
                   :secondary="field.secondary === true">
-                  <div v-if="showLabelOnMobile" class="grid">
+                  <div v-if="showLabelOnMobile" :class="`label-config ${index !== 0 ? 'grid' : ''}`">
                       <span v-if="!field.displayRightOnMobile && index !== 0" class="label">{{field.name}}: </span>
                       <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
                                   :field="field"></table-data>
@@ -152,18 +152,20 @@
         .grid {
             display: grid;
             grid-template-columns: 70px 3fr;
+        }
 
-            .label {
-                font-size: .9em;
-                display: inline-block;
-                padding-left: 3px;
-                padding-right: 3px;
-            }
+        .label-config {
+          .label {
+            font-size: .9em;
+            display: inline-block;
+            padding-left: 3px;
+            padding-right: 3px;
+          }
 
-            .field-contents {
-                padding-left: 3px;
-                padding-right: 3px;
-            }
+          .field-contents {
+            padding-left: 3px;
+            padding-right: 3px;
+          }
         }
 
         .list-row-field {
