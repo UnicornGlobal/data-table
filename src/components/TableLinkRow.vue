@@ -31,24 +31,28 @@
                     <table-data :data="data" :field="firstField"></table-data>
                 </div>
             </div>
-            <div class="rest">
+            <div class="flex">
+              <div class="rest">
                 <div v-for="(field, index) in rest" class="list-row-field" :style="styler(field)"
-                     :secondary="field.secondary === true">
-                    <div v-if="showLabelOnMobile" class="grid">
-                        <span v-if="!field.displayRightOnMobile" class="label">{{field.name}}: </span>
-                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
-                                    :field="field"></table-data>
-                    </div>
-                    <div v-else>
-                        <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
-                                    :field="field"></table-data>
-                    </div>
+                  :secondary="field.secondary === true">
+                  <div v-if="showLabelOnMobile" class="grid">
+                      <span v-if="!field.displayRightOnMobile && index !== 0" class="label">{{field.name}}: </span>
+                      <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
+                                  :field="field"></table-data>
+                  </div>
+                  <div v-else>
+                      <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
+                                  :field="field"></table-data>
+                  </div>
                 </div>
-            </div>
-            <div v-if="displayRight" class="mobile-right">
-                <div :style="getStyle(displayRight, data)" class="list-row-field">
-                    <table-data v-if="displayRight" :data="data" :field="displayRight"></table-data>
+              </div>
+              <div class="right-cont">
+                <div v-if="displayRight.length > 0" v-for="(right, index) in displayRight" :key="index" class="mobile-right">
+                  <div :style="getStyle(right, data)" class="list-row-field">
+                      <table-data v-if="right" :data="data" :field="right"></table-data>
+                  </div>
                 </div>
+              </div>
             </div>
         </div>
     </router-link>
@@ -115,18 +119,30 @@
     }
 
     .mobile-screen {
-        display: grid;
-        grid-template-columns: 1fr 4fr 2fr;
-        align-items: center;
         text-decoration: none;
         padding-top: 10px;
         padding-bottom: 10px;
         border-bottom: 1px solid $gray-4;
         color: $black;
         padding-left: 2px;
+        display: grid;
+        grid-template-columns: 100px 6fr;
+        align-items: center;
+
+        .thumbnail {
+          // max-width: 100px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .flex {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
 
         &.no-image {
-            grid-template-columns: 100px 4fr 2fr;
+            grid-template-columns: 100px 6fr;
         }
 
         &:hover {
@@ -140,6 +156,11 @@
             .label {
                 font-size: .9em;
                 display: inline-block;
+                padding-left: 3px;
+                padding-right: 3px;
+            }
+
+            .field-contents {
                 padding-left: 3px;
                 padding-right: 3px;
             }
@@ -162,14 +183,24 @@
             }
         }
 
+        .right-cont {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          max-width: 90px;
+          flex-wrap: wrap;
+        }
+
         .mobile-right {
             text-align: right;
+            margin-right: 2px;
             .list-row-field {
                 display: inline-block;
                 background-color: green;
-                padding: 5px;
+                padding: 3px;
                 border-radius: 4px;
                 color: white;
+                font-size: 12px;
             }
         }
     }
@@ -229,7 +260,7 @@
         return this.fields.find(field => field.field === 'image')
       },
       displayRight () {
-        return this.fields.find(field => field.displayRightOnMobile === true)
+        return this.fields.filter(field => field.displayRightOnMobile === true)
       },
       filteredFields () {
         const copied = [...this.fields]
@@ -264,9 +295,15 @@
       },
       getStyle (field, data) {
         if (field.styledBackground && field.styledBackground.enabled) {
-          const value = field.field.split('.').reduce((prev, curr) => {
-            return prev ? prev[curr] : null
-          }, data || self)
+          let value
+          if (field.value) {
+            value = field.value(data)
+          } else {
+            value = field.field.split('.').reduce((prev, curr) => {
+              return prev ? prev[curr] : null
+            }, data || self)
+          }
+
           return `background-color: ${field.styledBackground.config[value]}`
         }
       }
