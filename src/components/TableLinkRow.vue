@@ -191,7 +191,7 @@
           display: flex;
           flex-direction: row;
           justify-content: flex-end;
-          max-width: 90px;
+          max-width: 120px;
           flex-wrap: wrap;
         }
 
