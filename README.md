@@ -34,7 +34,7 @@ npm install unicorn-vue-datatable --save
 #### Setup
 The component accepts only two props
 - `options` - A configuration options object, described in details in the next section
-- `dataset` - An array of data items to be rendered. The data table expects each item in the array to be an object. If your data set consists of simple values like strings and numbers, you can use a mapping function to convert them to objects. 
+- `dataset` - An array of data items to be rendered. The data table expects each item in the array to be an object, with each key representing a table column. If your data set consists of simple values like strings and numbers, you can use a mapping function to convert them to objects. 
 
 #### Configuration Options 
 The options prop is an object with the following props
