@@ -1,12 +1,11 @@
-import tabedFilters from '../../../src/components/tabedFilters.vue'
+import TabbedFilters from '../../../src/components/TabbedFilters.vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 
-
-describe('tabedFilters', () => {
+describe('TabbedFilters', () => {
   it('sets active tab', () => {
     let localVue = createLocalVue()
 
-    let tabs = shallowMount(tabedFilters, {localVue, propsData: {filter: {tabs: []}}})
+    let tabs = shallowMount(TabbedFilters, {localVue, propsData: {filter: {tabs: []}}})
     tabs.vm.setActive({name: 'me'})
     expect(tabs.vm.activeTab).toMatchObject({name: 'me'})
   })
@@ -14,7 +13,7 @@ describe('tabedFilters', () => {
   it('gets the correct title', () => {
     let localVue = createLocalVue()
 
-    let tabs = shallowMount(tabedFilters, {localVue, propsData: {filter: {tabs: []}}})
+    let tabs = shallowMount(TabbedFilters, {localVue, propsData: {filter: {tabs: []}}})
 
     expect(tabs.vm.getTitle({name: 'General Tab', type: 'null'})).toBe('General Tab')
 
