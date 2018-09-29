@@ -1,13 +1,13 @@
 // http://chaijs.com/api/bdd/
 import DataTable from '../../src/DataTable.vue'
-import { createLocalVue, shallow } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 import sinon from 'sinon'
 
 describe('DataTable.vue', () => {
   it('Mounts correctly with minimal values and renders an empty table', () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       attachToDocument: true,
       localVue,
       propsData: {
@@ -41,7 +41,7 @@ describe('DataTable.vue', () => {
   it('Watches for changes in dataset and config', () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [
@@ -117,7 +117,7 @@ describe('DataTable.vue', () => {
   it('it computes showHeaders and processedData', async () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [
@@ -178,7 +178,7 @@ describe('DataTable.vue', () => {
   it('watches config', async () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [],
@@ -227,7 +227,7 @@ describe('DataTable.vue', () => {
   it('processes data', () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [
@@ -431,7 +431,7 @@ describe('DataTable.vue', () => {
   it('searches if searching is enabled', () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [],
@@ -459,7 +459,7 @@ describe('DataTable.vue', () => {
   it('filters by checkboxes', () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [],
@@ -489,7 +489,7 @@ describe('DataTable.vue', () => {
   it('filters by tabs', () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [],
@@ -524,7 +524,7 @@ describe('DataTable.vue', () => {
   it('filters by date range', () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [],
@@ -554,7 +554,7 @@ describe('DataTable.vue', () => {
   it('filters by number range', () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [],
@@ -585,7 +585,7 @@ describe('DataTable.vue', () => {
   it('gets style', () => {
     let localVue = createLocalVue()
 
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [
@@ -646,7 +646,7 @@ describe('DataTable.vue', () => {
 
   it('compares values - ascending order', () => {
     let localVue = createLocalVue()
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [],
@@ -671,7 +671,7 @@ describe('DataTable.vue', () => {
 
   it('compares values - descending order', () => {
     let localVue = createLocalVue()
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [],
@@ -696,7 +696,7 @@ describe('DataTable.vue', () => {
 
   it('listens to resize event', async () => {
     let localVue = createLocalVue()
-    let dataTable = shallow(DataTable, {
+    let dataTable = shallowMount(DataTable, {
       localVue,
       propsData: {
         dataset: [],

@@ -1,11 +1,11 @@
 import TableHeaders from '../../../src/components/TableHeaders.vue'
-import { createLocalVue, shallow } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 
 describe('TableHeaders', () => {
   let localVue = createLocalVue()
 
   it('sorts data', () => {
-    let headers = shallow(TableHeaders, {
+    let headers = shallowMount(TableHeaders, {
       localVue,
       propsData: {
         config: {

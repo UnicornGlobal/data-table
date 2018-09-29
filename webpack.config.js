@@ -1,9 +1,13 @@
-var path = require('path')
-var webpack = require('webpack')
-var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   entry: './src/DataTable.vue',
+  plugins: [
+    new VueLoaderPlugin()
+  ],
   output: {
     path: path.resolve(__dirname, './'),
     publicPath: './',
@@ -28,6 +32,20 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(scss|sass)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.js$/,

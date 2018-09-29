@@ -27,8 +27,8 @@
         <close-button-inverted width="20px" height="20px" v-else></close-button-inverted>
     </div>
     <div v-else-if="field.type === 'third_party'" class="field-contents" :class="field.field">
-        <span v-if="getProperty(data, field.field)">Pilot</span>
-        <span v-else>Tabbs</span>
+        <span v-if="getProperty(data, field.field)">Third Party</span>
+        <span v-else>First Party</span>
     </div>
     <div v-else-if="field.type === 'property'" class="field-contents" :class="field.field">
         {{ field.symbol ? field.symbol : '' }} {{ getProperty(data, field.field) }}

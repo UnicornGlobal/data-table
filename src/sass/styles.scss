@@ -86,7 +86,7 @@ button, a.button {
 }
 
 @each $color in blue, pink, gray {
-  $colorValue: map-get($colors-map, tabbs-#{$color});
+  $colorValue: map-get($colors-map, #{$color});
 
   .text-#{$color} {
     color: $colorValue
