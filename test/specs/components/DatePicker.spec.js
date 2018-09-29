@@ -1,5 +1,5 @@
 import DatePicker from '../../../src/components/DatePicker.vue'
-import { createLocalVue, shallow, mount } from '@vue/test-utils'
+import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
 import Pickaday from 'pikaday'
 import sinon from 'sinon'
 

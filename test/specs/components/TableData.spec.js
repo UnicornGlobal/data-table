@@ -1,11 +1,11 @@
 import TableData from '../../../src/components/TableData.vue'
-import { createLocalVue, shallow, mount } from '@vue/test-utils'
+import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
 
 describe('TableData.vue', () => {
   it('gets number property', () => {
     let localVue = createLocalVue()
 
-    let tableData = shallow(TableData, {
+    let tableData = shallowMount(TableData, {
       localVue,
       propsData: {
         data: {name: 'test', id: 3},
@@ -101,7 +101,7 @@ describe('TableData.vue', () => {
 
   it('computes component props when its an object', () => {
     let localVue = createLocalVue()
-    let option = shallow(TableData, {
+    let option = shallowMount(TableData, {
       localVue,
       propsData: {
         field: {
@@ -134,7 +134,7 @@ describe('TableData.vue', () => {
 
   it('computes component name when its a function', () => {
     let localVue = createLocalVue()
-    let option = shallow(TableData, {
+    let option = shallowMount(TableData, {
       localVue,
       propsData: {
         field: {
@@ -157,7 +157,7 @@ describe('TableData.vue', () => {
 
   it('computes component events', () => {
     let localVue = createLocalVue()
-    let option = shallow(TableData, {
+    let option = shallowMount(TableData, {
       localVue,
       propsData: {
         field: {
@@ -186,7 +186,7 @@ describe('TableData.vue', () => {
 
   it('gets custom content', () => {
     let localVue = createLocalVue()
-    let option = shallow(TableData, {
+    let option = shallowMount(TableData, {
       localVue,
       propsData: {
         field: {
@@ -219,7 +219,7 @@ describe('TableData.vue', () => {
 
   it('formats date', () => {
     let localVue = createLocalVue()
-    let option = shallow(TableData, {
+    let option = shallowMount(TableData, {
       localVue,
       propsData: {
         field: {

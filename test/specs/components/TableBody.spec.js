@@ -1,10 +1,10 @@
 import TableBody from '../../../src/components/TableBody.vue'
-import { createLocalVue, shallow } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 
 describe('TableBody.vue', () => {
   it('computes must link', () => {
     let localVue = createLocalVue()
-    let table = shallow(TableBody, {
+    let table = shallowMount(TableBody, {
       localVue,
       propsData: {
         dataset: [],

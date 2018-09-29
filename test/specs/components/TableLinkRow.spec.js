@@ -1,10 +1,10 @@
 import LinkedRow from '../../../src/components/TableLinkRow.vue'
-import { createLocalVue, shallow } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 
 describe('TableLinkRow.vue', () => {
   it('computes values', () => {
     let localVue = createLocalVue()
-    let table = shallow(LinkedRow, {
+    let table = shallowMount(LinkedRow, {
       localVue,
       stubs: ['router-link'],
       propsData: {
