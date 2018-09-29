@@ -310,6 +310,7 @@
 
           return `background-color: ${field.styledBackground.config[value]}`
         }
+        return ''
       }
     }
   }
