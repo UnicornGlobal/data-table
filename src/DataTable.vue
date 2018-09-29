@@ -57,9 +57,7 @@
       this.watchConfig()
       this.windowWidth = window.innerWidth
       this.$nextTick(() => {
-        window.addEventListener('resize', () => {
-          this.windowWidth = window.innerWidth
-        })
+        window.addEventListener('resize', this.setInnerWidth)
       })
     },
     computed: {
@@ -74,6 +72,9 @@
       },
     },
     methods: {
+      setInnerWidth () {
+        this.windowWidth = window.innerWidth
+      },
       watchConfig () {
         this.$watch('options.config', () => {
           return this.$nextTick(this.processData)
