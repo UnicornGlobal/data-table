@@ -72,7 +72,7 @@
       },
     },
     methods: {
-      setInnerWidth(){
+      setInnerWidth () {
         this.windowWidth = window.innerWidth
       },
       watchConfig () {
