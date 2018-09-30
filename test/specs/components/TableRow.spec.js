@@ -13,6 +13,6 @@ describe('TableRow', () => {
       }
     })
 
-    expect(row.vm.smallScreen).toMatchObject({w: window.innerWidth, h: window.innerHeight})
+    expect(row.vm.smallScreen).toBe(false)
   })
 })
