@@ -255,6 +255,10 @@
     },
     methods: {
       link (rowData) {
+        if(typeof this.linking.link === 'function'){
+          return this.linking.link(rowData)
+        }
+
         return {
           name: this.linking.route.name,
           params: {

@@ -37,7 +37,7 @@ The component accepts only two props
 - `dataset` - An array of data items to be rendered. The data table expects each item in the array to be an object, with each key representing a table column. If your data set consists of simple values like strings and numbers, you can use a mapping function to convert them to objects. 
 
 #### Configuration Options 
-The options prop is an object with the following props
+The `options` prop is an object with the following props
 - `fields` - an array of configs for each table column. Each config has the following properties
     - `header` - Boolean. Determines if the column has a header or not
     - `field` - The value key for this field in the data sets. Use dot syntax to denote nested properties
@@ -51,9 +51,36 @@ The options prop is an object with the following props
     - `events` - an object with event names and handlers. Only required if field type is component
     - `symbol` - Currency symbol if type is currency
     - `value` - value if type is custom. Can be a function that returns a value or a literal value
+    - `secondary` - boolean value determines if column is shown on small screens or not
+    - `grow` - flex grow css property
 
 - `config` - Has the following properties
     - `search` - search configuration
         - `enabled` - true or false. Disable or enable search
         - `placeholder` - Search box placeholder
         - `term` - search v-model
+    - `filtering` - Configuration for filtering
+        - `enabled` - Boolean, whether filtering is enabled or not
+        - `filters` - An array of filters
+            - `type` - Filter type. Can be `tabbed`, `checkbox`, or `dropdown`
+            - `tabbs` - An array or tab filters. Only required if `type` is `tabbed`
+                - `type` - Tabbed filter type. Can be `date` or `range`
+                - `from` - Date or number range lower limit
+                - `to` - Date or number range upper limit
+            - `field` - Field to filter. Only required if `type` is `checkbox`
+            - `value` - Initial value of checkbox or dropdown filter
+            - `placeholder` - Dropdown filter placeholder
+            - `options` - An array of options for dropdown filters. Can be strings or objects with `label` and `value` keys
+    - `linking` - Configuration for converting a whole table row into a link
+        - `enabled` - True or false to enable/disable linking
+        - `link` - A function called with row data and returns a router-link `:to` prop value
+- `controls` - An array of configurations for call-to-actions for each row.
+    - `type` - Can be `link` or `component`
+    - `href` - a callback function to return link configuration if type is link. Its called with the data for that row
+    - `label` - label if type is link
+    - `props` - Either a callback function or object if type is `component`
+    - `events` - Events config if type is component
+
+            
+            
+     
