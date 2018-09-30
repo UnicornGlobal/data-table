@@ -63,11 +63,9 @@ The `options` prop is an object with the following props
         - `enabled` - Boolean, whether filtering is enabled or not
         - `filters` - An array of filters
             - `type` - Filter type. Can be `tabbed`, `checkbox`, or `dropdown`
-            - `tabbs` - An array or tab filters. Only required if `type` is `tabbed`
+            - `tabs` - An array of tab filters. Only required if `type` is `tabbed`
                 - `type` - Tabbed filter type. Can be `date` or `range`
-                - `from` - Date or number range lower limit
-                - `to` - Date or number range upper limit
-            - `field` - Field to filter. Only required if `type` is `checkbox`
+            - `field` - Field to filter
             - `value` - Initial value of checkbox or dropdown filter
             - `placeholder` - Dropdown filter placeholder
             - `options` - An array of options for dropdown filters. Can be strings or objects with `label` and `value` keys
@@ -80,6 +78,118 @@ The `options` prop is an object with the following props
     - `label` - label if type is link
     - `props` - Either a callback function or object if type is `component`
     - `events` - Events config if type is component
+    
+#### Examples setup
+```
+    dataset: [
+        {
+            id: 1,
+            name: 'Jon Doe',
+            date_of_birth: '01-01-1970',
+            role: 'admin',
+            active: true
+        },
+        {
+            id: 2,
+            name: 'Jane Doe',
+            date_of_birth: '01-01-1971',
+            role: 'editor',
+            active: false
+          
+        },
+        {
+           id: 3,
+           name: 'Jane Doe',
+           date_of_birth: '01-01-1971',
+           role: 'manager',
+           active: true
+        },
+    ],
+    options: {
+        fields: [
+            {
+                field: 'name',
+                name: 'Name',
+                type: 'text',
+                header: true
+            },
+            {
+                field: 'date_of_birth',
+                name: 'Birthday',
+                type: 'date',
+                header: true
+            },
+            {
+                field: 'role',
+                name: 'Role',
+                type: 'text',
+                header: true
+            },
+            {
+                field: 'active',
+                name: 'Status',
+                type: 'boolean',
+                header: true,
+                yes: 'Active',
+                no: 'Disabled'
+            }
+        ],
+        config: {
+            filtering: {
+                enabled: true,
+                filters: [
+                    {
+                        type: 'dropdown',
+                        field: 'role'
+                        options: [
+                            {label: 'Admin', value: 'admin'},
+                            {label: 'Manager', value: 'manager'},
+                            {label: 'Editor', value: 'editor'}
+                        ]
+                    },
+                    {
+                        type: 'checkbox',
+                        field: 'active',
+                        value: true
+                    },
+                    {
+                        type: 'tabbed',
+                        tabs: [
+                            {type: 'date'}
+                        ]
+                    }
+                ]
+            },
+            controls: [
+                {
+                    type: 'link',
+                    label: 'View',
+                    href: (user) => {
+                       return {name: 'ViewUserProfile', props: {userId: user.id}} 
+                    }
+                },
+                {
+                    type: 'component',
+                    component: 'DeleteUserDialog',
+                    props: (user) => {
+                        return {
+                            userId: user.id,
+                            name: user.name
+                        }
+                    },
+                    events: {
+                        success: () => {
+                            //code to reload users list go here
+                        },
+                        error: () => {
+                            //show an error message here
+                        }
+                    }
+                }
+            ]
+        }
+    }
+```
 
             
             
