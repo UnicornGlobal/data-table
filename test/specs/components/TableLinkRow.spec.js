@@ -26,7 +26,7 @@ describe('TableLinkRow.vue', () => {
     })
 
     expect(table.vm.imageField).toMatchObject({field: 'image'})
-    expect(table.vm.displayRight).toMatchObject({displayRightOnMobile: true})
+    expect(table.vm.displayRight).toMatchObject([{displayRightOnMobile: true}])
     expect(typeof table.vm.filteredFields).toBe('object')
 
     table.setProps({fields: [

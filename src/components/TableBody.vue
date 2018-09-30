@@ -5,7 +5,7 @@
                             :linking="linking" :mobileType="mobileType" :showLabelOnMobile="showLabelOnMobile" :smallScreen="smallScreen"></table-link-row>
         </div>
         <table-row v-for="(data, key) in dataset" :fields="fields" :data="data" :styler="styler" :key="key"
-                   :controls="controls" v-else></table-row>
+                   :controls="controls" :mobileType="mobileType" :showLabelOnMobile="showLabelOnMobile" :smallScreen="smallScreen" v-else></table-row>
     </div>
 </template>
 
