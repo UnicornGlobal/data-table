@@ -1,5 +1,5 @@
 import TableRowOption from '../../../src/components/TableRowOption.vue'
-import { createLocalVue, shallow } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 
 describe('TableRowOption', () => {
   it('has props and computed props', () => {
@@ -9,7 +9,7 @@ describe('TableRowOption', () => {
 
   it('computes component props when its an object', () => {
     let localVue = createLocalVue()
-    let option = shallow(TableRowOption, {
+    let option = shallowMount(TableRowOption, {
       localVue,
       propsData: {
         config: {
@@ -27,7 +27,7 @@ describe('TableRowOption', () => {
 
   it('computes component props when its a function', () => {
     let localVue = createLocalVue()
-    let option = shallow(TableRowOption, {
+    let option = shallowMount(TableRowOption, {
       localVue,
       propsData: {
         config: {
@@ -52,7 +52,7 @@ describe('TableRowOption', () => {
 
   it('computes component name when its a function', () => {
     let localVue = createLocalVue()
-    let option = shallow(TableRowOption, {
+    let option = shallowMount(TableRowOption, {
       localVue,
       propsData: {
         config: {
@@ -68,7 +68,7 @@ describe('TableRowOption', () => {
 
   it('computes component events', () => {
     let localVue = createLocalVue()
-    let option = shallow(TableRowOption, {
+    let option = shallowMount(TableRowOption, {
       localVue,
       propsData: {
         config: {
