@@ -37,14 +37,14 @@
       }
     },
     methods: {
-      value(option){
-        if(typeof option  === 'object'){
+      value (option) {
+        if (typeof option === 'object') {
           return option.value
         }
         return option
       },
-      label(option){
-        if(typeof option === 'object'){
+      label (option) {
+        if (typeof option === 'object') {
           return option.label
         }
         return option
