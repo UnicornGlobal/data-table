@@ -1,0 +1,10 @@
+dist: trusty
+language: node_js
+node_js:
+- 9
+before_install:
+- npm install
+- npm test
+after_success:
+- codecov coverage/lcov.info -t ${CODECOV_TOKEN}
+- echo 'Done!'
