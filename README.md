@@ -189,6 +189,7 @@ The `options` prop is an object with the following props
             ]
         }
     }
+    
 ```
 
             
