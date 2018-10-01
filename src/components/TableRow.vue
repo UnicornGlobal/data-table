@@ -289,14 +289,6 @@
       }
     },
     methods: {
-      link (rowData) {
-        return {
-          name: this.linking.route.name,
-          params: {
-            [this.linking.param]: rowData[this.linking.field]
-          }
-        }
-      },
       getStyle (field, data) {
         if (field.styledBackground && field.styledBackground.enabled) {
           let value
@@ -310,6 +302,8 @@
 
           return `background-color: ${field.styledBackground.config[value]}`
         }
+
+        return ''
       }
     }
   }

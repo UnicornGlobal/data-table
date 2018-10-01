@@ -29,10 +29,12 @@ describe('TableLinkRow.vue', () => {
     expect(table.vm.displayRight).toMatchObject([{displayRightOnMobile: true}])
     expect(typeof table.vm.filteredFields).toBe('object')
 
-    table.setProps({fields: [
-      {type: 'text'},
-      {type: 'number'}
-    ]})
+    table.setProps({
+      fields: [
+        {type: 'text'},
+        {type: 'number'}
+      ]
+    })
     expect(typeof table.vm.filteredFields).toBe('object')
     expect(table.vm.firstField).toMatchObject({type: 'text'})
     expect(table.vm.rest[0]).toMatchObject({type: 'number'})
@@ -68,5 +70,21 @@ describe('TableLinkRow.vue', () => {
 
     field = {styledBackground: {enabled: false, config: {Name: 'Name'}}, field: 'user.name'}
     expect(table.vm.getStyle(field)).toBe('')
+
+    field = {value: (data) => 'value', styledBackground: {enabled: true, config: {value: 'Name'}}, field: 'user.name'}
+    expect(table.vm.getStyle(field)).toBe('background-color: Name')
+
+    data = {name: 'name'}
+    expect(table.vm.link(data)).toMatchObject({name: 'route', params: {name: 'name'}})
+
+    table.setProps({
+      linking: {
+        link: function (data) {
+          return 'route'
+        }
+      }
+    })
+
+    expect(table.vm.link(data)).toBe('route')
   })
 })
