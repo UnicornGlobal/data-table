@@ -1,5 +1,7 @@
+/*eslint no-undef: false*/
+
 import FilterDropdown from '../../../src/components/FilterDropdown.vue'
-import { createLocalVue, shallow } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 
 describe('FilterDropdown.vue', () => {
   it('it is an object', () => {
@@ -8,7 +10,7 @@ describe('FilterDropdown.vue', () => {
 
   it('get value and label', () => {
     let localVue = createLocalVue()
-    let filter = shallow(FilterDropdown, {
+    let filter = shallowMount(FilterDropdown, {
       localVue,
       propsData: {
         filter: {
