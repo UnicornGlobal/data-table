@@ -1,5 +1,3 @@
-/*eslint no-undef: false*/
-
 import FilterDropdown from '../../../src/components/FilterDropdown.vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 
