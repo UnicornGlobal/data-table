@@ -25,3 +25,4 @@ describe('FilterDropdown.vue', () => {
     expect(filter.vm.label({label: 'label1'})).toBe('label1')
   })
 })
+
