@@ -49,8 +49,6 @@ describe('TableRow', () => {
     row.setProps({fields})
     expect(row.vm.firstField).toMatchObject({field: 'image'})
     expect(row.vm.rest.length).toBe(2)
-
-
   })
 
   it('gets style', () => {
