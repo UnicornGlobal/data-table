@@ -2,7 +2,6 @@ import FilterDropdown from '../../../src/components/FilterDropdown.vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 
 describe('FilterDropdown.vue', () => {
-
   it('it is an object', () => {
     expect(typeof FilterDropdown).toBe('object')
   })
