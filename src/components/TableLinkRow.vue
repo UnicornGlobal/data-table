@@ -133,7 +133,7 @@
 
         .thumbnail {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
         .flex {
@@ -143,7 +143,7 @@
         }
 
         &.no-image {
-            grid-template-columns: 100px 6fr;
+            grid-template-columns: 72px 6fr;
         }
 
         &:hover {
@@ -201,10 +201,11 @@
             margin-right: 2px;
             .list-row-field {
                 display: inline-block;
-                background-color: green;
-                padding: 3px;
+                margin-right: 1em;
+                background-color: lightgreen;
+                padding: 0.5em;
                 border-radius: 4px;
-                color: white;
+                color: black;
                 font-size: 12px;
             }
         }

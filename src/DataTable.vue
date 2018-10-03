@@ -265,7 +265,6 @@
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
-            padding: 10px;
         }
     }
 

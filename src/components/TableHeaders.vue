@@ -46,9 +46,10 @@
     .headers {
         display: flex;
         justify-content: space-between;
-        border-bottom: 3px solid $gray-4;
+        border-bottom: 2px solid $gray-4;
         background-color: $white;
         min-height: 55px;
+        padding: 0 1em;
 
         @media(max-width: 480px) {
             padding-right: 7px;

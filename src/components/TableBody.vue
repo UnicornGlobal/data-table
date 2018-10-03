@@ -16,7 +16,6 @@
         position: relative;
         overflow-y: auto;
         max-height: 540px;
-        overflow-x: scroll;
 
         @media(max-width: 480px) {
             max-height: calc(100vh - 250px);
@@ -26,6 +25,7 @@
     .row-link:nth-of-type(1) {
       border-top: 1px solid #d8dae1;
     }
+
 
     .row-link {
       &:nth-of-type(odd) {
