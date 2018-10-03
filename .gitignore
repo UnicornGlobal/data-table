@@ -1,0 +1,7 @@
+/.idea
+/node_modules
+/.nyc_output
+/coverage
+/npm-debug.log
+index.js
+index.js.map
