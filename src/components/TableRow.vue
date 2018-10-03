@@ -85,10 +85,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-bottom: 1px solid $gray-4;
+        border-top: 1px solid $gray-4;
         min-height: 56px;
+        padding: 0 1em;
 
         @media(max-width: 480px) {
+            min-height: 65px;
+            padding-left: 0.5em;
+        }
+
+        @media(max-width: 680px) {
             min-height: 65px;
             padding-left: 0.5em;
         }
@@ -131,9 +137,8 @@
         align-items: center;
 
         .thumbnail {
-            // max-width: 100px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
         .flex {
@@ -143,7 +148,7 @@
         }
 
         &.no-image {
-            grid-template-columns: 100px 6fr;
+            grid-template-columns: 72px 6fr;
         }
 
         &:hover {

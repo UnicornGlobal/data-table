@@ -1,6 +1,6 @@
 {
   "name": "unicorn-vue-datatable",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Vue component for rendering data-tables",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
@@ -20,6 +20,10 @@
   "bugs": {
     "url": "https://github.com/darrynten/vue-data-table/issues"
   },
+  "files": [
+    "index.js",
+    "index.js.map"
+  ],
   "homepage": "https://github.com/darrynten/vue-data-table#readme",
   "dependencies": {
     "moment": "^2.22.2",

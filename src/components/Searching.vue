@@ -11,6 +11,7 @@
     @import "../sass/styles";
 
     .search-div {
+      border-bottom: 1px solid $gray-4;
         .controls {
             padding: 1em 0.75em;
         }
