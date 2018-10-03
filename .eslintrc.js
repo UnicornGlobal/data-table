@@ -20,6 +20,7 @@ module.exports = {
   },
   // add your custom rules here
   'rules': {
+    'no-undef': 0,
     'no-trailing-spaces': 1,
     'space-before-function-paren': 0,
     'space-before-blocks': 1,
