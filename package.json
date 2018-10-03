@@ -20,6 +20,10 @@
   "bugs": {
     "url": "https://github.com/darrynten/vue-data-table/issues"
   },
+  "files": [
+    "index.js",
+    "index.js.map"
+  ],
   "homepage": "https://github.com/darrynten/vue-data-table#readme",
   "dependencies": {
     "moment": "^2.22.2",
