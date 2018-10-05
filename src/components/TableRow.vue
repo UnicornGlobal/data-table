@@ -85,7 +85,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-top: 1px solid $gray-4;
+        border-top: 1px solid rgb(216, 218, 225);
         min-height: 56px;
         padding: 0 1em;
 
@@ -129,8 +129,8 @@
         text-decoration: none;
         padding-top: 10px;
         padding-bottom: 10px;
-        border-bottom: 1px solid $gray-4;
-        color: $black;
+        border-bottom: 1px solid rgb(216, 218, 225);
+        color: rgb(0, 0, 0);
         padding-left: 2px;
         display: grid;
         grid-template-columns: 100px 6fr;

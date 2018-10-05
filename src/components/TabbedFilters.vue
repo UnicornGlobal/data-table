@@ -10,9 +10,9 @@
             <div>
                 <div v-for="(tab, index) in filter.tabs">
                     <filter-date-range @close="setActive(0)" v-if="tab.type === 'date' && index === activeTab" :filter="tab"
-                                       class="filter-tab-content"></filter-date-range>
+                                       class="filter-tab-content__udt"></filter-date-range>
                     <filter-number-range @close="setActive(0)" v-if="tab.type === 'range' && index === activeTab" :filter="tab"
-                                         class="filter-tab-content"></filter-number-range>
+                                         class="filter-tab-content__udt"></filter-number-range>
                 </div>
             </div>
         </div>
@@ -25,16 +25,17 @@
     .filter-tab {
     }
 
-    .filter-tab-content {
+    .filter-tab-content__udt {
         position: absolute;
         z-index: 999;
         left: 2em;
         background: white;
         border: 1px solid rgb(233, 234, 235);
         padding: 2em 1em 0em;
-        width: 50%;
         min-width: 300px;
         max-width: 600px;
+        display: flex;
+        flex-direction: column;
     }
 
     .tabs {
@@ -52,7 +53,7 @@
 
             &.active {
                 background: lightgrey;
-                color: $blue;
+                color: rgb(84, 129, 255);
             }
         }
     }

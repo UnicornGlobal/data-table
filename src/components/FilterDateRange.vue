@@ -1,17 +1,17 @@
 <template>
-    <div class="date-form-picker">
-        <div @click="closeFilter" class="close-tab">x</div>
-        <span class="custom-form-label">From</span>
-        <div class="date-input">
+    <div>
+        <button @click="closeFilter" class="close-tab__udt"><close-button></close-button></button>
+        <span class="custom-form-label__udt">From</span>
+        <div class="date-input__udt">
             <datatable-date-picker @dateFrom="setDateFrom" ref="pickFrom" name="dateFrom"
                                    :value="filter.from"></datatable-date-picker>
-            <button tabindex="-1" @click="setDateFrom({date:null})">x</button>
+            <button tabindex="-1" @click="setDateFrom({date:null})" class="button__udt"><close-button></close-button></button>
         </div>
-        <span class="custom-form-label">To</span>
-        <div class="date-input">
+        <span class="custom-form-label__udt">To</span>
+        <div class="date-input__udt">
             <datatable-date-picker @dateTo="setDateTo" ref="pickTo" name="dateTo"
                                    :value="filter.to"></datatable-date-picker>
-            <button tabindex="-1" @click="setDateTo({date:null})">x</button>
+            <button tabindex="-1" @click="setDateTo({date:null})" class="button__udt"><close-button></close-button></button>
         </div>
         <input hidden ref="from" v-model="filter.from"/>
         <input hidden ref="to" v-model="filter.to"/>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+  import CloseButton from './Icons/close-button.svg'
   import DatatableDatePicker from './DatePicker.vue'
 
   export default {
@@ -29,6 +30,7 @@
       }
     },
     components: {
+      CloseButton,
       DatatableDatePicker
     },
     /**
@@ -54,23 +56,50 @@
   }
 </script>
 
-<style lang="scss">
-    @import "../sass/styles";
-
-    .date-input {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 1em;
+<style lang="scss" scoped>
+    .date-input__udt {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 1em;
     }
 
-    .close-tab {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0.5em 1em;
+    .close-tab__udt {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0;
+      margin: 0;
+      height: 30px;
+      width: 30px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      svg {
+        height: 22px;
+        width: 22px;
+      }
     }
 
-    .custom-form-label {
-        margin-bottom: 0.5em;
+    .custom-form-label__udt {
+      margin-bottom: 0.3em;
+    }
+
+    .button__udt {
+      border: 0;
+      background-color: white;
+      padding: 0;
+      margin: 0;
+      height: 38px;
+      width: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      svg {
+        height: 20px;
+        width: 20px;
+      }
     }
 </style>

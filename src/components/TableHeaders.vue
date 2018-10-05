@@ -46,8 +46,8 @@
     .headers {
         display: flex;
         justify-content: space-between;
-        border-bottom: 2px solid $gray-4;
-        background-color: $white;
+        border-bottom: 2px solid rgb(216, 218, 225);
+        background-color: rgb(255, 255, 255);
         min-height: 55px;
         padding: 0 1em;
 
@@ -63,11 +63,11 @@
 
             div {
                 align-self: center;
-                color: $black;
+                color: rgb(0, 0, 0);
                 display: flex;
 
                 b {
-                    color: $black;
+                    color: rgb(0, 0, 0);
                 }
             }
 

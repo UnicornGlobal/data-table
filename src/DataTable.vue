@@ -282,7 +282,7 @@
 
             input {
                 padding-left: 29px;
-                background-color: $white;
+                background-color: rgb(255, 255, 255);
 
                 @media(max-width: 480px) {
                     margin-bottom: 8px;
@@ -291,9 +291,9 @@
         }
 
         a {
-            background-color: $blue;
-            border: 1px solid $gray-4;
-            color: $white;
+            background-color: rgb(84, 129, 255);
+            border: 1px solid rgb(216, 218, 225);
+            color: rgb(255, 255, 255);
             text-decoration: none;
             padding: 7px 20px;
             text-align: center;

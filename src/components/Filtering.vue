@@ -16,7 +16,7 @@
     .filters {
         display: flex;
         flex-wrap: wrap;
-        border-bottom: 2px solid $gray-4;
+        border-bottom: 2px solid rgb(216, 218, 225);
     }
 
     .filter-checkbox, .filter-dropdown {
