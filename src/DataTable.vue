@@ -242,8 +242,6 @@
         min-height: 65px;
     }
 
-    $background: #fff;
-    $tabs-base-color: #fff;
     .search-bar-label {
         width: 18px;
         height: 18px;
