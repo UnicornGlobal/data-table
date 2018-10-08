@@ -33,13 +33,12 @@
     },
     methods: {
       getDate(date) {
-        this.$emit(this.inputName, {date, field: this.inputName})
+        this.$emit(this.inputName, { date, field: this.inputName })
         this.$emit('input', date)
       }
     }
   }
 </script>
-
 
 <style lang="scss">
   @import '~pikaday/scss/pikaday';
