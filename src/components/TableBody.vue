@@ -24,7 +24,6 @@
     border-top: 1px solid #d8dae1;
   }
 
-
   .row-link {
     &:nth-of-type(odd) {
     border-left: 5px solid rgba(184,199,223, 0.7);
