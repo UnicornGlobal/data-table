@@ -1,10 +1,10 @@
 <template>
-    <div class="flex search-div">
-        <div class="controls">
-            <div class="search-bar-label"></div>
-            <input v-model="config.term" :placeholder="config.placeholder" class="input"/>
-        </div>
+  <div class="flex search-div">
+    <div class="controls">
+      <div class="search-bar-label"></div>
+      <input v-model="config.term" :placeholder="config.placeholder" class="input"/>
     </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
