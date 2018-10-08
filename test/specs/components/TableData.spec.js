@@ -51,7 +51,7 @@ describe('TableData.vue', () => {
       }
     })
 
-    expect(tableData.find('.field-contents__udt').text()).toBe(tableData.vm.formatAsCurrency(70))
+    expect(tableData.find('.field-contents').text()).toBe(tableData.vm.formatAsCurrency(70))
 
     tableData.setProps({
       data: {
@@ -66,7 +66,7 @@ describe('TableData.vue', () => {
       }
     })
 
-    expect(tableData.find('.field-contents__udt').text()).toBe(tableData.vm.formatAsCurrency('NaN'))
+    expect(tableData.find('.field-contents').text()).toBe(tableData.vm.formatAsCurrency('NaN'))
   })
 
   it('formats 0 price/amount', () => {
@@ -96,7 +96,7 @@ describe('TableData.vue', () => {
         }
       }
     })
-    expect(tableData.find('.field-contents__udt').text()).toBe(tableData.vm.formatAsCurrency(0))
+    expect(tableData.find('.field-contents').text()).toBe(tableData.vm.formatAsCurrency(0))
   })
 
   it('computes component props when its an object', () => {
