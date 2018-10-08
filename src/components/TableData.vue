@@ -40,7 +40,7 @@
     {{ formatAsCurrency(getProperty(data, field.field), field.symbol) }}
   </div>
   <div v-else-if="field.type === 'datetime'" class="field-contents datetime" :class="field.field">
-    <span class="year_udt">{{formatDate(getProperty(data, field.field)).year}}</span>
+    <span class="year">{{formatDate(getProperty(data, field.field)).year}}</span>
     <span class="delimiter">,</span>
     <span class="time">{{formatDate(getProperty(data, field.field)).time}}</span>
   </div>
