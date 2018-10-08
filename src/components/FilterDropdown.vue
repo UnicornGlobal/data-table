@@ -1,13 +1,13 @@
 <template>
-    <div class="dropdown-box" v-if="filter.type === 'dropdown'">
-        <label :for="'filter-' + filter.filter" class="label-filter">
-            {{ filter.text }}
-        </label>
-        <select v-model="filter.value" :name="`${filter.filter}`" class="select">
-            <option value="">{{ filter.placeholder }}</option>
-            <option v-for="each in options" :value="value(each)">{{label(each)}}</option>
-        </select>
-    </div>
+  <div class="dropdown-box" v-if="filter.type === 'dropdown'">
+    <label :for="'filter-' + filter.filter" class="label-filter">
+      {{ filter.text }}
+    </label>
+    <select v-model="filter.value" :name="`${filter.filter}`" class="select">
+      <option value="">{{ filter.placeholder }}</option>
+      <option v-for="each in options" :value="value(each)">{{label(each)}}</option>
+    </select>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -21,11 +21,7 @@
     font-size: .9rem;
   }
 
-  .select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
+  select {
     padding: 0 0 0 10px;
     background-size: 15px 13px;
     background-repeat: no-repeat;
