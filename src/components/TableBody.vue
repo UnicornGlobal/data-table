@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .list {
     position: relative;
     overflow-y: auto;

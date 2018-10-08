@@ -56,7 +56,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .date-input {
     display: flex;
     flex-direction: row;

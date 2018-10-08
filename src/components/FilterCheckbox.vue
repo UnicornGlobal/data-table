@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .filter-label-checkbox {
     margin-left: 5px;
     margin-top: 1px;

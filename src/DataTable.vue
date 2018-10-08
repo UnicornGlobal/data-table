@@ -222,7 +222,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .search-div {
     min-height: 65px;
   }

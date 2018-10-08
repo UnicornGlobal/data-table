@@ -64,7 +64,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .list-row-field[secondary="true"] {
     @media(max-width: 1023px) {
       display: none !important;

@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .filters {
     display: flex;
     flex-wrap: wrap;

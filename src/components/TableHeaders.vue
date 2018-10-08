@@ -26,7 +26,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .header-bar {
     min-width: 100%;
     right: 0;
