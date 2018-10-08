@@ -35,7 +35,7 @@
                 <div class="rest__udt">
                     <div v-for="(field, index) in rest" class="list-row-field__udt" :style="styler(field)"
                          :secondary="field.secondary === true">
-                        <div v-if="showLabelOnMobile" :class="`label-config__udt ${index !== 0 ? 'grid' : ''}`">
+                        <div v-if="showLabelOnMobile" :class="`label-config__udt ${index !== 0 ? 'grid__udt' : ''}`">
                             <span v-if="!field.displayRightOnMobile && index !== 0"
                                   class="label__udt">{{field.name}}: </span>
                             <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
@@ -148,7 +148,7 @@
             background-color: #f7f8f9;
         }
 
-        .grid {
+        .grid__udt {
             display: grid;
             grid-template-columns: 70px 3fr;
         }
@@ -161,7 +161,7 @@
                 padding-right: 3px;
             }
 
-            .field-contents {
+            .field-contents__udt {
                 padding-left: 3px;
                 padding-right: 3px;
                 display: flex;
