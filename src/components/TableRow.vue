@@ -1,43 +1,43 @@
 <template>
-    <div v-if="!smallScreen" class="list-row">
-        <div v-for="(field, index) in fields" :key="index" class="list-row-field" :style="styler(field)"
+    <div v-if="!smallScreen" class="list-row__udt">
+        <div v-for="(field, index) in fields" :key="index" class="list-row-field__udt" :style="styler(field)"
              :secondary="field.secondary === true">
             <table-data :data="data" :field="field"></table-data>
         </div>
-        <div v-if="controls && controls.length" class="controls list-row-field">
+        <div v-if="controls && controls.length" class="controls__udt list-row-field__udt">
             <table-row-option v-for="(control, key) in controls" :key="key" :config="control"
                               :data="data"></table-row-option>
         </div>
     </div>
     <div v-else>
-        <div v-if="mobileType === 'with-image'" class="mobile-screen">
-            <div v-if="imageField" class="thumbnail">
-                <div class="list-row-field">
+        <div v-if="mobileType === 'with-image'" class="mobile-screen__udt">
+            <div v-if="imageField" class="thumbnail__udt">
+                <div class="list-row-field__udt">
                     <table-data v-if="imageField" :data="data" :field="imageField"></table-data>
                 </div>
             </div>
             <div class="rest">
-                <div v-for="(field, index) in filteredFields" class="list-row-field" :style="styler(field)"
+                <div v-for="(field, index) in filteredFields" class="list-row-field__udt" :style="styler(field)"
                      :secondary="field.secondary === true">
                     <table-data v-if="field.field !== 'image' && !field.displayRightOnMobile" :data="data"
                                 :field="field"></table-data>
                 </div>
             </div>
             <div v-if="displayRight" class="mobile-right">
-                <div :style="getStyle(displayRight, data)" class="list-row-field">
+                <div :style="getStyle(displayRight, data)" class="list-row-field__udt">
                     <table-data v-if="displayRight" :data="data" :field="displayRight"></table-data>
                 </div>
             </div>
         </div>
-        <div v-else-if="mobileType === 'no-image'" class="mobile-screen no-image">
-            <div class="thumbnail">
-                <div class="list-row-field">
+        <div v-else-if="mobileType === 'no-image'" class="mobile-screen__udt no-image">
+            <div class="thumbnail__udt">
+                <div class="list-row-field__udt">
                     <table-data :data="data" :field="firstField"></table-data>
                 </div>
             </div>
             <div class="flex">
                 <div class="rest">
-                    <div v-for="(field, index) in rest" class="list-row-field" :style="styler(field)"
+                    <div v-for="(field, index) in rest" class="list-row-field__udt" :style="styler(field)"
                          :secondary="field.secondary === true">
                         <div v-if="showLabelOnMobile" :class="`label-config ${index !== 0 ? 'grid' : ''}`">
                             <span v-if="!field.displayRightOnMobile && index !== 0"
@@ -54,7 +54,7 @@
                 <div class="right-cont">
                     <div v-if="displayRight.length > 0" v-for="(right, index) in displayRight" :key="index"
                          class="mobile-right">
-                        <div :style="getStyle(right, data)" class="list-row-field">
+                        <div :style="getStyle(right, data)" class="list-row-field__udt">
                             <table-data v-if="right" :data="data" :field="right"></table-data>
                         </div>
                     </div>
@@ -65,15 +65,13 @@
 </template>
 
 <style lang="scss">
-    @import "../sass/styles";
-
     div[secondary="true"] {
         @media(max-width: 1023px) {
             display: none !important;
         }
     }
 
-    .controls {
+    .controls__udt {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
@@ -81,7 +79,7 @@
         flex-wrap: wrap;
     }
 
-    .list-row {
+    .list-row__udt {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -99,12 +97,12 @@
             padding-left: 0.5em;
         }
 
-        .list-row-field {
+        .list-row-field__udt {
             flex: 1;
             padding: 0px 3px;
         }
 
-        .list-row-field:last-child {
+        .list-row-field__udt:last-child {
             padding: 0 3px;
 
             @media(max-width: 1023px) and (min-width: 481px) {
@@ -119,13 +117,13 @@
         }
     }
 
-    .list-row:last-child {
+    .list-row__udt:last-child {
         @media(max-width: 480px) {
             margin-bottom: 65px;
         }
     }
 
-    .mobile-screen {
+    .mobile-screen__udt {
         text-decoration: none;
         padding-top: 10px;
         padding-bottom: 10px;
@@ -136,12 +134,12 @@
         grid-template-columns: 100px 6fr;
         align-items: center;
 
-        .thumbnail {
+        .thumbnail__udt {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .flex {
+        .flex__udt {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -176,16 +174,16 @@
             }
         }
 
-        .list-row-field {
+        .list-row-field__udt {
             padding-left: 3px;
             padding-right: 3px;
         }
 
         .rest {
-            .list-row-field {
+            .list-row-field__udt {
                 color: rgba(0, 0, 0, 0.6)
             }
-            .list-row-field:nth-of-type(1) {
+            .list-row-field__udt:nth-of-type(1) {
                 color: rgb(0, 0, 0);
                 font-weight: 900 !important;
                 font-size: 15px !important;
@@ -204,7 +202,7 @@
         .mobile-right {
             text-align: right;
             margin-right: 2px;
-            .list-row-field {
+            .list-row-field__udt {
                 display: inline-block;
                 background-color: green;
                 padding: 3px;
@@ -217,10 +215,10 @@
 
     .no-image {
         .rest {
-            .list-row-field {
+            .list-row-field__udt {
                 color: rgba(0, 0, 0, 0.6)
             }
-            .list-row-field:nth-of-type(1) {
+            .list-row-field__udt:nth-of-type(1) {
                 color: rgb(0, 0, 0);
                 padding-bottom: 0px;
             }

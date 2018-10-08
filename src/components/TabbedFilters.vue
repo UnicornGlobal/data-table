@@ -19,9 +19,7 @@
     </div>
 </template>
 
-<style lang="scss">
-    @import "../sass/styles";
-
+<style lang="scss" scoped>
     .filter-tab {
     }
 

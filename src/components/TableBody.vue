@@ -9,9 +9,7 @@
     </div>
 </template>
 
-<style lang="scss">
-    @import "../sass/styles";
-
+<style lang="scss" scoped>
     .list {
         position: relative;
         overflow-y: auto;
@@ -22,12 +20,12 @@
         }
     }
 
-    .row-link:nth-of-type(1) {
+    .row-link__udt:nth-of-type(1) {
       border-top: 1px solid #d8dae1;
     }
 
 
-    .row-link {
+    .row-link__udt {
       &:nth-of-type(odd) {
             border-left: 5px solid rgba(184,199,223, 0.7);
         }
