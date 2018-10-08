@@ -56,7 +56,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .date-input__udt {
     display: flex;
     flex-direction: row;

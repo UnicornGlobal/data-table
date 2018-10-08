@@ -17,7 +17,7 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .filter-tab-content__udt {
     position: absolute;
     z-index: 999;

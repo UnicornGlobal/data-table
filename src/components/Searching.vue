@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .search-div__udt {
     border-bottom: 1px solid rgb(216, 218, 225);
 

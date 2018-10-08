@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .filters__udt {
     display: flex;
     flex-wrap: wrap;

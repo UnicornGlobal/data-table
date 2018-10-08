@@ -10,7 +10,7 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .dropdown-box__udt {
     display: flex;
     align-items: center;

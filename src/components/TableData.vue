@@ -52,7 +52,7 @@
     </div>
     <div v-else-if="field.type === 'custom'" v-html="getCustomContent()" class="field-contents__udt" :class="field.field"></div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss">
   .field-contents__udt {
     font-size: .9em;
       &.image {

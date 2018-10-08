@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .list__udt {
     position: relative;
     overflow-y: auto;

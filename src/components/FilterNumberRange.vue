@@ -14,7 +14,7 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .custom-form-label__udt {
     margin-bottom: 0.3em;
   }
