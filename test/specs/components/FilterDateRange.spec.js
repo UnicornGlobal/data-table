@@ -9,8 +9,7 @@ describe('FilterDateRange.vue', () => {
   it('closes filter', () => {
     let localVue = createLocalVue()
     let filter = shallowMount(FilterDateRange, {localVue, propsData: {filter: {from: '', to: ''}}})
-    let close = filter.find('div.close-tab')
-    expect(close.text()).toBe('x')
+    let close = filter.find('button.close-tab__udt')
     close.trigger('click')
     expect(filter.emitted()).toHaveProperty('close')
   })

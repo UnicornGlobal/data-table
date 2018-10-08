@@ -33,7 +33,7 @@ describe('DataTable.vue', () => {
     })
 
     expect(dataTable.contains('div')).toEqual(true)
-    const element = dataTable.find('.no-results')
+    const element = dataTable.find('.no-results__udt')
     expect(element.is('div')).toEqual(true)
     expect(element.text()).toEqual('No Results. Please broaden your search parameters.')
   })

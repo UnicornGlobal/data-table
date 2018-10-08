@@ -9,8 +9,7 @@ describe('FilterNumberRange.vue', () => {
   it('closes filter', () => {
     let localVue = createLocalVue()
     let filter = mount(FilterNumberRange, {localVue, propsData: {filter: {from: 3, to: 9}}})
-    let close = filter.find('div.close-tab')
-    expect(close.text()).toBe('x')
+    let close = filter.find('button.close-tab__udt')
     close.trigger('click')
     expect(filter.emitted()).toHaveProperty('close')
   })
