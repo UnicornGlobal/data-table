@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <label :for="'filter-' + filter.field" class="filter-label-checkbox">
-            <input type="checkbox"
-                   :id="'filter-' + filter.field"
-                   v-model="filter.value"/>
-            {{ filter.text }}
-        </label>
-    </div>
+  <div>
+    <label :for="'filter-' + filter.field" class="filter-label-checkbox">
+      <input type="checkbox"
+             :id="'filter-' + filter.field"
+             v-model="filter.value"/>
+      {{ filter.text }}
+    </label>
+  </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .filter-label-checkbox {
     margin-left: 5px;
     margin-top: 1px;
