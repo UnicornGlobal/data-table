@@ -1,21 +1,21 @@
 <template>
-    <div>
-        <button @click="closeFilter" class="close-tab"><close-button></close-button></button>
-        <span class="custom-form-label">From</span>
-        <div class="date-input">
-            <datatable-date-picker @dateFrom="setDateFrom" ref="pickFrom" name="dateFrom"
-                                   :value="filter.from"></datatable-date-picker>
-            <button tabindex="-1" @click="setDateFrom({date:null})" class="button"><close-button></close-button></button>
-        </div>
-        <span class="custom-form-label">To</span>
-        <div class="date-input">
-            <datatable-date-picker @dateTo="setDateTo" ref="pickTo" name="dateTo"
-                                   :value="filter.to"></datatable-date-picker>
-            <button tabindex="-1" @click="setDateTo({date:null})" class="button"><close-button></close-button></button>
-        </div>
-        <input hidden ref="from" v-model="filter.from"/>
-        <input hidden ref="to" v-model="filter.to"/>
+  <div>
+    <button @click="closeFilter" class="close-tab"><close-button></close-button></button>
+    <span class="custom-form-label">From</span>
+    <div class="date-input">
+      <datatable-date-picker @dateFrom="setDateFrom" ref="pickFrom" name="dateFrom"
+                                                                    :value="filter.from"></datatable-date-picker>
+      <button tabindex="-1" @click="setDateFrom({date:null})" class="button"><close-button></close-button></button>
     </div>
+    <span class="custom-form-label">To</span>
+    <div class="date-input">
+      <datatable-date-picker @dateTo="setDateTo" ref="pickTo" name="dateTo"
+                                                              :value="filter.to"></datatable-date-picker>
+      <button tabindex="-1" @click="setDateTo({date:null})" class="button"><close-button></close-button></button>
+    </div>
+    <input hidden ref="from" v-model="filter.from"/>
+    <input hidden ref="to" v-model="filter.to"/>
+  </div>
 </template>
 
 <script>
@@ -46,11 +46,11 @@
       },
       setDateFrom(e) {
         this.$refs.from.value = e.date
-        this.$refs.from.dispatchEvent(new Event('input', {'bubbles': true}))
+        this.$refs.from.dispatchEvent(new Event('input', { 'bubbles': true }))
       },
       setDateTo(e) {
         this.$refs.to.value = e.date
-        this.$refs.to.dispatchEvent(new Event('input', {'bubbles': true}))
+        this.$refs.to.dispatchEvent(new Event('input', { 'bubbles': true }))
       }
     }
   }
