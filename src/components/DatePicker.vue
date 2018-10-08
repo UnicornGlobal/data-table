@@ -1,5 +1,5 @@
 <template>
-    <input type="text" :value="value" class="input__udt">
+    <input type="text" :value="value" class="input">
 </template>
 
 <script type="text/javascript">
@@ -83,7 +83,7 @@
     }
   }
 
-  .input__udt:not([type=checkbox]):not([type=radio]) {
+  .input:not([type=checkbox]):not([type=radio]) {
     height: 38px;
     background-color: rgb(245, 246, 247);
     border: solid 1px rgb(216, 218, 225);

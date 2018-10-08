@@ -1,7 +1,7 @@
 <template>
-    <div class="header-bar__udt">
-        <div class="headers__udt">
-            <div v-for="(field) in fields" v-if="field.header" class="header-cell__udt" :style="styler(field)"
+    <div class="header-bar">
+        <div class="headers">
+            <div v-for="(field) in fields" v-if="field.header" class="header-cell" :style="styler(field)"
                  :secondary="field.secondary === true" @click="sort(field)">
                 <div>
                     {{ field.name }}
@@ -14,10 +14,10 @@
                         <arrow-up></arrow-up>
                     </b>
                 </div>
-                <div class="arrow-spacer__udt" v-else></div>
+                <div class="arrow-spacer" v-else></div>
             </div>
-            <div v-else class="empty-header-cell__udt" :style="styler(field)" :secondary="field.secondary"><div class="empty-header-cell-inner__udt"></div></div>
-            <div v-if="controls && controls.length" class="header-cell__udt" :secondary="false" style="flex: 1 1 0%">
+            <div v-else class="empty-header-cell" :style="styler(field)" :secondary="field.secondary"><div class="empty-header-cell-inner"></div></div>
+            <div v-if="controls && controls.length" class="header-cell" :secondary="false" style="flex: 1 1 0%">
                 <div>
                     Options
                 </div>
@@ -27,7 +27,7 @@
 </template>
 
 <style lang="scss">
-  .header-bar__udt {
+  .header-bar {
     min-width: 100%;
     right: 0;
     left: 0;
@@ -37,11 +37,11 @@
     }
   }
 
-  .arrow-spacer__udt {
+  .arrow-spacer {
     width: 20px;
   }
 
-  .headers__udt {
+  .headers {
     display: flex;
     justify-content: space-between;
     border-bottom: 2px solid rgb(216, 218, 225);
@@ -55,7 +55,7 @@
       min-height: 55px;
     }
 
-    .header-cell__udt {
+    .header-cell {
       padding: 0px 3px;
       display: flex;
 
@@ -79,19 +79,19 @@
       }
     }
 
-    .header-cell__udt:last-child {
+    .header-cell:last-child {
       justify-content: flex-end;
 
-      .arrow-spacer__udt {
+      .arrow-spacer {
         display: none;
       }
     }
 
-    .empty-header-cell-inner__udt {
+    .empty-header-cell-inner {
       width: 35px;
     }
 
-    .empty-header-cell__udt {
+    .empty-header-cell {
       padding: 0 3px;
     }
   }

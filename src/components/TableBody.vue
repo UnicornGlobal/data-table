@@ -1,5 +1,5 @@
 <template>
-    <div class="list__udt">
+    <div class="list">
         <div v-if="mustLink()">
             <table-link-row v-for="(data, key) in dataset" :fields="fields" :data="data" :styler="styler" :key="key"
                             :linking="linking" :mobileType="mobileType" :showLabelOnMobile="showLabelOnMobile" :smallScreen="smallScreen"></table-link-row>
@@ -10,7 +10,7 @@
 </template>
 
 <style lang="scss">
-  .list__udt {
+  .list {
     position: relative;
     overflow-y: auto;
     max-height: 540px;
@@ -20,12 +20,12 @@
     }
   }
 
-  .row-link__udt:nth-of-type(1) {
+  .row-link:nth-of-type(1) {
     border-top: 1px solid #d8dae1;
   }
 
 
-  .row-link__udt {
+  .row-link {
     &:nth-of-type(odd) {
     border-left: 5px solid rgba(184,199,223, 0.7);
   }

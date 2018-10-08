@@ -1,8 +1,8 @@
 <template>
-    <div class="filters__udt">
-        <div v-for="filter in filters" :class="'filter-' + filter.type + '__udt'">
-            <tabbed-filters v-if="filter.type === 'tabbed'" :filter="filter" class="tabbed-filters__udt"></tabbed-filters>
-            <filter-checkbox v-if="filter.type === 'checkbox'" :filter="filter" class="input_checkbox__udt"></filter-checkbox>
+    <div class="filters">
+        <div v-for="filter in filters" :class="'filter-' + filter.type + ''">
+            <tabbed-filters v-if="filter.type === 'tabbed'" :filter="filter" class="tabbed-filters"></tabbed-filters>
+            <filter-checkbox v-if="filter.type === 'checkbox'" :filter="filter" class="input_checkbox"></filter-checkbox>
             <filter-dropdown v-if="filter.type === 'dropdown'" :filter="filter" :options="dropdownDataSet(filter, dataset)">
             </filter-dropdown>
         </div>
@@ -10,24 +10,24 @@
 </template>
 
 <style lang="scss">
-  .filters__udt {
+  .filters {
     display: flex;
     flex-wrap: wrap;
     border-bottom: 2px solid rgb(216, 218, 225);
   }
 
-  .filter-checkbox__udt, .filter-dropdown__udt {
+  .filter-checkbox, .filter-dropdown {
     flex: 1;
     padding: 0.6em;
     flex-basis: 170px;
   }
 
-  .filter-tabbed__udt {
+  .filter-tabbed {
     margin-bottom: 1em;
     width: 100%;
   }
 
-  .tabbed-filters__udt {
+  .tabbed-filters {
     position: relative;
     top: 0;
     left: 0;

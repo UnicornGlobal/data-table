@@ -1,17 +1,17 @@
 <template>
     <div>
-        <button @click="closeFilter" class="close-tab__udt"><close-button></close-button></button>
-        <span class="custom-form-label__udt">From</span>
-        <div class="date-input__udt">
+        <button @click="closeFilter" class="close-tab"><close-button></close-button></button>
+        <span class="custom-form-label">From</span>
+        <div class="date-input">
             <datatable-date-picker @dateFrom="setDateFrom" ref="pickFrom" name="dateFrom"
                                    :value="filter.from"></datatable-date-picker>
-            <button tabindex="-1" @click="setDateFrom({date:null})" class="button__udt"><close-button></close-button></button>
+            <button tabindex="-1" @click="setDateFrom({date:null})" class="button"><close-button></close-button></button>
         </div>
-        <span class="custom-form-label__udt">To</span>
-        <div class="date-input__udt">
+        <span class="custom-form-label">To</span>
+        <div class="date-input">
             <datatable-date-picker @dateTo="setDateTo" ref="pickTo" name="dateTo"
                                    :value="filter.to"></datatable-date-picker>
-            <button tabindex="-1" @click="setDateTo({date:null})" class="button__udt"><close-button></close-button></button>
+            <button tabindex="-1" @click="setDateTo({date:null})" class="button"><close-button></close-button></button>
         </div>
         <input hidden ref="from" v-model="filter.from"/>
         <input hidden ref="to" v-model="filter.to"/>
@@ -57,13 +57,13 @@
 </script>
 
 <style lang="scss">
-  .date-input__udt {
+  .date-input {
     display: flex;
     flex-direction: row;
     margin-bottom: 1em;
   }
 
-  .close-tab__udt {
+  .close-tab {
     position: absolute;
     top: 0;
     right: 0;
@@ -83,11 +83,11 @@
     }
   }
 
-  .custom-form-label__udt {
+  .custom-form-label {
     margin-bottom: 0.3em;
   }
 
-  .button__udt {
+  .button {
     border: 0;
     background-color: white;
     padding: 0;

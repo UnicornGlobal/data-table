@@ -1,9 +1,9 @@
 <template>
-    <div class="dropdown-box__udt" v-if="filter.type === 'dropdown'">
-        <label :for="'filter-' + filter.filter" class="label-filter__udt">
+    <div class="dropdown-box" v-if="filter.type === 'dropdown'">
+        <label :for="'filter-' + filter.filter" class="label-filter">
             {{ filter.text }}
         </label>
-        <select v-model="filter.value" :name="`${filter.filter}`" class="select__udt">
+        <select v-model="filter.value" :name="`${filter.filter}`" class="select">
             <option value="">{{ filter.placeholder }}</option>
             <option v-for="each in options" :value="value(each)">{{label(each)}}</option>
         </select>
@@ -11,17 +11,17 @@
 </template>
 
 <style lang="scss">
-  .dropdown-box__udt {
+  .dropdown-box {
     display: flex;
     align-items: center;
   }
 
-  .label-filter__udt {
+  .label-filter {
     margin-right: 0.7em;
     font-size: .9rem;
   }
 
-  .select__udt {
+  .select {
     -webkit-appearance: none;
     -moz-appearance: none;
     -webkit-border-radius: 0;

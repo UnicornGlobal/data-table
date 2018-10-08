@@ -1,25 +1,25 @@
 <template>
     <div>
-        <button @click="closeFilter" class="close-tab__udt"><close-button></close-button></button>
-        <span class="custom-form-label__udt">Amount from:</span>
-        <div class="value-input__udt">
-            <input type="text" v-model="filter.from" ref="amountFrom" class="input__udt">
-            <button tabindex="-1" @click="clearAmountFrom" class="button__udt"><close-button></close-button></button>
+        <button @click="closeFilter" class="close-tab"><close-button></close-button></button>
+        <span class="custom-form-label">Amount from:</span>
+        <div class="value-input">
+            <input type="text" v-model="filter.from" ref="amountFrom" class="input">
+            <button tabindex="-1" @click="clearAmountFrom" class="button"><close-button></close-button></button>
         </div>
-        <span class="custom-form-label__udt">Amount to:</span>
-        <div class="value-input__udt">
-            <input type="text" v-model="filter.to" ref="amountTo" class="input__udt">
-            <button tabindex="-1" @click="clearAmountTo" class="button__udt"><close-button></close-button></button>
+        <span class="custom-form-label">Amount to:</span>
+        <div class="value-input">
+            <input type="text" v-model="filter.to" ref="amountTo" class="input">
+            <button tabindex="-1" @click="clearAmountTo" class="button"><close-button></close-button></button>
         </div>
     </div>
 </template>
 
 <style lang="scss">
-  .custom-form-label__udt {
+  .custom-form-label {
     margin-bottom: 0.3em;
   }
 
-  .close-tab__udt {
+  .close-tab {
     position: absolute;
     top: 0;
     right: 0;
@@ -39,13 +39,13 @@
     }
   }
 
-  .value-input__udt {
+  .value-input {
     display: flex;
     flex-direction: row;
     margin-bottom: 1em;
   }
 
-  .button__udt {
+  .button {
     border: 0;
     background-color: white;
     padding: 0;
@@ -63,7 +63,7 @@
     }
   }
 
-  .input__udt:not([type=checkbox]):not([type=radio]) {
+  .input:not([type=checkbox]):not([type=radio]) {
     height: 38px;
     background-color: rgb(245, 246, 247);
     border: solid 1px rgb(216, 218, 225);

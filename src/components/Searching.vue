@@ -1,22 +1,22 @@
 <template>
-    <div class="flex__udt search-div__udt">
-        <div class="controls__udt">
-            <div class="search-bar-label__udt"></div>
-            <input v-model="config.term" :placeholder="config.placeholder" class="input__udt"/>
+    <div class="flex search-div">
+        <div class="controls">
+            <div class="search-bar-label"></div>
+            <input v-model="config.term" :placeholder="config.placeholder" class="input"/>
         </div>
     </div>
 </template>
 
 <style lang="scss">
-  .search-div__udt {
+  .search-div {
     border-bottom: 1px solid rgb(216, 218, 225);
 
-    .controls__udt {
+    .controls {
       padding: 1em 0.75em;
     }
   }
 
-  .input__udt:not([type=checkbox]):not([type=radio]) {
+  .input:not([type=checkbox]):not([type=radio]) {
     height: 38px;
     background-color: rgb(245, 246, 247);
     border: solid 1px rgb(216, 218, 225);
