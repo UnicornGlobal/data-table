@@ -39,42 +39,42 @@
     <div v-else-if="field.type === 'currency'" class="field-contents__udt" :class="field.field">
         {{ formatAsCurrency(getProperty(data, field.field), field.symbol) }}
     </div>
-    <div v-else-if="field.type === 'datetime'" class="field-contents__udt datetime" :class="field.field">
-        <span class="year">{{formatDate(getProperty(data, field.field)).year}}</span>
-        <span class="delimiter">,</span>
-        <span class="time">{{formatDate(getProperty(data, field.field)).time}}</span>
+    <div v-else-if="field.type === 'datetime'" class="field-contents__udt datetime__udt" :class="field.field">
+        <span class="year_udt">{{formatDate(getProperty(data, field.field)).year}}</span>
+        <span class="delimiter__udt">,</span>
+        <span class="time__udt">{{formatDate(getProperty(data, field.field)).time}}</span>
     </div>
     <div v-else-if="field.type === 'date'" class="field-contents__udt" :class="field.field">
-        <span class="year">{{formatDate(getProperty(data, field.field)).year}}</span>
+        <span class="year__udt">{{formatDate(getProperty(data, field.field)).year}}</span>
     </div>
     <div v-else-if="field.type === 'time'" class="field-contents__udt" :class="field.field">
-        <span class="year">{{formatDate(getProperty(data, field.field)).time}}</span>
+        <span class="year__udt">{{formatDate(getProperty(data, field.field)).time}}</span>
     </div>
     <div v-else-if="field.type === 'custom'" v-html="getCustomContent()" class="field-contents__udt" :class="field.field"></div>
 </template>
 <style lang="scss" scoped>
-    .field-contents__udt {
-        font-size: .9em;
-        &.image {
-            min-width: 58px;
-        }
-    }
+  .field-contents__udt {
+    font-size: .9em;
+      &.image {
+        min-width: 58px;
+      }
+  }
 
-    .year, .time {
-        display: inline-block;
-    }
+  .year__udt, .time__udt {
+    display: inline-block;
+  }
 
-    .time {
-        margin-left: 10px;
-    }
+  .time__udt {
+    margin-left: 10px;
+  }
 
-    @media only screen and (max-width: 600px) {
-        .datetime {
-            .time, .delimiter {
-                display: none;
-            }
-        }
+  @media only screen and (max-width: 600px) {
+    .datetime__udt {
+      .time__udt, .delimiter__udt {
+        display: none;
+      }
     }
+  }
 </style>
 
 <script>

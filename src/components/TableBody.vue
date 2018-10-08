@@ -1,5 +1,5 @@
 <template>
-    <div class="list">
+    <div class="list__udt">
         <div v-if="mustLink()">
             <table-link-row v-for="(data, key) in dataset" :fields="fields" :data="data" :styler="styler" :key="key"
                             :linking="linking" :mobileType="mobileType" :showLabelOnMobile="showLabelOnMobile" :smallScreen="smallScreen"></table-link-row>
@@ -10,30 +10,30 @@
 </template>
 
 <style lang="scss" scoped>
-    .list {
-        position: relative;
-        overflow-y: auto;
-        max-height: 540px;
+  .list__udt {
+    position: relative;
+    overflow-y: auto;
+    max-height: 540px;
 
-        @media(max-width: 480px) {
-            max-height: calc(100vh - 250px);
-        }
+    @media(max-width: 480px) {
+      max-height: calc(100vh - 250px);
     }
+  }
 
-    .row-link__udt:nth-of-type(1) {
-      border-top: 1px solid #d8dae1;
-    }
+  .row-link__udt:nth-of-type(1) {
+    border-top: 1px solid #d8dae1;
+  }
 
 
-    .row-link__udt {
-      &:nth-of-type(odd) {
-            border-left: 5px solid rgba(184,199,223, 0.7);
-        }
+  .row-link__udt {
+    &:nth-of-type(odd) {
+    border-left: 5px solid rgba(184,199,223, 0.7);
+  }
 
-        &:nth-of-type(even) {
-            border-left: 5px solid rgb(230,237,249) ;
-        }
-    }
+  &:nth-of-type(even) {
+    border-left: 5px solid rgb(230,237,249) ;
+  }
+}
 </style>
 
 <script>

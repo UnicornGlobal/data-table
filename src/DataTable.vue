@@ -69,7 +69,7 @@
       },
       smallScreen () {
         return this.windowWidth && this.windowWidth <= 500 ? true : false
-      },
+      }
     },
     methods: {
       setInnerWidth () {
