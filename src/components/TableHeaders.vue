@@ -1,29 +1,29 @@
 <template>
-    <div class="header-bar">
-        <div class="headers">
-            <div v-for="(field) in fields" v-if="field.header" class="header-cell" :style="styler(field)"
-                 :secondary="field.secondary === true" @click="sort(field)">
-                <div>
-                    {{ field.name }}
-                </div>
-                <div v-if="field.field === config.sorting.field">
-                    <b v-if="config.sorting.ascending">
-                        <arrow-down></arrow-down>
-                    </b>
-                    <b v-else>
-                        <arrow-up></arrow-up>
-                    </b>
-                </div>
-                <div class="arrow-spacer" v-else></div>
-            </div>
-            <div v-else class="empty-header-cell" :style="styler(field)" :secondary="field.secondary"><div class="empty-header-cell-inner"></div></div>
-            <div v-if="controls && controls.length" class="header-cell" :secondary="false" style="flex: 1 1 0%">
-                <div>
-                    Options
-                </div>
-            </div>
+  <div class="header-bar">
+    <div class="headers">
+      <div v-for="(field) in fields" v-if="field.header" class="header-cell" :style="styler(field)"
+                                                         :secondary="field.secondary === true" @click="sort(field)">
+        <div>
+          {{ field.name }}
         </div>
+        <div v-if="field.field === config.sorting.field">
+          <b v-if="config.sorting.ascending">
+            <arrow-down></arrow-down>
+          </b>
+          <b v-else>
+            <arrow-up></arrow-up>
+          </b>
+        </div>
+        <div class="arrow-spacer" v-else></div>
+      </div>
+      <div v-else class="empty-header-cell" :style="styler(field)" :secondary="field.secondary"><div class="empty-header-cell-inner"></div></div>
+      <div v-if="controls && controls.length" class="header-cell" :secondary="false" style="flex: 1 1 0%">
+        <div>
+          Options
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
