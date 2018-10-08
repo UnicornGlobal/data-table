@@ -1,72 +1,67 @@
 <template>
-    <div class="filter-tab">
-        <div>
-            <div class="tabs" role="tablist">
-                <div class="tab" :class="index === activeTab ? 'active' : ''" v-for="(tab, index) in filter.tabs"
-                     @click="setActive(index)">
-                    {{ getTitle(tab) }}
-                </div>
+    <div>
+        <div class="tabs__udt" role="tablist">
+            <div class="tab__udt" :class="index === activeTab ? 'active' : ''" v-for="(tab, index) in filter.tabs"
+                 @click="setActive(index)">
+                {{ getTitle(tab) }}
             </div>
-            <div>
-                <div v-for="(tab, index) in filter.tabs">
-                    <filter-date-range @close="setActive(0)" v-if="tab.type === 'date' && index === activeTab" :filter="tab"
-                                       class="filter-tab-content__udt"></filter-date-range>
-                    <filter-number-range @close="setActive(0)" v-if="tab.type === 'range' && index === activeTab" :filter="tab"
-                                         class="filter-tab-content__udt"></filter-number-range>
-                </div>
+        </div>
+        <div>
+            <div v-for="(tab, index) in filter.tabs">
+                <filter-date-range @close="setActive(0)" v-if="tab.type === 'date' && index === activeTab" :filter="tab"
+                                   class="filter-tab-content__udt"></filter-date-range>
+                <filter-number-range @close="setActive(0)" v-if="tab.type === 'range' && index === activeTab" :filter="tab"
+                                     class="filter-tab-content__udt"></filter-number-range>
             </div>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .filter-tab {
-    }
+  .filter-tab-content__udt {
+    position: absolute;
+    z-index: 999;
+    left: 2em;
+    background: white;
+    border: 1px solid rgb(233, 234, 235);
+    padding: 2em 1em 0em;
+    min-width: 300px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .filter-tab-content__udt {
-        position: absolute;
-        z-index: 999;
-        left: 2em;
-        background: white;
-        border: 1px solid rgb(233, 234, 235);
-        padding: 2em 1em 0em;
-        min-width: 300px;
-        max-width: 600px;
-        display: flex;
-        flex-direction: column;
-    }
+  .tabs__udt {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(233, 234, 235);
+    align-items: center;
 
-    .tabs {
+    .tab__udt {
+      padding: 0.7em;
+      min-width: 65px;
+      height: auto;
+      font-size: .9rem;
+      overflow-wrap: normal;
+
+      &.active {
+        background: lightgrey;
+        color: rgb(84, 129, 255);
+      }
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .tabs__udt {
+      .tab__udt {
+        font-size: .7rem;
+        padding: 0.7em;
+        min-height: 48px;
         display: flex;
-        flex-direction: row;
-        border-bottom: 1px solid rgb(233, 234, 235);
         align-items: center;
-
-        .tab {
-            padding: 0.7em;
-            min-width: 65px;
-            height: auto;
-            font-size: .9rem;
-            overflow-wrap: normal;
-
-            &.active {
-                background: lightgrey;
-                color: rgb(84, 129, 255);
-            }
-        }
+      }
     }
-
-    @media screen and (max-width: 500px) {
-        .tabs {
-            .tab {
-                font-size: .7rem;
-                padding: 0.7em;
-                min-height: 48px;
-                display: flex;
-                align-items: center;
-            }
-        }
-    }
+  }
 </style>
 
 <script>

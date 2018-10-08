@@ -57,49 +57,51 @@
 </script>
 
 <style lang="scss" scoped>
-    .date-input__udt {
-      display: flex;
-      flex-direction: row;
-      margin-bottom: 1em;
-    }
+  .date-input__udt {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+  }
 
-    .close-tab__udt {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 0;
-      margin: 0;
-      height: 30px;
-      width: 30px;
-      border-radius: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      svg {
-        height: 22px;
-        width: 22px;
-      }
-    }
+  .close-tab__udt {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 
-    .custom-form-label__udt {
-      margin-bottom: 0.3em;
+    svg {
+      height: 22px;
+      width: 22px;
     }
+  }
 
-    .button__udt {
-      border: 0;
-      background-color: white;
-      padding: 0;
-      margin: 0;
-      height: 38px;
-      width: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      svg {
-        height: 20px;
-        width: 20px;
-      }
+  .custom-form-label__udt {
+    margin-bottom: 0.3em;
+  }
+
+  .button__udt {
+    border: 0;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    height: 38px;
+    width: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    svg {
+      height: 20px;
+      width: 20px;
     }
+  }
 </style>

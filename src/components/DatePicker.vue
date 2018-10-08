@@ -85,23 +85,26 @@
 
   .input__udt:not([type=checkbox]):not([type=radio]) {
     height: 38px;
-
-    &:not([type=file]) {
-      width: 100%;
-    }
     background-color: rgb(245, 246, 247);
     border: solid 1px rgb(216, 218, 225);
     color: rgb(0, 0, 0);
     padding-left: 10px;
     padding-right: 10px;
 
+
+    &:not([type=file]) {
+      width: 100%;
+    }
+
     &::placeholder {
       color: lighten(rgb(0, 0, 0), 60%);
     }
+
     &:focus {
       border-color: rgb(84, 129, 255);
       outline: none;
     }
+
     &[aria-invalid=true] {
       border-color: rgb(255, 43, 104);
       color: rgb(255, 43, 104);
@@ -110,8 +113,9 @@
       background-repeat: no-repeat;
       background-position: right 30px center;
     }
+
     &[disabled] {
       cursor: not-allowed;
     }
-}
+  }
 </style>

@@ -10,30 +10,30 @@
 </template>
 
 <style lang="scss" scoped>
-    .filters__udt {
-        display: flex;
-        flex-wrap: wrap;
-        border-bottom: 2px solid rgb(216, 218, 225);
-    }
+  .filters__udt {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 2px solid rgb(216, 218, 225);
+  }
 
-    .filter-checkbox__udt, .filter-dropdown__udt {
-        flex: 1;
-        padding: 0.6em;
-        flex-basis: 170px;
-    }
+  .filter-checkbox__udt, .filter-dropdown__udt {
+    flex: 1;
+    padding: 0.6em;
+    flex-basis: 170px;
+  }
 
-    .filter-tabbed__udt {
-        margin-bottom: 1em;
-        width: 100%;
-    }
+  .filter-tabbed__udt {
+    margin-bottom: 1em;
+    width: 100%;
+  }
 
-    .tabbed-filters__udt {
-        position: relative;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-    }
+  .tabbed-filters__udt {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
 </style>
 
 <script>
