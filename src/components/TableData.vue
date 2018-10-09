@@ -1,6 +1,5 @@
 <template>
   <div v-if="field.type === 'image'"
-    class="field-contents"
     :class="field.field"
     style="flex-grow: 0">
     <avatar-or-initials
@@ -12,17 +11,14 @@
     </avatar-or-initials>
   </div>
   <div v-else-if="field.type === 'text'"
-    class="field-contents"
     :class="field.field">
     {{ getProperty(data, field.field) }}
   </div>
   <div v-else-if="field.type === 'count'"
-    class="field-contents"
     :class="field.field">
     {{ count(getProperty(data, field.field))}}
   </div>
   <div v-else-if="field.type === 'boolean'"
-    class="field-contents"
     :class="field.field">
     <template v-if="field.yes">
       {{ getProperty(data, field.field) ? field.yes : field.no }}
@@ -39,7 +35,6 @@
     </template>
   </div>
   <div v-else-if="field.type === 'boolean-inverted'"
-    class="field-contents"
     :class="field.field">
     <check-mark-inverted v-if="getProperty(data, field.field)"
       width="20px"
@@ -51,7 +46,6 @@
     </close-button-inverted>
   </div>
   <div v-else-if="field.type === 'third_party'"
-    class="field-contents"
     :class="field.field">
     <span v-if="getProperty(data, field.field)">
       Third Party
@@ -61,12 +55,10 @@
     </span>
   </div>
   <div v-else-if="field.type === 'property'"
-    class="field-contents"
     :class="field.field">
     {{ field.symbol ? field.symbol : '' }} {{ getProperty(data, field.field) }}
   </div>
   <div v-else-if="field.type === 'component'"
-    class="field-contents"
     :class="field.field"
     style="flex-grow: 0">
     <component
@@ -76,12 +68,10 @@
     </component>
   </div>
   <div v-else-if="field.type === 'currency'"
-    class="field-contents"
     :class="field.field">
     {{ formatAsCurrency(getProperty(data, field.field), field.symbol) }}
   </div>
   <div v-else-if="field.type === 'datetime'"
-    class="field-contents datetime"
     :class="field.field">
     <span class="year">
       {{formatDate(getProperty(data, field.field)).year}}
@@ -92,32 +82,30 @@
     </span>
   </div>
   <div v-else-if="field.type === 'date'"
-    class="field-contents"
     :class="field.field">
     <span class="year">
       {{formatDate(getProperty(data, field.field)).year}}
     </span>
   </div>
   <div v-else-if="field.type === 'time'"
-    class="field-contents"
     :class="field.field">
     <span class="year">
       {{formatDate(getProperty(data, field.field)).time}}
     </span>
   </div>
   <div v-else-if="field.type === 'custom'"
-    class="field-contents"
     :class="field.field"
     v-html="getCustomContent()">
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .field-contents {
+  div {
     font-size: .9em;
-      &.image {
-        min-width: 58px;
-      }
+
+    &.image {
+      min-width: 58px;
+    }
   }
 
   .year, .time {
@@ -172,7 +160,11 @@
         })
 
         if (typeof value === 'number') {
-          return value.toLocaleString(undefined, {style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2})
+          return value.toLocaleString(undefined, {
+            style: 'decimal',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })
         }
 
         return value
@@ -228,7 +220,11 @@
           value = 0
         }
 
-        return symbol + String.fromCharCode(160) + value.toLocaleString(undefined, {style: 'decimal', minimumFractionDigits: decimals, maximumFractionDigits: decimals})
+        return symbol + String.fromCharCode(160) + value.toLocaleString(undefined, {
+          style: 'decimal',
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        })
       }
     }
   }
