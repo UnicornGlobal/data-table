@@ -171,6 +171,7 @@
 
         path.forEach(function (prop) {
           let index = parseInt(prop)
+
           if (isNaN(index)) {
             value = value[prop]
           } else {
@@ -200,8 +201,10 @@
             const value = propField[key[0]]
             props[key] = this.data[value]
           })
+
           return props
         }
+
         return this.field.requireProps.defaultProps || {}
       },
       getComponentName () {
@@ -222,11 +225,13 @@
         if (typeof this.field.value === 'function') {
           return this.field.value(this.data)
         }
+
         return this.field.value
       },
       formatDate (date) {
         const year = moment(date).format('YYYY-MM-DD')
         const time = moment(date).format('LT')
+
         return {
           year,
           time

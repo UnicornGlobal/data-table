@@ -179,10 +179,13 @@
       filteredFields () {
         const copied = [...this.fields]
         const image = copied.findIndex(field => field.field === 'image')
+
         if (image >= 0) {
           copied.splice(image, 1)
         }
+
         const displayRight = copied.findIndex(field => field.displayRightOnMobile === true)
+
         if (displayRight >= 0) {
           copied.splice(displayRight, 1)
         }
@@ -202,6 +205,7 @@
       getStyle (field, data) {
         if (field.styledBackground && field.styledBackground.enabled) {
           let value
+
           if (field.value) {
             value = field.value(data)
           } else {

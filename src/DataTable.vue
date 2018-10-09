@@ -157,6 +157,7 @@
         if (!filter.collection && filter.value) {
           show = true
         }
+
         // TODO empty collections
         if (filter.collection && value.length > 0) {
           show = true
@@ -171,6 +172,7 @@
       filterTabs (dataItem, filter) {
         const config = filter
         let show = true
+
         for (let tab of config.tabs) {
           if (tab.type === 'date') {
             show = this.dateTabFilter(dataItem, tab)
@@ -180,6 +182,7 @@
             show = this.rangeTabFilter(dataItem, tab)
           }
         }
+
         return show
       },
       dateTabFilter (dataItem, tab) {

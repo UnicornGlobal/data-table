@@ -88,11 +88,15 @@
       },
       clearAmountFrom() {
         this.$refs.amountFrom.value = null
-        this.$refs.amountFrom.dispatchEvent(new Event('input', { 'bubbles': true }))
+        this.$refs.amountFrom.dispatchEvent(new Event('input', {
+          'bubbles': true
+        }))
       },
       clearAmountTo() {
         this.$refs.amountTo.value = null
-        this.$refs.amountTo.dispatchEvent(new Event('input', { 'bubbles': true }))
+        this.$refs.amountTo.dispatchEvent(new Event('input', {
+          'bubbles': true
+        }))
       }
     }
   }

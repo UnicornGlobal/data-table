@@ -1,6 +1,13 @@
 <template>
-    <input type="text" :value="value" class="input">
+  <input
+    type="text"
+    :value="value"
+    class="input" />
 </template>
+
+<style lang="scss">
+  @import '~pikaday/scss/pikaday';
+</style>
 
 <script type="text/javascript">
   import Pickaday from 'pikaday'
@@ -14,12 +21,13 @@
       }
     },
     watch: {
-      value(value){
+      value(value) {
         this.picker.setDate(value)
       }
     },
     mounted() {
       const getDate = this.getDate
+
       this.picker = new Pickaday({
         field: this.$el,
         bound: true,
@@ -29,17 +37,17 @@
           getDate(this.getMoment(date).format('YYYY-MM-DD'))
         }
       })
+
       this.picker.setDate(this.value)
     },
     methods: {
       getDate(date) {
-        this.$emit(this.inputName, { date, field: this.inputName })
+        this.$emit(this.inputName, {
+          date,
+          field: this.inputName
+        })
         this.$emit('input', date)
       }
     }
   }
 </script>
-
-<style lang="scss">
-  @import '~pikaday/scss/pikaday';
-</style>

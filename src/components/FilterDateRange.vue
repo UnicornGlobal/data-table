@@ -104,11 +104,15 @@
       },
       setDateFrom(e) {
         this.$refs.from.value = e.date
-        this.$refs.from.dispatchEvent(new Event('input', { 'bubbles': true }))
+        this.$refs.from.dispatchEvent(new Event('input', {
+          'bubbles': true
+        }))
       },
       setDateTo(e) {
         this.$refs.to.value = e.date
-        this.$refs.to.dispatchEvent(new Event('input', { 'bubbles': true }))
+        this.$refs.to.dispatchEvent(new Event('input', {
+          'bubbles': true
+        }))
       }
     }
   }

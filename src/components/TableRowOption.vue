@@ -31,6 +31,7 @@
         if (typeof this.config.props === 'function') {
           return this.config.props(this.data)
         }
+
         if (typeof this.config.props === 'object') {
           return this.config.props
         }
