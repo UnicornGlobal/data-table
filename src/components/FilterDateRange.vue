@@ -1,60 +1,44 @@
 <template>
   <div>
-    <button @click="closeFilter" class="close-tab"><close-button></close-button></button>
-    <span class="custom-form-label">From</span>
+    <button @click="closeFilter" class="close-tab">
+      <close-button></close-button>
+    </button>
+    <span class="custom-form-label">
+      From
+    </span>
     <div class="date-input">
-      <datatable-date-picker @dateFrom="setDateFrom" ref="pickFrom" name="dateFrom"
-                                                                    :value="filter.from"></datatable-date-picker>
-      <button tabindex="-1" @click="setDateFrom({date:null})" class="button"><close-button></close-button></button>
+      <datatable-date-picker
+        @dateFrom="setDateFrom"
+        ref="pickFrom"
+        name="dateFrom"
+        :value="filter.from">
+      </datatable-date-picker>
+      <button tabindex="-1"
+              @click="setDateFrom({date:null})"
+              class="button">
+        <close-button></close-button>
+      </button>
     </div>
-    <span class="custom-form-label">To</span>
+    <span class="custom-form-label">
+      To
+    </span>
     <div class="date-input">
-      <datatable-date-picker @dateTo="setDateTo" ref="pickTo" name="dateTo"
-                                                              :value="filter.to"></datatable-date-picker>
-      <button tabindex="-1" @click="setDateTo({date:null})" class="button"><close-button></close-button></button>
+      <datatable-date-picker
+        @dateTo="setDateTo"
+        ref="pickTo"
+        name="dateTo"
+        :value="filter.to">
+      </datatable-date-picker>
+      <button tabindex="-1"
+              @click="setDateTo({date:null})"
+              class="button">
+        <close-button></close-button>
+      </button>
     </div>
     <input hidden ref="from" v-model="filter.from"/>
     <input hidden ref="to" v-model="filter.to"/>
   </div>
 </template>
-
-<script>
-  import CloseButton from './Icons/close-button.svg'
-  import DatatableDatePicker from './DatePicker.vue'
-
-  export default {
-    props: {
-      filter: {
-        type: Object,
-        required: true
-      }
-    },
-    components: {
-      CloseButton,
-      DatatableDatePicker
-    },
-    /**
-     * Pikaday breaks reactivity.
-     * To keep it we act as a 'proxy' here, and bind the real, reactive value
-     * to a hidden input.
-     *
-     * We dispatch an event to force a refresh
-     */
-    methods: {
-      closeFilter() {
-        this.$emit('close')
-      },
-      setDateFrom(e) {
-        this.$refs.from.value = e.date
-        this.$refs.from.dispatchEvent(new Event('input', { 'bubbles': true }))
-      },
-      setDateTo(e) {
-        this.$refs.to.value = e.date
-        this.$refs.to.dispatchEvent(new Event('input', { 'bubbles': true }))
-      }
-    }
-  }
-</script>
 
 <style lang="scss" scoped>
   .date-input {
@@ -105,3 +89,42 @@
     }
   }
 </style>
+
+<script>
+  import CloseButton from './Icons/close-button.svg'
+  import DatatableDatePicker from './DatePicker.vue'
+
+  export default {
+    props: {
+      filter: {
+        type: Object,
+        required: true
+      }
+    },
+    components: {
+      CloseButton,
+      DatatableDatePicker
+    },
+
+    /**
+     * Pikaday breaks reactivity.
+     * To keep it we act as a 'proxy' here, and bind the real, reactive value
+     * to a hidden input.
+     *
+     * We dispatch an event to force a refresh
+     */
+    methods: {
+      closeFilter() {
+        this.$emit('close')
+      },
+      setDateFrom(e) {
+        this.$refs.from.value = e.date
+        this.$refs.from.dispatchEvent(new Event('input', { 'bubbles': true }))
+      },
+      setDateTo(e) {
+        this.$refs.to.value = e.date
+        this.$refs.to.dispatchEvent(new Event('input', { 'bubbles': true }))
+      }
+    }
+  }
+</script>
