@@ -3,7 +3,7 @@
     <label :for="'filter-' + filter.field">
       <input type="checkbox"
              :id="'filter-' + filter.field"
-             v-model="filter.value"/>
+             v-model="filter.value" />
       {{ filter.text }}
     </label>
   </div>
