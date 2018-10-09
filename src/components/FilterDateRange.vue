@@ -3,7 +3,7 @@
     <button @click="closeFilter" class="close-tab">
       <close-button></close-button>
     </button>
-    <span class="custom-form-label">
+    <span>
       From
     </span>
     <div class="date-input">
@@ -13,13 +13,11 @@
         name="dateFrom"
         :value="filter.from">
       </datatable-date-picker>
-      <button tabindex="-1"
-              @click="setDateFrom({date:null})"
-              class="button">
+      <button tabindex="-1" @click="setDateFrom({date:null})">
         <close-button></close-button>
       </button>
     </div>
-    <span class="custom-form-label">
+    <span>
       To
     </span>
     <div class="date-input">
@@ -29,9 +27,7 @@
         name="dateTo"
         :value="filter.to">
       </datatable-date-picker>
-      <button tabindex="-1"
-              @click="setDateTo({date:null})"
-              class="button">
+      <button tabindex="-1" @click="setDateTo({date:null})">
         <close-button></close-button>
       </button>
     </div>
@@ -41,13 +37,7 @@
 </template>
 
 <style lang="scss" scoped>
-  .date-input {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1em;
-  }
-
-  .close-tab {
+  button.close-tab {
     position: absolute;
     top: 0;
     right: 0;
@@ -67,25 +57,32 @@
     }
   }
 
-  .custom-form-label {
+  // Label from / to
+  span {
     margin-bottom: 0.3em;
   }
 
-  .button {
-    border: 0;
-    background-color: white;
-    padding: 0;
-    margin: 0;
-    height: 38px;
-    width: 38px;
+  .date-input {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+    flex-direction: row;
+    margin-bottom: 1em;
 
-    svg {
-      height: 20px;
-      width: 20px;
+    button {
+      border: 0;
+      background-color: white;
+      padding: 0;
+      margin: 0;
+      height: 38px;
+      width: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+
+      svg {
+        height: 20px;
+        width: 20px;
+      }
     }
   }
 </style>
