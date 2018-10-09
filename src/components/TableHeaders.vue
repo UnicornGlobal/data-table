@@ -1,8 +1,12 @@
 <template>
   <div class="header-bar">
     <div class="headers">
-      <div v-for="(field) in fields" v-if="field.header" class="header-cell" :style="styler(field)"
-                                                         :secondary="field.secondary === true" @click="sort(field)">
+      <div v-if="field.header"
+        v-for="(field) in fields"
+        class="header-cell"
+        :style="styler(field)"
+        :secondary="field.secondary === true"
+        @click="sort(field)">
         <div>
           {{ field.name }}
         </div>
@@ -14,10 +18,18 @@
             <arrow-up></arrow-up>
           </b>
         </div>
-        <div class="arrow-spacer" v-else></div>
+        <div v-else class="arrow-spacer"></div>
       </div>
-      <div v-else class="empty-header-cell" :style="styler(field)" :secondary="field.secondary"><div class="empty-header-cell-inner"></div></div>
-      <div v-if="controls && controls.length" class="header-cell" :secondary="false" style="flex: 1 1 0%">
+      <div v-else
+        class="empty-header-cell"
+        :style="styler(field)"
+        :secondary="field.secondary">
+        <div></div>
+      </div>
+      <div v-if="controls && controls.length"
+        class="header-cell"
+        :secondary="false"
+        style="flex: 1 1 0%">
         <div>
           Options
         </div>
@@ -35,64 +47,64 @@
     @media (max-width: 480px) {
       padding: 1em 0;
     }
-  }
 
-  .arrow-spacer {
-    width: 20px;
-  }
-
-  .headers {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 2px solid rgb(216, 218, 225);
-    background-color: rgb(255, 255, 255);
-    min-height: 55px;
-    padding: 0 1em;
-
-    @media(max-width: 480px) {
-      padding-right: 7px;
-      padding-left: 0.5em;
-      min-height: 55px;
-    }
-
-    .header-cell {
-      padding: 0px 3px;
+    .headers {
       display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid rgb(216, 218, 225);
+      background-color: rgb(255, 255, 255);
+      min-height: 55px;
+      padding: 0 1em;
 
-      div {
-        align-self: center;
-        color: rgb(0, 0, 0);
+      @media(max-width: 480px) {
+        padding-right: 7px;
+        padding-left: 0.5em;
+        min-height: 55px;
+      }
+
+      .header-cell {
+        padding: 0px 3px;
         display: flex;
 
-        b {
+        div {
+          align-self: center;
           color: rgb(0, 0, 0);
+          display: flex;
+
+          b {
+            color: rgb(0, 0, 0);
+          }
+        }
+
+        svg {
+          padding-left: 2px;
+          margin-left: 5px;
+          margin-top: 8px;
+          height: 20px;
+          width: 15px;
+          fill: #6C758C;
+        }
+
+        .arrow-spacer {
+          width: 20px;
         }
       }
 
-      svg {
-        padding-left: 2px;
-        margin-left: 5px;
-        margin-top: 8px;
-        height: 20px;
-        width: 15px;
-        fill: #6C758C;
+      .header-cell:last-child {
+        justify-content: flex-end;
+
+        .arrow-spacer {
+          display: none;
+        }
       }
-    }
 
-    .header-cell:last-child {
-      justify-content: flex-end;
+      .empty-header-cell {
+        padding: 0 3px;
 
-      .arrow-spacer {
-        display: none;
+        div {
+          width: 35px;
+        }
       }
-    }
-
-    .empty-header-cell-inner {
-      width: 35px;
-    }
-
-    .empty-header-cell {
-      padding: 0 3px;
     }
   }
 </style>
@@ -135,4 +147,3 @@
     }
   }
 </script>
-
