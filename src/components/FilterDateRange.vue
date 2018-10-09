@@ -1,22 +1,79 @@
 <template>
-    <div>
-        <button @click="closeFilter" class="close-tab__udt"><close-button></close-button></button>
-        <span class="custom-form-label__udt">From</span>
-        <div class="date-input__udt">
-            <datatable-date-picker @dateFrom="setDateFrom" ref="pickFrom" name="dateFrom"
-                                   :value="filter.from"></datatable-date-picker>
-            <button tabindex="-1" @click="setDateFrom({date:null})" class="button__udt"><close-button></close-button></button>
-        </div>
-        <span class="custom-form-label__udt">To</span>
-        <div class="date-input__udt">
-            <datatable-date-picker @dateTo="setDateTo" ref="pickTo" name="dateTo"
-                                   :value="filter.to"></datatable-date-picker>
-            <button tabindex="-1" @click="setDateTo({date:null})" class="button__udt"><close-button></close-button></button>
-        </div>
-        <input hidden ref="from" v-model="filter.from"/>
-        <input hidden ref="to" v-model="filter.to"/>
+  <div>
+    <button
+      class="close-tab"
+      @click="closeFilter">
+      <close-button></close-button>
+    </button>
+    <span>
+      From
+    </span>
+    <div class="date-input">
+      <datatable-date-picker
+        ref="pickFrom"
+        name="dateFrom"
+        :value="filter.from"
+        @dateFrom="setDateFrom">
+      </datatable-date-picker>
+      <button
+        tabindex="-1"
+        @click="setDateFrom({date:null})">
+        <close-button></close-button>
+      </button>
     </div>
+    <span>
+      To
+    </span>
+    <div class="date-input">
+      <datatable-date-picker
+        ref="pickTo"
+        name="dateTo"
+        :value="filter.to"
+        @dateTo="setDateTo">
+      </datatable-date-picker>
+      <button
+        tabindex="-1"
+        @click="setDateTo({date:null})">
+        <close-button></close-button>
+      </button>
+    </div>
+    <input hidden ref="from" v-model="filter.from"/>
+    <input hidden ref="to" v-model="filter.to"/>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+  @import '../styles/filters/close-tab.scss';
+
+  // Label from / to
+  span {
+    margin-bottom: 0.3em;
+  }
+
+  .date-input {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+
+    button {
+      border: 0;
+      background-color: white;
+      padding: 0;
+      margin: 0;
+      height: 38px;
+      width: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+
+      svg {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+</style>
 
 <script>
   import CloseButton from './Icons/close-button.svg'
@@ -33,6 +90,7 @@
       CloseButton,
       DatatableDatePicker
     },
+
     /**
      * Pikaday breaks reactivity.
      * To keep it we act as a 'proxy' here, and bind the real, reactive value
@@ -46,62 +104,16 @@
       },
       setDateFrom(e) {
         this.$refs.from.value = e.date
-        this.$refs.from.dispatchEvent(new Event('input', {'bubbles': true}))
+        this.$refs.from.dispatchEvent(new Event('input', {
+          'bubbles': true
+        }))
       },
       setDateTo(e) {
         this.$refs.to.value = e.date
-        this.$refs.to.dispatchEvent(new Event('input', {'bubbles': true}))
+        this.$refs.to.dispatchEvent(new Event('input', {
+          'bubbles': true
+        }))
       }
     }
   }
 </script>
-
-<style lang="scss">
-  .date-input__udt {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1em;
-  }
-
-  .close-tab__udt {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0;
-    margin: 0;
-    height: 30px;
-    width: 30px;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-
-    svg {
-      height: 22px;
-      width: 22px;
-    }
-  }
-
-  .custom-form-label__udt {
-    margin-bottom: 0.3em;
-  }
-
-  .button__udt {
-    border: 0;
-    background-color: white;
-    padding: 0;
-    margin: 0;
-    height: 38px;
-    width: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-
-    svg {
-      height: 20px;
-      width: 20px;
-    }
-  }
-</style>

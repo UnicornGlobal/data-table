@@ -1,76 +1,143 @@
 <template>
-    <div v-if="field.type === 'image'" class="field-contents__udt" :class="field.field" style="flex-grow: 0">
-        <avatar-or-initials class="item-avatar"
-                            round
-                            size="35"
-                            :image="getProperty(data, field.image)"
-                            :title="data[field.field]">
-        </avatar-or-initials>
-    </div>
-    <div v-else-if="field.type === 'text'" class="field-contents__udt" :class="field.field">{{ getProperty(data, field.field)
-        }}
-    </div>
-    <div v-else-if="field.type === 'count'" class="field-contents__udt" :class="field.field">
-        {{ count(getProperty(data, field.field))}}
-    </div>
-    <div v-else-if="field.type === 'boolean'" class="field-contents__udt" :class="field.field">
-        <template v-if="field.yes">
-            {{ getProperty(data, field.field) ? field.yes : field.no }}
-        </template>
-        <template v-else>
-            <check-mark v-if="getProperty(data, field.field)" width="20px" height="20px"></check-mark>
-            <close-button width="20px" height="20px" v-else></close-button>
-        </template>
-    </div>
-    <div v-else-if="field.type === 'boolean-inverted'" class="field-contents__udt" :class="field.field">
-        <check-mark-inverted v-if="getProperty(data, field.field)" width="20px" height="20px"></check-mark-inverted>
-        <close-button-inverted width="20px" height="20px" v-else></close-button-inverted>
-    </div>
-    <div v-else-if="field.type === 'third_party'" class="field-contents__udt" :class="field.field">
-        <span v-if="getProperty(data, field.field)">Third Party</span>
-        <span v-else>First Party</span>
-    </div>
-    <div v-else-if="field.type === 'property'" class="field-contents__udt" :class="field.field">
-        {{ field.symbol ? field.symbol : '' }} {{ getProperty(data, field.field) }}
-    </div>
-    <div v-else-if="field.type === 'component'" class="field-contents__udt" :class="field.field" style="flex-grow: 0">
-        <component :is="getComponentName()" v-bind="getProps()" v-on="getComponentEvents()"></component>
-    </div>
-    <div v-else-if="field.type === 'currency'" class="field-contents__udt" :class="field.field">
-        {{ formatAsCurrency(getProperty(data, field.field), field.symbol) }}
-    </div>
-    <div v-else-if="field.type === 'datetime'" class="field-contents__udt datetime__udt" :class="field.field">
-        <span class="year_udt">{{formatDate(getProperty(data, field.field)).year}}</span>
-        <span class="delimiter__udt">,</span>
-        <span class="time__udt">{{formatDate(getProperty(data, field.field)).time}}</span>
-    </div>
-    <div v-else-if="field.type === 'date'" class="field-contents__udt" :class="field.field">
-        <span class="year__udt">{{formatDate(getProperty(data, field.field)).year}}</span>
-    </div>
-    <div v-else-if="field.type === 'time'" class="field-contents__udt" :class="field.field">
-        <span class="year__udt">{{formatDate(getProperty(data, field.field)).time}}</span>
-    </div>
-    <div v-else-if="field.type === 'custom'" v-html="getCustomContent()" class="field-contents__udt" :class="field.field"></div>
+  <div
+    v-if="field.type === 'image'"
+    :class="field.field"
+    style="flex-grow: 0">
+    <avatar-or-initials
+      class="item-avatar"
+      round
+      size="35"
+      :image="getProperty(data, field.image)"
+      :title="data[field.field]">
+    </avatar-or-initials>
+  </div>
+  <div
+    v-else-if="field.type === 'text'"
+    :class="field.field">
+    {{ getProperty(data, field.field) }}
+  </div>
+  <div
+    v-else-if="field.type === 'count'"
+    :class="field.field">
+    {{ count(getProperty(data, field.field))}}
+  </div>
+  <div
+    v-else-if="field.type === 'boolean'"
+    :class="field.field">
+    <template
+      v-if="field.yes">
+      {{ getProperty(data, field.field) ? field.yes : field.no }}
+    </template>
+    <template
+      v-else>
+      <check-mark
+        v-if="getProperty(data, field.field)"
+        width="20px"
+        height="20px">
+      </check-mark>
+      <close-button
+        v-else
+        width="20px"
+        height="20px">
+      </close-button>
+    </template>
+  </div>
+  <div
+    v-else-if="field.type === 'boolean-inverted'"
+    :class="field.field">
+    <check-mark-inverted
+      v-if="getProperty(data, field.field)"
+      width="20px"
+      height="20px">
+    </check-mark-inverted>
+    <close-button-inverted
+      v-else
+      width="20px"
+      height="20px">
+    </close-button-inverted>
+  </div>
+  <div
+    v-else-if="field.type === 'third_party'"
+    :class="field.field">
+    <span v-if="getProperty(data, field.field)">
+      Third Party
+    </span>
+    <span v-else>
+      First Party
+    </span>
+  </div>
+  <div
+    v-else-if="field.type === 'property'"
+    :class="field.field">
+    {{ field.symbol ? field.symbol : '' }} {{ getProperty(data, field.field) }}
+  </div>
+  <div
+    v-else-if="field.type === 'component'"
+    :class="field.field"
+    style="flex-grow: 0">
+    <component
+      :is="getComponentName()"
+      v-bind="getProps()"
+      v-on="getComponentEvents()">
+    </component>
+  </div>
+  <div
+    v-else-if="field.type === 'currency'"
+    :class="field.field">
+    {{ formatAsCurrency(getProperty(data, field.field), field.symbol) }}
+  </div>
+  <div
+    v-else-if="field.type === 'datetime'"
+    :class="field.field">
+    <span class="year">
+      {{formatDate(getProperty(data, field.field)).year}}
+    </span>
+    <span class="delimiter">,</span>
+    <span class="time">
+      {{formatDate(getProperty(data, field.field)).time}}
+    </span>
+  </div>
+  <div
+    v-else-if="field.type === 'date'"
+    :class="field.field">
+    <span class="year">
+      {{formatDate(getProperty(data, field.field)).year}}
+    </span>
+  </div>
+  <div
+    v-else-if="field.type === 'time'"
+    :class="field.field">
+    <span class="year">
+      {{formatDate(getProperty(data, field.field)).time}}
+    </span>
+  </div>
+  <div
+    v-else-if="field.type === 'custom'"
+    :class="field.field"
+    v-html="getCustomContent()">
+  </div>
 </template>
-<style lang="scss">
-  .field-contents__udt {
+
+<style lang="scss" scoped>
+  div {
     font-size: .9em;
-      &.image {
-        min-width: 58px;
-      }
+
+    &.image {
+      min-width: 58px;
+    }
   }
 
-  .year__udt, .time__udt {
+  .year, .time {
     display: inline-block;
   }
 
-  .time__udt {
+  .time {
     margin-left: 10px;
   }
 
   @media only screen and (max-width: 600px) {
-    .datetime__udt {
-      .time__udt, .delimiter__udt {
+    .datetime {
+      .time, .delimiter {
         display: none;
       }
     }
@@ -104,6 +171,7 @@
 
         path.forEach(function (prop) {
           let index = parseInt(prop)
+
           if (isNaN(index)) {
             value = value[prop]
           } else {
@@ -112,7 +180,11 @@
         })
 
         if (typeof value === 'number') {
-          return value.toLocaleString(undefined, {style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2})
+          return value.toLocaleString(undefined, {
+            style: 'decimal',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })
         }
 
         return value
@@ -129,8 +201,10 @@
             const value = propField[key[0]]
             props[key] = this.data[value]
           })
+
           return props
         }
+
         return this.field.requireProps.defaultProps || {}
       },
       getComponentName () {
@@ -151,11 +225,13 @@
         if (typeof this.field.value === 'function') {
           return this.field.value(this.data)
         }
+
         return this.field.value
       },
       formatDate (date) {
         const year = moment(date).format('YYYY-MM-DD')
         const time = moment(date).format('LT')
+
         return {
           year,
           time
@@ -168,7 +244,11 @@
           value = 0
         }
 
-        return symbol + String.fromCharCode(160) + value.toLocaleString(undefined, {style: 'decimal', minimumFractionDigits: decimals, maximumFractionDigits: decimals})
+        return symbol + String.fromCharCode(160) + value.toLocaleString(undefined, {
+          style: 'decimal',
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        })
       }
     }
   }

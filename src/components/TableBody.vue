@@ -1,16 +1,36 @@
 <template>
-    <div class="list__udt">
-        <div v-if="mustLink()">
-            <table-link-row v-for="(data, key) in dataset" :fields="fields" :data="data" :styler="styler" :key="key"
-                            :linking="linking" :mobileType="mobileType" :showLabelOnMobile="showLabelOnMobile" :smallScreen="smallScreen"></table-link-row>
-        </div>
-        <table-row v-for="(data, key) in dataset" :fields="fields" :data="data" :styler="styler" :key="key"
-                   :controls="controls" :mobileType="mobileType" :showLabelOnMobile="showLabelOnMobile" :smallScreen="smallScreen" v-else></table-row>
+  <div class="list">
+    <div
+      v-if="mustLink()">
+      <table-link-row
+        v-for="(data, key) in dataset"
+        :fields="fields"
+        :data="data"
+        :styler="styler"
+        :key="key"
+        :linking="linking"
+        :mobileType="mobileType"
+        :showLabelOnMobile="showLabelOnMobile"
+        :smallScreen="smallScreen">
+      </table-link-row>
     </div>
+    <table-row
+      v-else
+      v-for="(data, key) in dataset"
+      :fields="fields"
+      :data="data"
+      :styler="styler"
+      :key="key"
+      :controls="controls"
+      :mobileType="mobileType"
+      :showLabelOnMobile="showLabelOnMobile"
+      :smallScreen="smallScreen">
+    </table-row>
+  </div>
 </template>
 
-<style lang="scss">
-  .list__udt {
+<style lang="scss" scoped>
+  .list {
     position: relative;
     overflow-y: auto;
     max-height: 540px;
@@ -20,12 +40,11 @@
     }
   }
 
-  .row-link__udt:nth-of-type(1) {
+  .row-link:nth-of-type(1) {
     border-top: 1px solid #d8dae1;
   }
 
-
-  .row-link__udt {
+  .row-link {
     &:nth-of-type(odd) {
     border-left: 5px solid rgba(184,199,223, 0.7);
   }
@@ -85,7 +104,6 @@
     methods: {
       mustLink() {
         return !!(this.linking && this.linking.enabled)
-
       }
     }
   }

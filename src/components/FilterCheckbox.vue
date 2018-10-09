@@ -1,16 +1,18 @@
 <template>
-    <div>
-        <label :for="'filter-' + filter.field" class="filter-label-checkbox__udt">
-            <input type="checkbox"
-                   :id="'filter-' + filter.field"
-                   v-model="filter.value"/>
-            {{ filter.text }}
-        </label>
-    </div>
+  <div>
+    <label
+      :for="'filter-' + filter.field">
+      <input
+        type="checkbox"
+        :id="'filter-' + filter.field"
+        v-model="filter.value" />
+      {{ filter.text }}
+    </label>
+  </div>
 </template>
 
-<style lang="scss">
-  .filter-label-checkbox__udt {
+<style scoped>
+  label {
     margin-left: 5px;
     margin-top: 1px;
     flex-basis: 200px;
@@ -28,4 +30,3 @@
     }
   }
 </script>
-

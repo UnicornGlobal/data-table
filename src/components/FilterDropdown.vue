@@ -1,31 +1,37 @@
 <template>
-    <div class="dropdown-box__udt" v-if="filter.type === 'dropdown'">
-        <label :for="'filter-' + filter.filter" class="label-filter__udt">
-            {{ filter.text }}
-        </label>
-        <select v-model="filter.value" :name="`${filter.filter}`" class="select__udt">
-            <option value="">{{ filter.placeholder }}</option>
-            <option v-for="each in options" :value="value(each)">{{label(each)}}</option>
-        </select>
-    </div>
+  <div
+    v-if="filter.type === 'dropdown'">
+    <label
+      :for="'filter-' + filter.filter">
+      {{ filter.text }}
+    </label>
+    <select
+      v-model="filter.value"
+      :name="`${filter.filter}`">
+      <option value="">
+        {{ filter.placeholder }}
+      </option>
+      <option
+        v-for="each in options"
+        :value="value(each)">
+        {{label(each)}}
+      </option>
+    </select>
+  </div>
 </template>
 
-<style lang="scss">
-  .dropdown-box__udt {
+<style lang="scss" scoped>
+  div {
     display: flex;
     align-items: center;
   }
 
-  .label-filter__udt {
+  label {
     margin-right: 0.7em;
     font-size: .9rem;
   }
 
-  .select__udt {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
+  select {
     padding: 0 0 0 10px;
     background-size: 15px 13px;
     background-repeat: no-repeat;
@@ -61,6 +67,5 @@
         return option
       }
     }
-
   }
 </script>
