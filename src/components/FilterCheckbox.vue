@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="'filter-' + filter.field" class="filter-label-checkbox">
+    <label :for="'filter-' + filter.field">
       <input type="checkbox"
              :id="'filter-' + filter.field"
              v-model="filter.value"/>
@@ -10,7 +10,7 @@
 </template>
 
 <style scoped>
-  .filter-label-checkbox {
+  label {
     margin-left: 5px;
     margin-top: 1px;
     flex-basis: 200px;
