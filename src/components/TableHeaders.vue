@@ -1,103 +1,115 @@
 <template>
-    <div class="header-bar border-top">
-        <div class="headers">
-            <div v-for="(field) in fields" v-if="field.header" class="header-cell" :style="styler(field)"
-                 :secondary="field.secondary === true" @click="sort(field)">
-                <div>
-                    {{ field.name }}
-                </div>
-                <div v-if="field.field === config.sorting.field">
-                    <b v-if="config.sorting.ascending">
-                        <arrow-down></arrow-down>
-                    </b>
-                    <b v-else>
-                        <arrow-up></arrow-up>
-                    </b>
-                </div>
-                <div class="arrow-spacer" v-else></div>
-            </div>
-            <div v-else class="empty-header-cell" :style="styler(field)" :secondary="field.secondary"><div class="empty-header-cell-inner"></div></div>
-            <div v-if="controls && controls.length" class="header-cell" :secondary="false" style="flex: 1 1 0%">
-                <div>
-                    Options
-                </div>
-            </div>
+  <div class="header-bar">
+    <div class="headers">
+      <div
+        v-if="field.header"
+        v-for="(field) in fields"
+        class="header-cell"
+        :style="styler(field)"
+        :secondary="field.secondary === true"
+        @click="sort(field)">
+        <div>
+          {{ field.name }}
         </div>
+        <div v-if="field.field === config.sorting.field">
+          <b v-if="config.sorting.ascending">
+            <arrow-down></arrow-down>
+          </b>
+          <b v-else>
+            <arrow-up></arrow-up>
+          </b>
+        </div>
+        <div v-else class="arrow-spacer"></div>
+      </div>
+      <div
+        v-else
+        class="empty-header-cell"
+        :style="styler(field)"
+        :secondary="field.secondary">
+        <div></div>
+      </div>
+      <div
+        v-if="controls && controls.length"
+        class="header-cell"
+        :secondary="false"
+        style="flex: 1 1 0%">
+        <div>
+          Options
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
-<style lang="scss">
-    @import "../sass/styles";
+<style lang="scss" scoped>
+  .header-bar {
+    min-width: 100%;
+    right: 0;
+    left: 0;
 
-    .header-bar {
-        min-width: 100%;
-        right: 0;
-        left: 0;
-
-        @media (max-width: 480px) {
-            padding: 1em 0;
-        }
-    }
-
-    .arrow-spacer {
-        width: 20px;
+    @media (max-width: 480px) {
+      padding: 1em 0;
     }
 
     .headers {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 2px solid $gray-4;
-        background-color: $white;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid rgb(216, 218, 225);
+      background-color: rgb(255, 255, 255);
+      min-height: 55px;
+      padding: 0 1em;
+
+      @media(max-width: 480px) {
+        padding-right: 7px;
+        padding-left: 0.5em;
         min-height: 55px;
-        padding: 0 1em;
+      }
 
-        @media(max-width: 480px) {
-            padding-right: 7px;
-            padding-left: 0.5em;
-            min-height: 55px;
+      .header-cell {
+        padding: 0px 3px;
+        display: flex;
+
+        div {
+          align-self: center;
+          color: rgb(0, 0, 0);
+          display: flex;
+
+          b {
+            color: rgb(0, 0, 0);
+          }
         }
 
-        .header-cell {
-            padding: 0px 3px;
-            display: flex;
-
-            div {
-                align-self: center;
-                color: $black;
-                display: flex;
-
-                b {
-                    color: $black;
-                }
-            }
-
-            svg {
-                padding-left: 2px;
-                margin-left: 5px;
-                margin-top: 8px;
-                height: 20px;
-                width: 15px;
-                fill: #6C758C;
-            }
+        svg {
+          padding-left: 2px;
+          margin-left: 5px;
+          margin-top: 8px;
+          height: 20px;
+          width: 15px;
+          fill: #6C758C;
         }
 
-        .header-cell:last-child {
-
-            justify-content: flex-end;
-
-            .arrow-spacer {
-                display: none;
-            }
+        .arrow-spacer {
+          width: 20px;
         }
+      }
 
-        .empty-header-cell-inner {
-            width: 35px;
-        }
+      .header-cell:last-child {
+        justify-content: flex-end;
 
-        .empty-header-cell {
-            padding: 0 3px;
+        .arrow-spacer {
+          display: none;
         }
+      }
+
+      .empty-header-cell {
+        padding: 0 3px;
+
+        div {
+          width: 35px;
+        }
+      }
     }
+  }
 </style>
 
 <script>
@@ -138,4 +150,3 @@
     }
   }
 </script>
-

@@ -1,13 +1,21 @@
 <template>
-    <div v-if="config.type == 'link'">
-        <router-link :to="config.href(data)" :class="config.class" :style="config.style">
-            {{config.label}}
-        </router-link>
-    </div>
-    <component v-else-if="config.type == 'component'" :is="componentName" v-bind="componentProps"
-               v-on="componentEvents" :style="config.style">
-    </component>
+  <div v-if="config.type == 'link'">
+    <router-link
+      :class="config.class"
+      :style="config.style"
+      :to="config.href(data)">
+      {{config.label}}
+    </router-link>
+  </div>
+  <component
+    v-else-if="config.type == 'component'"
+    v-bind="componentProps"
+    v-on="componentEvents"
+    :is="componentName"
+    :style="config.style">
+  </component>
 </template>
+
 <script>
   export default {
     props: ['config', 'data'],
@@ -23,6 +31,7 @@
         if (typeof this.config.props === 'function') {
           return this.config.props(this.data)
         }
+
         if (typeof this.config.props === 'object') {
           return this.config.props
         }
