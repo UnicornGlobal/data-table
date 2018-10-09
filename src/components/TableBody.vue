@@ -102,7 +102,6 @@
     methods: {
       mustLink() {
         return !!(this.linking && this.linking.enabled)
-
       }
     }
   }
