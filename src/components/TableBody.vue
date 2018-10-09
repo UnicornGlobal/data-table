@@ -1,11 +1,29 @@
 <template>
   <div class="list">
     <div v-if="mustLink()">
-      <table-link-row v-for="(data, key) in dataset" :fields="fields" :data="data" :styler="styler" :key="key"
-                      :linking="linking" :mobileType="mobileType" :showLabelOnMobile="showLabelOnMobile" :smallScreen="smallScreen"></table-link-row>
+      <table-link-row
+        v-for="(data, key) in dataset"
+        :fields="fields"
+        :data="data"
+        :styler="styler"
+        :key="key"
+        :linking="linking"
+        :mobileType="mobileType"
+        :showLabelOnMobile="showLabelOnMobile"
+        :smallScreen="smallScreen">
+      </table-link-row>
     </div>
-    <table-row v-for="(data, key) in dataset" :fields="fields" :data="data" :styler="styler" :key="key"
-               :controls="controls" :mobileType="mobileType" :showLabelOnMobile="showLabelOnMobile" :smallScreen="smallScreen" v-else></table-row>
+    <table-row v-else
+      v-for="(data, key) in dataset"
+      :fields="fields"
+      :data="data"
+      :styler="styler"
+      :key="key"
+      :controls="controls"
+      :mobileType="mobileType"
+      :showLabelOnMobile="showLabelOnMobile"
+      :smallScreen="smallScreen">
+    </table-row>
   </div>
 </template>
 
