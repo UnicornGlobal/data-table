@@ -1,22 +1,26 @@
 <template>
-  <div class="dropdown-box" v-if="filter.type === 'dropdown'">
-    <label :for="'filter-' + filter.filter" class="label-filter">
+  <div v-if="filter.type === 'dropdown'">
+    <label :for="'filter-' + filter.filter">
       {{ filter.text }}
     </label>
-    <select v-model="filter.value" :name="`${filter.filter}`" class="select">
-      <option value="">{{ filter.placeholder }}</option>
-      <option v-for="each in options" :value="value(each)">{{label(each)}}</option>
+    <select v-model="filter.value" :name="`${filter.filter}`">
+      <option value="">
+        {{ filter.placeholder }}
+      </option>
+      <option v-for="each in options" :value="value(each)">
+        {{label(each)}}
+      </option>
     </select>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .dropdown-box {
+  div {
     display: flex;
     align-items: center;
   }
 
-  .label-filter {
+  label {
     margin-right: 0.7em;
     font-size: .9rem;
   }
@@ -57,6 +61,5 @@
         return option
       }
     }
-
   }
 </script>
