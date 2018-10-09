@@ -1,5 +1,6 @@
 <template>
-  <div v-if="field.type === 'image'"
+  <div
+    v-if="field.type === 'image'"
     :class="field.field"
     style="flex-grow: 0">
     <avatar-or-initials
@@ -10,42 +11,53 @@
       :title="data[field.field]">
     </avatar-or-initials>
   </div>
-  <div v-else-if="field.type === 'text'"
+  <div
+    v-else-if="field.type === 'text'"
     :class="field.field">
     {{ getProperty(data, field.field) }}
   </div>
-  <div v-else-if="field.type === 'count'"
+  <div
+    v-else-if="field.type === 'count'"
     :class="field.field">
     {{ count(getProperty(data, field.field))}}
   </div>
-  <div v-else-if="field.type === 'boolean'"
+  <div
+    v-else-if="field.type === 'boolean'"
     :class="field.field">
-    <template v-if="field.yes">
+    <template
+      v-if="field.yes">
       {{ getProperty(data, field.field) ? field.yes : field.no }}
     </template>
-    <template v-else>
-      <check-mark v-if="getProperty(data, field.field)"
+    <template
+      v-else>
+      <check-mark
+        v-if="getProperty(data, field.field)"
         width="20px"
         height="20px">
       </check-mark>
-      <close-button v-else
+      <close-button
+        v-else
         width="20px"
         height="20px">
       </close-button>
     </template>
   </div>
-  <div v-else-if="field.type === 'boolean-inverted'"
+  <div
+    v-else-if="field.type === 'boolean-inverted'"
     :class="field.field">
-    <check-mark-inverted v-if="getProperty(data, field.field)"
+    <check-mark-inverted
+      v-if="getProperty(data, field.field)"
       width="20px"
       height="20px">
     </check-mark-inverted>
-    <close-button-inverted v-else
+    <close-button-inverted
+      v-else
       width="20px"
       height="20px">
     </close-button-inverted>
   </div>
-  <div v-else-if="field.type === 'third_party'"
+  <div
+    v-else-if="field.type === 'third_party'"
     :class="field.field">
     <span v-if="getProperty(data, field.field)">
       Third Party
@@ -54,11 +66,13 @@
       First Party
     </span>
   </div>
-  <div v-else-if="field.type === 'property'"
+  <div
+    v-else-if="field.type === 'property'"
     :class="field.field">
     {{ field.symbol ? field.symbol : '' }} {{ getProperty(data, field.field) }}
   </div>
-  <div v-else-if="field.type === 'component'"
+  <div
+    v-else-if="field.type === 'component'"
     :class="field.field"
     style="flex-grow: 0">
     <component
@@ -67,11 +81,13 @@
       v-on="getComponentEvents()">
     </component>
   </div>
-  <div v-else-if="field.type === 'currency'"
+  <div
+    v-else-if="field.type === 'currency'"
     :class="field.field">
     {{ formatAsCurrency(getProperty(data, field.field), field.symbol) }}
   </div>
-  <div v-else-if="field.type === 'datetime'"
+  <div
+    v-else-if="field.type === 'datetime'"
     :class="field.field">
     <span class="year">
       {{formatDate(getProperty(data, field.field)).year}}
@@ -81,19 +97,22 @@
       {{formatDate(getProperty(data, field.field)).time}}
     </span>
   </div>
-  <div v-else-if="field.type === 'date'"
+  <div
+    v-else-if="field.type === 'date'"
     :class="field.field">
     <span class="year">
       {{formatDate(getProperty(data, field.field)).year}}
     </span>
   </div>
-  <div v-else-if="field.type === 'time'"
+  <div
+    v-else-if="field.type === 'time'"
     :class="field.field">
     <span class="year">
       {{formatDate(getProperty(data, field.field)).time}}
     </span>
   </div>
-  <div v-else-if="field.type === 'custom'"
+  <div
+    v-else-if="field.type === 'custom'"
     :class="field.field"
     v-html="getCustomContent()">
   </div>

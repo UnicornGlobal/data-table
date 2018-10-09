@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button @click="closeFilter" class="close-tab">
+    <button
+      class="close-tab"
+      @click="closeFilter">
       <close-button></close-button>
     </button>
     <span>
@@ -8,12 +10,14 @@
     </span>
     <div class="date-input">
       <datatable-date-picker
-        @dateFrom="setDateFrom"
         ref="pickFrom"
         name="dateFrom"
-        :value="filter.from">
+        :value="filter.from"
+        @dateFrom="setDateFrom">
       </datatable-date-picker>
-      <button tabindex="-1" @click="setDateFrom({date:null})">
+      <button
+        tabindex="-1"
+        @click="setDateFrom({date:null})">
         <close-button></close-button>
       </button>
     </div>
@@ -22,12 +26,14 @@
     </span>
     <div class="date-input">
       <datatable-date-picker
-        @dateTo="setDateTo"
         ref="pickTo"
         name="dateTo"
-        :value="filter.to">
+        :value="filter.to"
+        @dateTo="setDateTo">
       </datatable-date-picker>
-      <button tabindex="-1" @click="setDateTo({date:null})">
+      <button
+        tabindex="-1"
+        @click="setDateTo({date:null})">
         <close-button></close-button>
       </button>
     </div>

@@ -1,7 +1,9 @@
 <template>
   <div class="search-div">
     <div>
-      <input v-model="config.term" :placeholder="config.placeholder" />
+      <input
+        v-model="config.term"
+        :placeholder="config.placeholder" />
     </div>
   </div>
 </template>

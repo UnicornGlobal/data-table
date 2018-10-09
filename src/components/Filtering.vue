@@ -1,9 +1,22 @@
 <template>
   <div class="filters">
-    <div v-for="filter in filters" :class="'filter-' + filter.type + ''">
-      <tabbed-filters v-if="filter.type === 'tabbed'" :filter="filter" class="tabbed-filters"></tabbed-filters>
-      <filter-checkbox v-if="filter.type === 'checkbox'" :filter="filter" class="input_checkbox"></filter-checkbox>
-      <filter-dropdown v-if="filter.type === 'dropdown'" :filter="filter" :options="dropdownDataSet(filter, dataset)">
+    <div
+      v-for="filter in filters"
+      :class="'filter-' + filter.type + ''">
+      <tabbed-filters
+        v-if="filter.type === 'tabbed'"
+        :filter="filter"
+        class="tabbed-filters">
+      </tabbed-filters>
+      <filter-checkbox
+        v-if="filter.type === 'checkbox'"
+        :filter="filter"
+        class="input_checkbox">
+      </filter-checkbox>
+      <filter-dropdown
+        v-if="filter.type === 'dropdown'"
+        :filter="filter"
+        :options="dropdownDataSet(filter, dataset)">
       </filter-dropdown>
     </div>
   </div>

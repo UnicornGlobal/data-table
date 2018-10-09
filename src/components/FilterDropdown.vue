@@ -1,13 +1,19 @@
 <template>
-  <div v-if="filter.type === 'dropdown'">
-    <label :for="'filter-' + filter.filter">
+  <div
+    v-if="filter.type === 'dropdown'">
+    <label
+      :for="'filter-' + filter.filter">
       {{ filter.text }}
     </label>
-    <select v-model="filter.value" :name="`${filter.filter}`">
+    <select
+      v-model="filter.value"
+      :name="`${filter.filter}`">
       <option value="">
         {{ filter.placeholder }}
       </option>
-      <option v-for="each in options" :value="value(each)">
+      <option
+        v-for="each in options"
+        :value="value(each)">
         {{label(each)}}
       </option>
     </select>

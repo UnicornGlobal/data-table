@@ -1,6 +1,7 @@
 <template>
   <div class="list">
-    <div v-if="mustLink()">
+    <div
+      v-if="mustLink()">
       <table-link-row
         v-for="(data, key) in dataset"
         :fields="fields"
@@ -13,7 +14,8 @@
         :smallScreen="smallScreen">
       </table-link-row>
     </div>
-    <table-row v-else
+    <table-row
+      v-else
       v-for="(data, key) in dataset"
       :fields="fields"
       :data="data"

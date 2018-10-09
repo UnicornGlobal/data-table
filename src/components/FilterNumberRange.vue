@@ -1,14 +1,21 @@
 <template>
   <div>
-    <button @click="closeFilter" class="close-tab">
+    <button
+      @click="closeFilter"
+      class="close-tab">
       <close-button></close-button>
     </button>
     <span>
       Amount from:
     </span>
     <div class="value-input">
-      <input type="text" v-model="filter.from" ref="amountFrom">
-      <button tabindex="-1" @click="clearAmountFrom">
+      <input
+        type="text"
+        v-model="filter.from"
+        ref="amountFrom" />
+      <button
+        tabindex="-1"
+        @click="clearAmountFrom">
         <close-button></close-button>
       </button>
     </div>
@@ -16,8 +23,13 @@
       Amount to:
     </span>
     <div class="value-input">
-      <input type="text" v-model="filter.to" ref="amountTo">
-      <button tabindex="-1" @click="clearAmountTo">
+      <input
+        type="text"
+        v-model="filter.to"
+        ref="amountTo" />
+      <button
+        tabindex="-1"
+        @click="clearAmountTo">
         <close-button></close-button>
       </button>
     </div>

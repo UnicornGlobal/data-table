@@ -1,7 +1,8 @@
 <template>
   <div class="header-bar">
     <div class="headers">
-      <div v-if="field.header"
+      <div
+        v-if="field.header"
         v-for="(field) in fields"
         class="header-cell"
         :style="styler(field)"
@@ -20,13 +21,15 @@
         </div>
         <div v-else class="arrow-spacer"></div>
       </div>
-      <div v-else
+      <div
+        v-else
         class="empty-header-cell"
         :style="styler(field)"
         :secondary="field.secondary">
         <div></div>
       </div>
-      <div v-if="controls && controls.length"
+      <div
+        v-if="controls && controls.length"
         class="header-cell"
         :secondary="false"
         style="flex: 1 1 0%">

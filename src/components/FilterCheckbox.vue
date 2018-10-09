@@ -1,9 +1,11 @@
 <template>
   <div>
-    <label :for="'filter-' + filter.field">
-      <input type="checkbox"
-             :id="'filter-' + filter.field"
-             v-model="filter.value" />
+    <label
+      :for="'filter-' + filter.field">
+      <input
+        type="checkbox"
+        :id="'filter-' + filter.field"
+        v-model="filter.value" />
       {{ filter.text }}
     </label>
   </div>

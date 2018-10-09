@@ -1,15 +1,19 @@
 <template>
   <div>
-    <div class="tabs" role="tablist">
-      <div class="tab"
-           :class="index === activeTab ? 'active' : ''"
-           v-for="(tab, index) in filter.tabs"
-           @click="setActive(index)">
+    <div
+      class="tabs"
+      role="tablist">
+      <div
+        v-for="(tab, index) in filter.tabs"
+        class="tab"
+        :class="index === activeTab ? 'active' : ''"
+        @click="setActive(index)">
         {{ getTitle(tab) }}
       </div>
     </div>
     <div>
-      <div v-for="(tab, index) in filter.tabs">
+      <div
+        v-for="(tab, index) in filter.tabs">
         <filter-date-range
           v-if="tab.type === 'date' && index === activeTab"
           :filter="tab"
