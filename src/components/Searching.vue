@@ -1,8 +1,7 @@
 <template>
-  <div class="flex search-div">
-    <div class="controls">
-      <div class="search-bar-label"></div>
-      <input v-model="config.term" :placeholder="config.placeholder" class="input"/>
+  <div class="search-div">
+    <div>
+      <input v-model="config.term" :placeholder="config.placeholder" />
     </div>
   </div>
 </template>
@@ -11,7 +10,7 @@
   .search-div {
     border-bottom: 1px solid rgb(216, 218, 225);
 
-    .controls {
+    div {
       padding: 1em 0.75em;
     }
   }
@@ -27,4 +26,3 @@
     }
   }
 </script>
-
