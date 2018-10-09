@@ -37,25 +37,7 @@
 </template>
 
 <style lang="scss" scoped>
-  button.close-tab {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0;
-    margin: 0;
-    height: 30px;
-    width: 30px;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-
-    svg {
-      height: 22px;
-      width: 22px;
-    }
-  }
+  @import '../styles/filters/close-tab.scss';
 
   // Label from / to
   span {
