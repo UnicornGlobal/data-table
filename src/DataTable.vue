@@ -1,19 +1,36 @@
 <template>
     <div class="data-table">
         <div class="action-component-container">
-            <component v-if="options.config.actionComponent" :is="options.config.actionComponent.component"></component>
+            <component v-if="options.config.actionComponent"
+                       :is="options.config.actionComponent.component">
+            </component>
         </div>
-        <filtering v-if="options.config.filtering.enabled" :filters="options.config.filtering.filters"
-                   :dataset="dataset"></filtering>
-        <searching v-if="options.config.search.enabled" :config="options.config.search"></searching>
-        <table-headers v-if="processedData.length && showHeaders && !smallScreen" :config="options.config"
+        <filtering v-if="options.config.filtering.enabled"
+                   :filters="options.config.filtering.filters"
+                   :dataset="dataset">
+        </filtering>
+        <searching v-if="options.config.search.enabled"
+                   :config="options.config.search">
+        </searching>
+        <table-headers v-if="processedData.length && showHeaders && !smallScreen"
+                       :config="options.config"
                        :fields="options.fields"
-                       :styler="getStyle" :controls="options.controls || []"></table-headers>
-        <table-body v-if="processedData.length" :dataset="processedData" :fields="options.fields" :styler="getStyle"
-                    :linking="options.config.linking" :mobileType="options.config.mobileType"
-                    :showLabelOnMobile="options.config.showLabelOnMobile" :smallScreen="smallScreen"
-                    :controls="options.controls || []"></table-body>
-        <div v-else class="no-results">No Results. Please broaden your search parameters.</div>
+                       :styler="getStyle"
+                       :controls="options.controls || []">
+        </table-headers>
+        <table-body v-if="processedData.length"
+                    :dataset="processedData"
+                    :fields="options.fields"
+                    :styler="getStyle"
+                    :linking="options.config.linking"
+                    :mobileType="options.config.mobileType"
+                    :showLabelOnMobile="options.config.showLabelOnMobile"
+                    :smallScreen="smallScreen"
+                    :controls="options.controls || []">
+        </table-body>
+        <div v-else class="no-results">
+          No Results. Please broaden your search parameters.
+        </div>
     </div>
 </template>
 
@@ -78,7 +95,7 @@
       watchConfig () {
         this.$watch('options.config', () => {
           return this.$nextTick(this.processData)
-        }, {deep: true})
+        }, { deep: true })
       },
       processData () {
         let dataset = this.dataset.slice()
