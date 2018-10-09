@@ -9,8 +9,7 @@ describe('FilterDateRange.vue', () => {
   it('closes filter', () => {
     let localVue = createLocalVue()
     let filter = shallowMount(FilterDateRange, {localVue, propsData: {filter: {from: '', to: ''}}})
-    let close = filter.find('div.close-tab')
-    expect(close.text()).toBe('x')
+    let close = filter.find('button.close-tab')
     close.trigger('click')
     expect(filter.emitted()).toHaveProperty('close')
   })
@@ -22,7 +21,7 @@ describe('FilterDateRange.vue', () => {
     filter.vm.setDateFrom({date: '12-12-1900'})
     expect(filter.vm.$refs.from.value).toBe('12-12-1900')
 
-    filter.vm.setDateTo({date: '13-12-1900'})
-    expect(filter.vm.$refs.to.value).toBe('13-12-1900')
+    filter.vm.setDateTo({date: '13-12-1901'})
+    expect(filter.vm.$refs.to.value).toBe('13-12-1901')
   })
 })

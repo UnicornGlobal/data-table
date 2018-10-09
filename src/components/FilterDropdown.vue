@@ -1,27 +1,44 @@
 <template>
-    <div class="dropdown-box" v-if="filter.type === 'dropdown'">
-        <label :for="'filter-' + filter.filter" class="filter-label-checkbox">
-            {{ filter.text }}
-        </label>
-        <select v-model="filter.value" :name="`${filter.filter}`">
-            <option value="">{{ filter.placeholder }}</option>
-            <option v-for="each in options" :value="value(each)">{{label(each)}}</option>
-        </select>
-    </div>
+  <div
+    v-if="filter.type === 'dropdown'">
+    <label
+      :for="'filter-' + filter.filter">
+      {{ filter.text }}
+    </label>
+    <select
+      v-model="filter.value"
+      :name="`${filter.filter}`">
+      <option value="">
+        {{ filter.placeholder }}
+      </option>
+      <option
+        v-for="each in options"
+        :value="value(each)">
+        {{label(each)}}
+      </option>
+    </select>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-    @import "../sass/styles";
+  div {
+    display: flex;
+    align-items: center;
+  }
 
-    .dropdown-box {
-        display: flex;
-        align-items: center;
-    }
+  label {
+    margin-right: 0.7em;
+    font-size: .9rem;
+  }
 
-    label {
-        margin-right: 0.7em;
-        font-size: .9rem;
-    }
+  select {
+    padding: 0 0 0 10px;
+    background-size: 15px 13px;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: right 10px center;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAflBMVEUAAAAvZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/tg0db9AAAAKXRSTlMAAQUKDhIUFRgcHR4gJCcoNU5WV11eX2FiaH6FlJ63yszP1+bp8ff5/R3tDSEAAAFCSURBVGje7c3HUgNBFENRgcE2Occmwxj0/z/IZso1oaeng3rjenephQ5gWZZlWdYut7h+XIsvz56u9nvD+YbkjdR4Jvmz6gwXfyTJW6HhSJLNamgoFdc+NsuhoVPc9rFVOoZKcZ3HZglg3TU0ius9NgvgnRQrbvD4gj1SrAwNfgNfYmVk8BU4pVQZG5sDAJdKxWMcAX7lTm0IlYAhU4KGSJkxJMqsIVAijGIlyihUIo0iJdrwKvdqI1tJMjKVRCNLSTYylAwjWckyEpVMI0nJNhKUAiNaKTK8yoPaiFKKjQhFYMwqHuMY0CoiI6jIjIAiNCYVqTGhiA2v8qk2vIrciFAExqwiMWYUkRFUflVGQBEak4rUmFDEhleRGx6lgjFSqhgDpZLRU6oZHaWisVWqGq1S2QBOPvh2CMuyLMuyrF3qHzdJFFyfRs27AAAAAElFTkSuQmCC);
+  }
 </style>
 
 <script>
@@ -50,6 +67,5 @@
         return option
       }
     }
-
   }
 </script>
