@@ -46,22 +46,22 @@
     min-width: 100%;
     right: 0;
     left: 0;
+    background-color: var(--primary);
 
     @media (max-width: 480px) {
-      padding: 1em 0;
+      padding: var(--padding) 0;
     }
 
     .headers {
       display: flex;
       justify-content: space-between;
       border-bottom: 2px solid rgb(216, 218, 225);
-      background-color: rgb(255, 255, 255);
       min-height: 55px;
-      padding: 0 1em;
+      padding: 0 var(--padding);
 
       @media(max-width: 480px) {
         padding-right: 7px;
-        padding-left: 0.5em;
+        padding-left: calc(var(--padding) / 2);
         min-height: 55px;
       }
 

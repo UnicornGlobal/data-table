@@ -33,18 +33,30 @@
       :smallScreen="smallScreen"
       :controls="options.controls || []">
     </table-body>
-    <div>{{$theme}} == </div>
-    <div :class="theme.red">RED</div>
     <div v-else class="no-results">
       No Results. Please broaden your search parameters.
     </div>
   </div>
 </template>
 
-<style module="theme">
-  .red {
-    color: red;
-    background-color: green;
+<style module lang="scss">
+  $primary: #000;
+  $secondary: #111;
+  $tertiary: #222;
+  $padding: 1em;
+
+  :root {
+    --primary: $primary;
+    --secondary: $secondary;
+    --tertiary: $tertiary;
+    --padding: $padding;
+  }
+
+  :export {
+    primary: $primary;
+    secondary: $secondary;
+    tertiary: $tertiary;
+    padding: $padding;
   }
 </style>
 
@@ -84,10 +96,7 @@
       }
     },
     mounted () {
-      console.log(this.$ref)
-      console.log(this.$theme)
-      console.log(this.theme.red)
-      // this.theme.red = '{ background-color: orange }'
+      this.setTheme()
       this.processData()
       this.watchConfig()
       this.windowWidth = window.innerWidth
@@ -107,6 +116,20 @@
       }
     },
     methods: {
+      setTheme() {
+        // Set the configured theme
+        this.$style.primary = this.$theme.primary
+        this.$style.secondary = this.$theme.secondary
+        this.$style.tertiary = this.$theme.tertiary || this.$style.tertiary
+        this.$style.padding = this.$theme.padding
+
+        // Then set the css variables
+        const bodyStyles = document.body.style
+        bodyStyles.setProperty('--primary', this.$style.primary)
+        bodyStyles.setProperty('--secondary', this.$style.secondary)
+        bodyStyles.setProperty('--tertiary', this.$style.tertiary)
+        bodyStyles.setProperty('--padding', this.$style.padding)
+      },
       setInnerWidth () {
         this.windowWidth = window.innerWidth
       },
