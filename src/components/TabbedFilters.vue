@@ -37,7 +37,7 @@
     z-index: 999;
     left: 2em;
     background: white;
-    border: 1px solid rgb(233, 234, 235);
+    border: 1px solid var(--primary);
     padding: 2em 1em 0em;
     min-width: 300px;
     max-width: 600px;
@@ -48,7 +48,7 @@
   .tabs {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid rgb(233, 234, 235);
+    border-bottom: 1px solid var(--primary);
     align-items: center;
 
     .tab {
@@ -59,8 +59,8 @@
       overflow-wrap: normal;
 
       &.active {
-        background: lightgrey;
-        color: rgb(84, 129, 255);
+        background: var(--primary);
+        color: var(--primaryText);
       }
     }
   }

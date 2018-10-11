@@ -120,7 +120,8 @@
 
 <style lang="scss" scoped>
   div {
-    font-size: .9em;
+    font-size: var(--fontSize);
+    color: var(--primaryText);
 
     &.image {
       min-width: 58px;

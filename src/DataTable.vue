@@ -44,14 +44,20 @@
   $secondary: #111;
   $tertiary: #222;
   $primaryText: #234;
+  $lightBackground: #DDD;
+  $darkBackground: #333;
   $padding: 1em;
+  $fontSize: 0.9em;
 
   :root {
     --primary: $primary;
     --secondary: $secondary;
     --tertiary: $tertiary;
     --primaryText: $primaryText;
+    --lightBackground: $lightBackground;
+    --darkBackground: $darkBackground;
     --padding: $padding;
+    --fontSize: $fontSize;
   }
 
   :export {
@@ -59,7 +65,10 @@
     secondary: $secondary;
     tertiary: $tertiary;
     primaryText: $primaryText;
+    lightBackground: $lightBackground;
+    darkBackground: $darkBackground;
     padding: $padding;
+    fontSize: $fontSize;
   }
 </style>
 
@@ -122,11 +131,14 @@
       setTheme() {
         // Set the configured theme
         console.log(this.$style, this.$theme)
-        this.$style.primary = this.$theme.primary
-        this.$style.primaryText = this.$theme.primaryText
-        this.$style.secondary = this.$theme.secondary
+        this.$style.primary = this.$theme.primary || this.$style.primary
+        this.$style.primaryText = this.$theme.primaryText || this.$style.primaryText
+        this.$style.secondary = this.$theme.secondary || this.$style.secondary
         this.$style.tertiary = this.$theme.tertiary || this.$style.tertiary
-        this.$style.padding = this.$theme.padding
+        this.$style.lightBackground = this.$theme.lightBackground || this.$style.lightBackground
+        this.$style.darkBackground = this.$theme.darkBackground || this.$style.darkBackground
+        this.$style.padding = this.$theme.padding || this.$style.padding
+        this.$style.fontSize = this.$theme.fontSize || this.$style.fontSize
 
         // Then set the css variables
         const bodyStyles = document.body.style
@@ -134,7 +146,10 @@
         bodyStyles.setProperty('--secondary', this.$style.secondary)
         bodyStyles.setProperty('--tertiary', this.$style.tertiary)
         bodyStyles.setProperty('--primaryText', this.$style.primaryText)
+        bodyStyles.setProperty('--lightBackground', this.$style.lightBackground)
+        bodyStyles.setProperty('--darkBackground', this.$style.darkBackground)
         bodyStyles.setProperty('--padding', this.$style.padding)
+        bodyStyles.setProperty('--fontSize', this.$style.fontSize)
       },
       setInnerWidth () {
         this.windowWidth = window.innerWidth

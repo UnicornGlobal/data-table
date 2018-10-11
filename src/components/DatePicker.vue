@@ -2,11 +2,15 @@
   <input
     type="text"
     :value="value"
-    class="input" />
+    class="date-input" />
 </template>
 
 <style lang="scss">
   @import '~pikaday/scss/pikaday';
+
+  input.date-input {
+    border: 1px solid var(--primary) !important;
+  }
 </style>
 
 <script type="text/javascript">

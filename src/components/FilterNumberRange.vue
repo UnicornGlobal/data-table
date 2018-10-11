@@ -66,6 +66,10 @@
         width: 20px;
       }
     }
+
+    input, input:focus {
+      border: 1px solid var(--primary);
+    }
   }
 </style>
 
