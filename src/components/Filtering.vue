@@ -26,17 +26,17 @@
   .filters {
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 2px solid rgb(216, 218, 225);
+    border-bottom: 2px solid var(--primary);
   }
 
   .filter-checkbox, .filter-dropdown {
     flex: 1;
-    padding: 0.6em;
+    padding: calc(var(--padding) / 2);
     flex-basis: 170px;
   }
 
   .filter-tabbed {
-    margin-bottom: 1em;
+    margin-bottom: var(--padding);
     width: 100%;
   }
 

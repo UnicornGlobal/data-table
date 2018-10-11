@@ -33,6 +33,7 @@
 
   select {
     padding: 0 0 0 10px;
+    border: 1px solid var(--primary);
     background-size: 15px 13px;
     background-repeat: no-repeat;
     background-origin: content-box;

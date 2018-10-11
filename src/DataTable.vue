@@ -43,12 +43,14 @@
   $primary: #000;
   $secondary: #111;
   $tertiary: #222;
+  $primaryText: #234;
   $padding: 1em;
 
   :root {
     --primary: $primary;
     --secondary: $secondary;
     --tertiary: $tertiary;
+    --primaryText: $primaryText;
     --padding: $padding;
   }
 
@@ -56,6 +58,7 @@
     primary: $primary;
     secondary: $secondary;
     tertiary: $tertiary;
+    primaryText: $primaryText;
     padding: $padding;
   }
 </style>
@@ -118,7 +121,9 @@
     methods: {
       setTheme() {
         // Set the configured theme
+        console.log(this.$style, this.$theme)
         this.$style.primary = this.$theme.primary
+        this.$style.primaryText = this.$theme.primaryText
         this.$style.secondary = this.$theme.secondary
         this.$style.tertiary = this.$theme.tertiary || this.$style.tertiary
         this.$style.padding = this.$theme.padding
@@ -128,6 +133,7 @@
         bodyStyles.setProperty('--primary', this.$style.primary)
         bodyStyles.setProperty('--secondary', this.$style.secondary)
         bodyStyles.setProperty('--tertiary', this.$style.tertiary)
+        bodyStyles.setProperty('--primaryText', this.$style.primaryText)
         bodyStyles.setProperty('--padding', this.$style.padding)
       },
       setInnerWidth () {

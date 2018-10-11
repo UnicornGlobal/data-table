@@ -10,10 +10,19 @@
 
 <style lang="scss" scoped>
   .search-div {
-    border-bottom: 1px solid rgb(216, 218, 225);
+    border-bottom: 1px solid var(--primary);
 
     div {
-      padding: 1em 0.75em;
+      padding: var(--padding);
+
+      input, input:focus {
+        color: var(--primary-text);
+        border: 1px solid var(--primary);
+      }
+
+      input::placeholder {
+        color: var(--primary);
+      }
     }
   }
 </style>
