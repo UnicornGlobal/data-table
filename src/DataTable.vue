@@ -130,7 +130,6 @@
     methods: {
       setTheme() {
         // Set the configured theme
-        console.log(this.$style, this.$theme)
         this.$style.primary = this.$theme.primary || this.$style.primary
         this.$style.primaryText = this.$theme.primaryText || this.$style.primaryText
         this.$style.secondary = this.$theme.secondary || this.$style.secondary
