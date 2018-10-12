@@ -83,11 +83,11 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-  }
 
-  .close-tab:hover {
-    opacity: 0.9;
-    cursor: pointer;
+    &:hover {
+      opacity: 0.9;
+      cursor: pointer;
+    }
   }
 </style>
 
