@@ -1,10 +1,10 @@
 <template>
   <div>
-    <button
+    <div
       class="close-tab"
+      :style="`background-image: ${ this.$assets.close }; background-repeat: no-repeat; background-position: center center;`"
       @click="closeFilter">
-      <close-button></close-button>
-    </button>
+    </div>
     <span>
       From
     </span>
@@ -43,8 +43,6 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '../styles/filters/close-tab.scss';
-
   // Label from / to
   span {
     margin-bottom: 0.3em;
@@ -57,21 +55,39 @@
 
     button {
       border: 0;
+      outline: 0;
       background-color: white;
       padding: 0;
       margin: 0;
-      height: 38px;
-      width: 38px;
+      height: 20px;
+      width: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-
-      svg {
-        height: 20px;
-        width: 20px;
-      }
     }
+  }
+
+  .close-tab {
+    position: absolute;
+    background: none;
+    background-size: 15px;
+    top: 0;
+    right: 0;
+    padding: 1.1em;
+    border: 0;
+    margin: 0;
+    height: 15px;
+    width: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .close-tab:hover {
+    opacity: 0.9;
+    cursor: pointer;
   }
 </style>
 
