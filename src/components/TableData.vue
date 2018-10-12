@@ -32,7 +32,16 @@
       v-else>
       <div
         v-if="getProperty(data, field.field)"
-        :style="`background-image: ${ this.$assets.checkmark }; background-repeat: no-repeat; width: 20px; height: 20px;`" width="20px" height="20px"></div>
+        :style="`background-image: ${ this.$assets.checkmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
+        width="20px"
+        height="20px">
+      </div>
+      <div
+        v-else
+        :style="`background-image: ${ this.$assets.crossmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
+        width="20px"
+        height="20px">
+      </div>
       <close-button
         v-else
         width="20px"
