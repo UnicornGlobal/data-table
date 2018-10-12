@@ -151,19 +151,11 @@
 
 <script>
   import AvatarOrInitials from 'vue-avatar-or-initials'
-  import CheckMark from './Icons/check.svg'
-  import CheckMarkInverted from './Icons/check-inverted.svg'
-  import CloseButton from './Icons/close-button.svg'
-  import CloseButtonInverted from './Icons/close-button-inverted.svg'
   import moment from 'moment'
 
   export default {
     components: {
-      AvatarOrInitials,
-      CheckMark,
-      CloseButton,
-      CheckMarkInverted,
-      CloseButtonInverted
+      AvatarOrInitials
     },
     props: ['field', 'data'],
     methods: {
