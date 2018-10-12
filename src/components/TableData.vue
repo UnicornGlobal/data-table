@@ -42,26 +42,23 @@
         width="20px"
         height="20px">
       </div>
-      <close-button
-        v-else
-        width="20px"
-        height="20px">
-      </close-button>
     </template>
   </div>
   <div
     v-else-if="field.type === 'boolean-inverted'"
     :class="field.field">
-    <check-mark-inverted
+    <div
       v-if="getProperty(data, field.field)"
+      :style="`background-image: ${ this.$assets.crossmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
       width="20px"
       height="20px">
-    </check-mark-inverted>
-    <close-button-inverted
+    </div>
+    <div
       v-else
+      :style="`background-image: ${ this.$assets.checkmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
       width="20px"
       height="20px">
-    </close-button-inverted>
+    </div>
   </div>
   <div
     v-else-if="field.type === 'third_party'"
