@@ -54,7 +54,7 @@
     align-items: center;
 
     .tab {
-      padding: calc(var(--padding) / 2);
+      padding: calc(var(--padding) / 2) var(--padding);
       border-top: 1px solid var(--primary);
       border-right: 1px solid var(--primary);
       border-left: 1px solid var(--primary);
