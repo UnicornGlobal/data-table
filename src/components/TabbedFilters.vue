@@ -38,7 +38,7 @@
     left: 2em;
     background: white;
     border: 1px solid var(--primary);
-    padding: 2em 1em 0em;
+    padding: var(--padding);
     min-width: 300px;
     max-width: 600px;
     display: flex;
@@ -52,7 +52,7 @@
     align-items: center;
 
     .tab {
-      padding: 0.7em;
+      padding: calc(var(--padding) / 2);
       min-width: 65px;
       height: auto;
       font-size: .9rem;

@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div
+    <close-button
       class="close-tab"
-      :style="`background-image: ${ this.$assets.close }; background-repeat: no-repeat; background-position: center center;`"
       @click="closeFilter">
-    </div>
+    </close-button>
     <span>
       From
     </span>
@@ -15,11 +14,12 @@
         :value="filter.from"
         @dateFrom="setDateFrom">
       </datatable-date-picker>
-      <button
-        tabindex="-1"
+      <div
+        v-if="filter.from"
+        class="clear-date"
         @click="setDateFrom({date:null})">
-        <close-button></close-button>
-      </button>
+        CLEAR
+      </div>
     </div>
     <span>
       To
@@ -31,11 +31,12 @@
         :value="filter.to"
         @dateTo="setDateTo">
       </datatable-date-picker>
-      <button
-        tabindex="-1"
+      <div
+        v-if="filter.to"
+        class="clear-date"
         @click="setDateTo({date:null})">
-        <close-button></close-button>
-      </button>
+        CLEAR
+      </div>
     </div>
     <input hidden ref="from" v-model="filter.from"/>
     <input hidden ref="to" v-model="filter.to"/>
@@ -45,13 +46,17 @@
 <style lang="scss" scoped>
   // Label from / to
   span {
-    margin-bottom: 0.3em;
+    font-size: calc(var(--padding) * 0.8);
+    margin: calc(var(--padding) / 2) 0;
+  }
+
+  span:first-of-type {
+    margin-top: calc(var(--padding) / 3);
   }
 
   .date-input {
     display: flex;
     flex-direction: row;
-    margin-bottom: 1em;
 
     button {
       border: 0;
@@ -68,31 +73,31 @@
     }
   }
 
-  .close-tab {
-    position: absolute;
-    background: none;
-    background-size: 15px;
-    top: 0;
-    right: 0;
-    padding: 1.1em;
-    border: 0;
-    margin: 0;
-    height: 15px;
-    width: 15px;
+  .clear-date {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
+    height: 40px;
+    margin-left: -5em;
+    color: grey;
+    font-size: 0.5em;
+    font-weight: bold;
 
     &:hover {
       opacity: 0.9;
       cursor: pointer;
     }
   }
+
+  .close-tab {
+    position: absolute;
+    top: var(--padding);
+    right: var(--padding);
+  }
 </style>
 
 <script>
-  import CloseButton from './Icons/close-button.svg'
+  import CloseButton from './CloseButton.vue'
   import DatatableDatePicker from './DatePicker.vue'
 
   export default {
