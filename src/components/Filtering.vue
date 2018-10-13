@@ -26,7 +26,7 @@
   .filters {
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 2px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
   }
 
   .filter-checkbox, .filter-dropdown {
