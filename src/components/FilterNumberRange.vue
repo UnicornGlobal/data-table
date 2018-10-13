@@ -1,41 +1,24 @@
 <template>
   <div>
     <close-button @close="$emit('close')"></close-button>
-    <span>
-      Amount from:
-    </span>
-    <div class="value-input">
-      <input
-        type="text"
-        v-model="filter.from"
-        ref="amountFrom" />
-      <button
-        tabindex="-1"
-        @click="clearAmountFrom">
-      </button>
-    </div>
-    <span>
-      Amount to:
-    </span>
-    <div class="value-input">
-      <input
-        type="text"
-        v-model="filter.to"
-        ref="amountTo" />
-      <button
-        tabindex="-1"
-        @click="clearAmountTo">
-      </button>
-    </div>
+    <value-input
+      label="Amount from:"
+      ref="from"
+      target="from"
+      :value="filter.from"
+      @input="handleInput">
+    </value-input>
+    <value-input
+      label="Amount to:"
+      ref="to"
+      target="to"
+      :value="filter.to"
+      @input="handleInput">
+    </value-input>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  // Label from / to
-  span {
-    margin-bottom: 0.3em;
-  }
-
   .value-input {
     display: flex;
     flex-direction: row;
@@ -67,6 +50,7 @@
 
 <script>
   import CloseButton from './CloseButton.vue'
+  import ValueInput from './ValueInput.vue'
 
   export default {
     props: {
@@ -76,20 +60,17 @@
       }
     },
     components: {
-      CloseButton
+      CloseButton,
+      ValueInput
+    },
+    mounted() {
+      this.$refs.from.$refs.inputBox.focus()
     },
     methods: {
-      clearAmountFrom() {
-        this.$refs.amountFrom.value = null
-        this.$refs.amountFrom.dispatchEvent(new Event('input', {
-          'bubbles': true
-        }))
-      },
-      clearAmountTo() {
-        this.$refs.amountTo.value = null
-        this.$refs.amountTo.dispatchEvent(new Event('input', {
-          'bubbles': true
-        }))
+      handleInput(value, target) {
+        this.filter[target] = value
+        this.$parent.$forceUpdate()
+        this.$forceUpdate()
       }
     }
   }

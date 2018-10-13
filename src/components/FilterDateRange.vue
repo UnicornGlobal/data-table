@@ -4,12 +4,14 @@
     <date-input
       title="From"
       name="dateFrom"
+      ref="dateFrom"
       :value="filter.from"
       :event="setDateFrom">
     </date-input>
     <date-input
       title="To"
       name="dateTo"
+      ref="dateTo"
       :value="filter.to"
       :event="setDateTo">
     </date-input>
@@ -41,6 +43,11 @@
      *
      * We dispatch an event to force a refresh
      */
+    mounted() {
+      if (!this.$refs.from.value) {
+        this.$nextTick(() => this.$refs.dateFrom.$refs.dateInput.$refs.inputArea.focus())
+      }
+    },
     methods: {
       setDateFrom(date) {
         this.$refs.from.value = date

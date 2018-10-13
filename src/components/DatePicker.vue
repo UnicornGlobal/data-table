@@ -2,6 +2,7 @@
   <input
     type="text"
     :value="value"
+    ref="inputArea"
     class="date-input" />
 </template>
 
