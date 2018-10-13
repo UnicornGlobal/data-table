@@ -29,6 +29,10 @@
         this.picker.setDate(value)
       }
     },
+    destroyed() {
+      this.picker.destroy()
+      this.picker = null
+    },
     mounted() {
       const getDate = this.getDate
 
