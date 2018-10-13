@@ -4,62 +4,28 @@
       class="close-tab"
       @click="closeFilter">
     </close-button>
-    <span>
-      From
-    </span>
-    <div class="date-input">
-      <datatable-date-picker
-        ref="pickFrom"
-        name="dateFrom"
-        :value="filter.from"
-        @dateFrom="setDateFrom">
-      </datatable-date-picker>
-      <clear-button
-        v-if="filter.from"
-        @click="setDateFrom({date:null})">
-      </clear-button>
-    </div>
-    <span>
-      To
-    </span>
-    <div class="date-input">
-      <datatable-date-picker
-        ref="pickTo"
-        name="dateTo"
-        :value="filter.to"
-        @dateTo="setDateTo">
-      </datatable-date-picker>
-      <clear-button
-        v-if="filter.to"
-        @click="setDateTo({date:null})">
-      </clear-button>
-    </div>
+    <date-input
+      title="From"
+      name="dateFrom"
+      :value="filter.from"
+      :event="setDateFrom">
+    </date-input>
+    <date-input
+      title="To"
+      name="dateTo"
+      :value="filter.to"
+      :event="setDateTo">
+    </date-input>
     <input hidden ref="from" v-model="filter.from"/>
     <input hidden ref="to" v-model="filter.to"/>
   </div>
 </template>
 
-<style lang="scss" scoped>
-  // Label from / to
-  span {
-    font-size: calc(var(--padding) * 0.8);
-    margin: var(--padding) 0 calc(var(--padding) / 2) 0;
-
-    &:first-of-type {
-      margin-top: calc(var(--padding) / 3);
-    }
-  }
-
-  .date-input {
-    display: flex;
-    flex-direction: row;
-  }
-</style>
-
 <script>
   import CloseButton from './CloseButton.vue'
   import ClearButton from './ClearButton.vue'
   import DatatableDatePicker from './DatePicker.vue'
+  import DateInput from './DateInput.vue'
 
   export default {
     props: {
@@ -71,6 +37,7 @@
     components: {
       CloseButton,
       ClearButton,
+      DateInput,
       DatatableDatePicker
     },
 
@@ -85,14 +52,14 @@
       closeFilter() {
         this.$emit('close')
       },
-      setDateFrom(e) {
-        this.$refs.from.value = e.date
+      setDateFrom(date) {
+        this.$refs.from.value = date
         this.$refs.from.dispatchEvent(new Event('input', {
           'bubbles': true
         }))
       },
-      setDateTo(e) {
-        this.$refs.to.value = e.date
+      setDateTo(date) {
+        this.$refs.to.value = date
         this.$refs.to.dispatchEvent(new Event('input', {
           'bubbles': true
         }))
