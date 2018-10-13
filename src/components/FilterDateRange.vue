@@ -44,55 +44,41 @@
 </template>
 
 <style lang="scss" scoped>
+  .close-tab {
+    position: absolute;
+    top: var(--padding);
+    right: var(--padding);
+  }
+
   // Label from / to
   span {
     font-size: calc(var(--padding) * 0.8);
-    margin: calc(var(--padding) / 2) 0;
-  }
+    margin: var(--padding) 0 calc(var(--padding) / 2) 0;
 
-  span:first-of-type {
-    margin-top: calc(var(--padding) / 3);
+    &:first-of-type {
+      margin-top: calc(var(--padding) / 3);
+    }
   }
 
   .date-input {
     display: flex;
     flex-direction: row;
 
-    button {
-      border: 0;
-      outline: 0;
-      background-color: white;
-      padding: 0;
-      margin: 0;
-      height: 20px;
-      width: 20px;
+    div.clear-date {
       display: flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
+      height: 40px;
+      margin-left: -5em;
+      color: grey;
+      font-size: 0.5em;
+      font-weight: bold;
+
+      &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+      }
     }
-  }
-
-  .clear-date {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    margin-left: -5em;
-    color: grey;
-    font-size: 0.5em;
-    font-weight: bold;
-
-    &:hover {
-      opacity: 0.9;
-      cursor: pointer;
-    }
-  }
-
-  .close-tab {
-    position: absolute;
-    top: var(--padding);
-    right: var(--padding);
   }
 </style>
 

@@ -1,5 +1,7 @@
 <template>
   <div
+    alt="Close"
+    title="Close"
     :style="`background-image: ${ this.$assets.close };`">
   </div>
 </template>
