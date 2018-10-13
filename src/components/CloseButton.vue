@@ -2,6 +2,7 @@
   <div
     alt="Close"
     title="Close"
+    @click="$emit('close')"
     :style="`background-image: ${ this.$assets.close };`">
   </div>
 </template>

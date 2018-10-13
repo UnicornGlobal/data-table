@@ -1,9 +1,6 @@
 <template>
   <div>
-    <close-button
-      class="close-tab"
-      @click="closeFilter">
-    </close-button>
+    <close-button @close="$emit('close')"></close-button>
     <date-input
       title="From"
       name="dateFrom"
@@ -23,8 +20,6 @@
 
 <script>
   import CloseButton from './CloseButton.vue'
-  import ClearButton from './ClearButton.vue'
-  import DatatableDatePicker from './DatePicker.vue'
   import DateInput from './DateInput.vue'
 
   export default {
@@ -36,9 +31,7 @@
     },
     components: {
       CloseButton,
-      ClearButton,
-      DateInput,
-      DatatableDatePicker
+      DateInput
     },
 
     /**
@@ -49,9 +42,6 @@
      * We dispatch an event to force a refresh
      */
     methods: {
-      closeFilter() {
-        this.$emit('close')
-      },
       setDateFrom(date) {
         this.$refs.from.value = date
         this.$refs.from.dispatchEvent(new Event('input', {

@@ -1,9 +1,6 @@
 <template>
   <div>
-    <close-button
-      class="close-tab"
-      @click="closeFilter">
-    </close-button>
+    <close-button @close="$emit('close')"></close-button>
     <span>
       Amount from:
     </span>
@@ -15,7 +12,6 @@
       <button
         tabindex="-1"
         @click="clearAmountFrom">
-        <!-- <close&#45;button></close&#45;button> -->
       </button>
     </div>
     <span>
@@ -29,7 +25,6 @@
       <button
         tabindex="-1"
         @click="clearAmountTo">
-        <!-- <close&#45;button></close&#45;button> -->
       </button>
     </div>
   </div>
@@ -84,9 +79,6 @@
       CloseButton
     },
     methods: {
-      closeFilter() {
-        this.$emit('close')
-      },
       clearAmountFrom() {
         this.$refs.amountFrom.value = null
         this.$refs.amountFrom.dispatchEvent(new Event('input', {

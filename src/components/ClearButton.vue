@@ -1,5 +1,5 @@
 <template>
-  <div @click="$emit('click')">
+  <div>
     CLEAR
   </div>
 </template>
