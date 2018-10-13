@@ -69,6 +69,11 @@
         border-left: none;
       }
 
+      &:hover {
+        background: #ddd;
+        cursor: pointer;
+      }
+
       &.active {
         background: var(--primary);
         color: var(--primaryText);
