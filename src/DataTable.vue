@@ -44,6 +44,7 @@
   $secondary: #111;
   $tertiary: #222;
   $primaryText: #234;
+  $secondaryText: #234;
   $lightBackground: #DDD;
   $darkBackground: #333;
   $padding: 1em;
@@ -54,6 +55,7 @@
     --secondary: $secondary;
     --tertiary: $tertiary;
     --primaryText: $primaryText;
+    --secondaryText: $secondaryText;
     --lightBackground: $lightBackground;
     --darkBackground: $darkBackground;
     --padding: $padding;
@@ -65,6 +67,7 @@
     secondary: $secondary;
     tertiary: $tertiary;
     primaryText: $primaryText;
+    secondaryText: $secondaryText;
     lightBackground: $lightBackground;
     darkBackground: $darkBackground;
     padding: $padding;
@@ -132,6 +135,7 @@
         // Set the configured theme
         this.$style.primary = this.$theme.primary || this.$style.primary
         this.$style.primaryText = this.$theme.primaryText || this.$style.primaryText
+        this.$style.secondaryText = this.$theme.secondaryText || this.$style.secondaryText
         this.$style.secondary = this.$theme.secondary || this.$style.secondary
         this.$style.tertiary = this.$theme.tertiary || this.$style.tertiary
         this.$style.lightBackground = this.$theme.lightBackground || this.$style.lightBackground
@@ -145,6 +149,7 @@
         bodyStyles.setProperty('--secondary', this.$style.secondary)
         bodyStyles.setProperty('--tertiary', this.$style.tertiary)
         bodyStyles.setProperty('--primaryText', this.$style.primaryText)
+        bodyStyles.setProperty('--secondaryText', this.$style.secondaryText)
         bodyStyles.setProperty('--lightBackground', this.$style.lightBackground)
         bodyStyles.setProperty('--darkBackground', this.$style.darkBackground)
         bodyStyles.setProperty('--padding', this.$style.padding)

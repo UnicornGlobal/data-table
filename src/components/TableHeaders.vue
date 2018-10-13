@@ -71,11 +71,11 @@
 
         div {
           align-self: center;
-          color: rgb(0, 0, 0);
+          color: var(--secondaryText);
           display: flex;
 
           b {
-            color: rgb(0, 0, 0);
+            color: var(--seondaryText);
           }
         }
 
