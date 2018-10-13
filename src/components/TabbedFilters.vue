@@ -4,24 +4,26 @@
       class="tabs"
       role="tablist">
       <div
+        v-if="getTitle(tab)"
         v-for="(tab, index) in filter.tabs"
         class="tab"
-        :class="index === activeTab ? 'active' : ''"
-        @click="setActive(index)">
+        :class="index + 1 === activeTab ? 'active' : ''"
+        @click="setActive(index + 1)">
         {{ getTitle(tab) }}
       </div>
     </div>
     <div>
       <div
+        v-if="activeTab > 0"
         v-for="(tab, index) in filter.tabs">
         <filter-date-range
-          v-if="tab.type === 'date' && index === activeTab"
+          v-if="tab.type === 'date' && index + 1 === activeTab"
           :filter="tab"
           @close="setActive(0)" 
           class="filter-tab-content">
         </filter-date-range>
         <filter-number-range
-          v-if="tab.type === 'range' && index === activeTab"
+          v-if="tab.type === 'range' && index + 1 === activeTab"
           :filter="tab"
           @close="setActive(0)"
           class="filter-tab-content">
@@ -34,7 +36,7 @@
 <style lang="scss" scoped>
   .filter-tab-content {
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     left: 2em;
     background: white;
     border: 1px solid var(--primary);
@@ -53,10 +55,19 @@
 
     .tab {
       padding: calc(var(--padding) / 2);
+      border-top: 1px solid var(--primary);
+      border-right: 1px solid var(--primary);
+      border-left: 1px solid var(--primary);
+      margin-left: -1px;
+      border-radius: 3px 5px 0 0;
       min-width: 65px;
       height: auto;
       font-size: .9rem;
       overflow-wrap: normal;
+
+      &:first-of-type {
+        border-left: none;
+      }
 
       &.active {
         background: var(--primary);
@@ -109,33 +120,35 @@
 
         if (tab.type === 'date') {
           if (!tab.from && !tab.to) {
-            return `${tab.name} (All)`
+            return `${tab.name || 'Date'} (All)`
           }
 
           if (tab.from && !tab.to) {
-            return `${tab.name} (Since ${tab.from})`
+            return `${tab.name || ''} (Since ${tab.from})`
           }
 
           if (!tab.from && tab.to) {
-            return `${tab.name} (Before ${tab.to})`
+            return `${tab.name || ''} (Before ${tab.to})`
           }
         }
 
         if (tab.type === 'range') {
           if (!tab.from && !tab.to) {
-            return `${tab.name} (All)`
+            return `${tab.name || 'Range'} (All)`
           }
 
           if (tab.from && !tab.to) {
-            return `${tab.name} (Above ${tab.from})`
+            return `${tab.name || ''} (Above ${tab.from})`
           }
 
           if (!tab.from && tab.to) {
-            return `${tab.name} (Below ${tab.to})`
+            return `${tab.name || ''} (Below ${tab.to})`
           }
         }
 
-        return `${tab.name} (${tab.from} - ${tab.to})`
+        if (tab.from && tab.to) {
+          return `${tab.name || 'From'} (${tab.from} to ${tab.to})`
+        }
       }
     }
   }
