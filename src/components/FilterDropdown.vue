@@ -2,6 +2,7 @@
   <div
     v-if="filter.type === 'dropdown'">
     <label
+      v-if="filter.text"
       :for="'filter-' + filter.filter">
       {{ filter.text }}
     </label>
@@ -25,10 +26,11 @@
   div {
     display: flex;
     align-items: center;
+    margin: calc(var(--padding) / 2);
   }
 
   label {
-    margin-right: 0.7em;
+    margin-right: var(--padding);
     font-size: .9rem;
   }
 

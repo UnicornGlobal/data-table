@@ -14,6 +14,7 @@
 
 <style scoped lang="scss">
   label {
+    cursor: pointer;
     margin-left: 5px;
     margin-top: 1px;
     flex-basis: 200px;
@@ -21,6 +22,7 @@
   }
 
   input[type=checkbox] {
+    cursor: pointer;
     border: 1px solid var(--primary);
     background-color: white;
     background-image: none;

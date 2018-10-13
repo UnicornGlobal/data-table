@@ -36,7 +36,6 @@
   }
 
   .filter-tabbed {
-    margin-bottom: var(--padding);
     width: 100%;
   }
 

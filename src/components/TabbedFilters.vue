@@ -50,7 +50,7 @@
   .tabs {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
     align-items: center;
 
     .tab {
@@ -66,6 +66,7 @@
       overflow-wrap: normal;
 
       &:first-of-type {
+        margin-left: 0;
         border-left: none;
       }
 
