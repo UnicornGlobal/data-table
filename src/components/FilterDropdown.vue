@@ -56,7 +56,6 @@
     },
     computed: {
       dropdownStyle() {
-        console.log(this.$assets.dropdown)
         return `background-image: ${this.$assets.dropdown};`
       }
     },

@@ -14,12 +14,10 @@
         :value="filter.from"
         @dateFrom="setDateFrom">
       </datatable-date-picker>
-      <div
+      <clear-button
         v-if="filter.from"
-        class="clear-date"
         @click="setDateFrom({date:null})">
-        CLEAR
-      </div>
+      </clear-button>
     </div>
     <span>
       To
@@ -31,12 +29,10 @@
         :value="filter.to"
         @dateTo="setDateTo">
       </datatable-date-picker>
-      <div
+      <clear-button
         v-if="filter.to"
-        class="clear-date"
         @click="setDateTo({date:null})">
-        CLEAR
-      </div>
+      </clear-button>
     </div>
     <input hidden ref="from" v-model="filter.from"/>
     <input hidden ref="to" v-model="filter.to"/>
@@ -44,12 +40,6 @@
 </template>
 
 <style lang="scss" scoped>
-  .close-tab {
-    position: absolute;
-    top: var(--padding);
-    right: var(--padding);
-  }
-
   // Label from / to
   span {
     font-size: calc(var(--padding) * 0.8);
@@ -63,27 +53,12 @@
   .date-input {
     display: flex;
     flex-direction: row;
-
-    div.clear-date {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 40px;
-      margin-left: -5em;
-      color: grey;
-      font-size: 0.5em;
-      font-weight: bold;
-
-      &:hover {
-        opacity: 0.9;
-        cursor: pointer;
-      }
-    }
   }
 </style>
 
 <script>
   import CloseButton from './CloseButton.vue'
+  import ClearButton from './ClearButton.vue'
   import DatatableDatePicker from './DatePicker.vue'
 
   export default {
@@ -95,6 +70,7 @@
     },
     components: {
       CloseButton,
+      ClearButton,
       DatatableDatePicker
     },
 

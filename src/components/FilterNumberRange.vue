@@ -1,10 +1,9 @@
 <template>
   <div>
-    <button
-      @click="closeFilter"
-      class="close-tab">
-      <close-button></close-button>
-    </button>
+    <close-button
+      class="close-tab"
+      @click="closeFilter">
+    </close-button>
     <span>
       Amount from:
     </span>
@@ -16,7 +15,7 @@
       <button
         tabindex="-1"
         @click="clearAmountFrom">
-        <close-button></close-button>
+        <!-- <close&#45;button></close&#45;button> -->
       </button>
     </div>
     <span>
@@ -30,15 +29,13 @@
       <button
         tabindex="-1"
         @click="clearAmountTo">
-        <close-button></close-button>
+        <!-- <close&#45;button></close&#45;button> -->
       </button>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  @import '../styles/filters/close-tab.scss';
-
   // Label from / to
   span {
     margin-bottom: 0.3em;
@@ -74,7 +71,7 @@
 </style>
 
 <script>
-  import CloseButton from './Icons/close-button.svg'
+  import CloseButton from './CloseButton.vue'
 
   export default {
     props: {

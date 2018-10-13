@@ -8,6 +8,9 @@
 
 <style lang="scss" scoped>
   div {
+    position: absolute;
+    top: var(--padding);
+    right: var(--padding);
     background: none;
     background-size: 15px;
     border: 0;
