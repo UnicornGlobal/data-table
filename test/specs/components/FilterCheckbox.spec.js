@@ -40,18 +40,16 @@ describe('FilterCheckbox.vue', () => {
       localVue,
       mocks: {
         $assets: {
-          checkbox: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path stroke="#123" stroke-width="3.4" d="m2.4,2.4 15.2,15.2m0-15.2-15.2,15.2"/></svg>')`
+          checkbox: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path stroke="#123456" stroke-width="3.4" d="m2.4,2.4 15.2,15.2m0-15.2-15.2,15.2"/></svg>')`
         }
       },
       propsData: {
         filter: {
-          type: 'checkbox',
-          field: 'fieldy',
-          text: 'text1'
+          type: 'checkbox'
         }
       }
     })
 
-    expect(filter.vm.checkboxStyle).toBe(`background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path stroke="#123" stroke-width="3.4" d="m2.4,2.4 15.2,15.2m0-15.2-15.2,15.2"/></svg>');`)
+    expect(filter.vm.checkboxStyle).toBe(`background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path stroke="#123456" stroke-width="3.4" d="m2.4,2.4 15.2,15.2m0-15.2-15.2,15.2"/></svg>');`)
   })
 })

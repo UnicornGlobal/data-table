@@ -54,6 +54,33 @@ describe('FilterDateRange.vue', () => {
     expect(filter.vm.$refs.to.value).toBe('13-12-1901')
   })
 
+  it('clears values', () => {
+    let localVue = createLocalVue()
+    let filter = mount(FilterDateRange, {
+      localVue,
+      mocks: {
+        $assets: {
+          close: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path stroke="#123" stroke-width="3.4" d="m2.4,2.4 15.2,15.2m0-15.2-15.2,15.2"/></svg>')`
+        }
+      },
+      propsData: {
+        filter: {
+          from: '12-12-1992',
+          to: '11-11-2001'
+        }
+      }
+    })
+
+    expect(filter.vm.$refs.from.value).toBe('1992-12-12')
+    expect(filter.vm.$refs.to.value).toBe('2001-11-11')
+
+    filter.vm.$refs.dateFrom.clear()
+    filter.vm.$refs.dateTo.clear()
+
+    expect(filter.vm.$refs.from.value).toBe('')
+    expect(filter.vm.$refs.to.value).toBe('')
+  })
+
   it('does not focus if there is a value', () => {
     let localVue = createLocalVue()
     let filter = mount(FilterDateRange, {
