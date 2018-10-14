@@ -130,11 +130,11 @@
           }
 
           if (tab.from && !tab.to) {
-            return `${tab.name || ''} (Since ${tab.from})`
+            return `${tab.name || ''} (Since ${tab.from})`.trim()
           }
 
           if (!tab.from && tab.to) {
-            return `${tab.name || ''} (Before ${tab.to})`
+            return `${tab.name || ''} (Before ${tab.to})`.trim()
           }
         }
 
@@ -144,11 +144,11 @@
           }
 
           if (tab.from && !tab.to) {
-            return `${tab.name || ''} (Above ${tab.from})`
+            return `${tab.name || ''} (Above ${tab.from})`.trim()
           }
 
           if (!tab.from && tab.to) {
-            return `${tab.name || ''} (Below ${tab.to})`
+            return `${tab.name || ''} (Below ${tab.to})`.trim()
           }
         }
 
