@@ -85,7 +85,7 @@
           margin-top: 8px;
           height: 20px;
           width: 15px;
-          fill: var(--primary);
+          fill: var(--secondaryText);
         }
 
         .arrow-spacer {
