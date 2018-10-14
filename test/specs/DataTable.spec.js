@@ -10,6 +10,23 @@ describe('DataTable.vue', () => {
     let dataTable = shallowMount(DataTable, {
       attachToDocument: true,
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -43,6 +60,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [
           {
@@ -119,6 +153,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [
           {
@@ -180,6 +231,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -229,6 +297,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [
           {
@@ -433,6 +518,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -461,6 +563,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -491,6 +610,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -526,6 +662,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -556,6 +709,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -587,6 +757,23 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [
           {
@@ -648,6 +835,23 @@ describe('DataTable.vue', () => {
     let localVue = createLocalVue()
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -673,6 +877,23 @@ describe('DataTable.vue', () => {
     let localVue = createLocalVue()
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -698,6 +919,23 @@ describe('DataTable.vue', () => {
     let localVue = createLocalVue()
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          tertiary: '#333',
+          primaryText: '#444',
+          secondaryText: '#555',
+          lightBackground: '#666',
+          darkBackground: '#777',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
