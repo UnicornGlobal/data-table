@@ -6,7 +6,10 @@
         :is="options.config.actionComponent.component">
       </component>
     </div>
-    <div class="filtering-card" :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''">
+    <div
+      v-if="options.config.filtering.enabled || options.config.search.enabled"
+      :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''"
+      class="filtering-card">
       <filtering
         v-if="options.config.filtering.enabled"
         :filters="options.config.filtering.filters"
