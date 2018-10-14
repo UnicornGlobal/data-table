@@ -14,7 +14,7 @@
       padding: var(--padding);
 
       input, input:focus {
-        color: var(--primary-text);
+        color: var(--primaryText);
         border: 1px solid var(--primary);
       }
 
