@@ -1,5 +1,5 @@
 import FilterCheckbox from '../../../src/components/FilterCheckbox.vue'
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 
 describe('FilterCheckbox.vue', () => {
   it('it is an object', () => {
@@ -8,7 +8,7 @@ describe('FilterCheckbox.vue', () => {
 
   it('mounts correctly', () => {
     let localVue = createLocalVue()
-    let filter = shallowMount(FilterCheckbox, {
+    let filter = mount(FilterCheckbox, {
       localVue,
       mocks: {
         $assets: {

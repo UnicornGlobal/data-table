@@ -45,7 +45,7 @@
      */
     mounted() {
       if (!this.$refs.from.value) {
-        // this.$nextTick(() => this.$refs.dateFrom.$refs.dateInput.$refs.inputArea.focus())
+        this.$nextTick(() => this.$refs.dateFrom.$refs.dateInput.$refs.inputArea.focus())
       }
     },
     methods: {
