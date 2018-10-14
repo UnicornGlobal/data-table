@@ -144,7 +144,7 @@
     }
 
     @media(max-width: 480px) {
-      height: 65px;
+      height: calc(var(--rowHeight) + 10px);
       padding-left: calc(var(--padding) / 2);
     }
 
@@ -175,7 +175,7 @@
 
   .list-row:last-child {
     @media(max-width: 480px) {
-      margin-bottom: 65px;
+      margin-bottom: calc(var(--rowHeight) + 10px);
     }
   }
 
@@ -183,7 +183,7 @@
     text-decoration: none;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgb(216, 218, 225);
+    border-bottom: 1px solid var(--primary);
     color: rgb(0, 0, 0);
     padding-left: 2px;
     display: grid;
@@ -207,7 +207,7 @@
     }
 
     &:hover {
-      background-color: #f7f8f9;
+      background-color: var(--hover);
     }
 
     .grid {

@@ -75,6 +75,7 @@
   $primary: #000;
   $secondary: #111;
   $tertiary: #222;
+  $hover: #eee;
   $primaryText: #234;
   $secondaryText: #234;
   $lightBackground: #DDD;
@@ -87,6 +88,7 @@
     --primary: $primary;
     --secondary: $secondary;
     --tertiary: $tertiary;
+    --hover: $hover;
     --primaryText: $primaryText;
     --secondaryText: $secondaryText;
     --lightBackground: $lightBackground;
@@ -100,6 +102,7 @@
     primary: $primary;
     secondary: $secondary;
     tertiary: $tertiary;
+    hover: $hover;
     primaryText: $primaryText;
     secondaryText: $secondaryText;
     lightBackground: $lightBackground;
@@ -173,6 +176,7 @@
         this.$style.secondaryText = this.$theme.secondaryText || this.$style.secondaryText
         this.$style.secondary = this.$theme.secondary || this.$style.secondary
         this.$style.tertiary = this.$theme.tertiary || this.$style.tertiary
+        this.$style.hover = this.$theme.hover || this.$style.hover
         this.$style.lightBackground = this.$theme.lightBackground || this.$style.lightBackground
         this.$style.darkBackground = this.$theme.darkBackground || this.$style.darkBackground
         this.$style.padding = this.$theme.padding || this.$style.padding
@@ -184,6 +188,7 @@
         bodyStyles.setProperty('--primary', this.$style.primary)
         bodyStyles.setProperty('--secondary', this.$style.secondary)
         bodyStyles.setProperty('--tertiary', this.$style.tertiary)
+        bodyStyles.setProperty('--hover', this.$style.hover)
         bodyStyles.setProperty('--primaryText', this.$style.primaryText)
         bodyStyles.setProperty('--secondaryText', this.$style.secondaryText)
         bodyStyles.setProperty('--lightBackground', this.$style.lightBackground)

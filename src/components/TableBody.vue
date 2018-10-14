@@ -41,7 +41,7 @@
   }
 
   .row-link:nth-of-type(1) {
-    border-top: 1px solid #d8dae1;
+    border-top: 1px solid var(--primary);
   }
 
   .row-link {

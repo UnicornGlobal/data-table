@@ -56,13 +56,13 @@
       display: flex;
       justify-content: space-between;
       border-bottom: 2px solid var(--primary);
-      min-height: 55px;
+      min-height: var(--rowHeight);
       padding: 0 var(--padding);
 
       @media(max-width: 480px) {
         padding-right: 7px;
         padding-left: calc(var(--padding) / 2);
-        min-height: 55px;
+        min-height: var(--rowHeight);
       }
 
       .header-cell {
@@ -85,7 +85,7 @@
           margin-top: 8px;
           height: 20px;
           width: 15px;
-          fill: #6C758C;
+          fill: var(--primary);
         }
 
         .arrow-spacer {

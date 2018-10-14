@@ -71,7 +71,7 @@
       }
 
       &:hover {
-        background: #ddd;
+        background: var(--hover);
         cursor: pointer;
       }
 
