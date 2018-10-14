@@ -14,7 +14,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -64,7 +63,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -157,7 +155,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -235,7 +232,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -301,7 +297,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -522,7 +517,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -567,7 +561,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -614,7 +607,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -666,7 +658,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -713,7 +704,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -761,7 +751,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -839,7 +828,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -881,7 +869,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
@@ -923,7 +910,6 @@ describe('DataTable.vue', () => {
         $style: {
           primary: '#000',
           secondary: '#111',
-          tertiary: '#333',
           primaryText: '#444',
           secondaryText: '#555',
           lightBackground: '#666',
