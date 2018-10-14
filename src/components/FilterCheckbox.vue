@@ -18,7 +18,7 @@
     margin-left: 5px;
     margin-top: 1px;
     flex-basis: 200px;
-    font-size: .9rem;
+    font-size: .9em;
   }
 
   input[type=checkbox] {

@@ -37,7 +37,7 @@
   .filter-tab-content {
     position: absolute;
     z-index: 9;
-    left: 2em;
+    left: calc(var(--padding) * 2);
     background: white;
     border: 1px solid var(--primary);
     padding: var(--padding);

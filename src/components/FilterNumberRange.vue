@@ -18,36 +18,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-  .value-input {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: var(--padding);
-
-    button {
-      border: 0;
-      background-color: white;
-      padding: 0;
-      margin: 0;
-      height: 38px;
-      width: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-
-      svg {
-        height: 20px;
-        width: 20px;
-      }
-    }
-
-    input, input:focus {
-      border: 1px solid var(--primary);
-    }
-  }
-</style>
-
 <script>
   import CloseButton from './CloseButton.vue'
   import ValueInput from './ValueInput.vue'
