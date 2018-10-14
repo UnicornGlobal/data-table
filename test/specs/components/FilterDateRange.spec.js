@@ -22,6 +22,7 @@ describe('FilterDateRange.vue', () => {
         }
       }
     })
+
     let close = filter.find('div[title="Close"]')
     close.trigger('click')
     expect(filter.emitted()).toHaveProperty('close')
