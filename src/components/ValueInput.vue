@@ -56,7 +56,7 @@
     },
     props: {
       value: {
-        type: String
+        types: [ String, Number ]
       },
       target: {
         type: String
