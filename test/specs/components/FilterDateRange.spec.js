@@ -1,5 +1,5 @@
 import FilterDateRange from '../../../src/components/FilterDateRange.vue'
-import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 
 describe('FilterDateRange.vue', () => {
   it('it is an object', () => {
