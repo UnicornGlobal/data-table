@@ -84,6 +84,16 @@ describe('TabbedFilters', () => {
     })).toBe('aaa (10 to 100)')
 
     expect(tabs.vm.getTitle({
+      name: 'aaadd',
+      to: '100'
+    })).toBe('Error')
+
+    expect(tabs.vm.getTitle({
+      name: 'aaad',
+      from: '10'
+    })).toBe('Error')
+
+    expect(tabs.vm.getTitle({
       type: 'date',
       from: '10-12-1900',
       to: '12-12-1900',

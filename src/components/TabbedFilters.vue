@@ -155,6 +155,8 @@
         if (tab.from && tab.to) {
           return `${tab.name || 'From'} (${tab.from} to ${tab.to})`
         }
+
+        return 'Error'
       }
     }
   }

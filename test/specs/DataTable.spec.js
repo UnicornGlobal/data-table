@@ -849,7 +849,7 @@ describe('DataTable.vue', () => {
           rowHeight: '60px'
         },
         $theme: {
-          primary: '#fff'
+          secondary: '#fff'
         }
       },
       propsData: {
