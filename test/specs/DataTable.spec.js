@@ -16,8 +16,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -65,8 +63,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -157,8 +153,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -234,8 +228,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -299,8 +291,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -519,8 +509,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -563,8 +551,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -609,8 +595,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -660,8 +644,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -706,8 +688,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -753,8 +733,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -830,8 +808,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -871,8 +847,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'
@@ -912,8 +886,6 @@ describe('DataTable.vue', () => {
           secondary: '#111',
           primaryText: '#444',
           secondaryText: '#555',
-          lightBackground: '#666',
-          darkBackground: '#777',
           padding: '1em',
           fontSize: '2em',
           rowHeight: '60px'

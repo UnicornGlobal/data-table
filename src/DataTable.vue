@@ -77,8 +77,6 @@
   $hover: #eee;
   $primaryText: #234;
   $secondaryText: #234;
-  $lightBackground: #DDD;
-  $darkBackground: #333;
   $padding: 1em;
   $fontSize: 0.9em;
   $rowHeight: 55px;
@@ -89,8 +87,6 @@
     --hover: $hover;
     --primaryText: $primaryText;
     --secondaryText: $secondaryText;
-    --lightBackground: $lightBackground;
-    --darkBackground: $darkBackground;
     --padding: $padding;
     --fontSize: $fontSize;
     --rowHeight: $rowHeight;
@@ -102,8 +98,6 @@
     hover: $hover;
     primaryText: $primaryText;
     secondaryText: $secondaryText;
-    lightBackground: $lightBackground;
-    darkBackground: $darkBackground;
     padding: $padding;
     fontSize: $fontSize;
     rowHeight: $rowHeight;
@@ -173,8 +167,6 @@
         this.$style.secondaryText = this.$theme.secondaryText || this.$style.secondaryText
         this.$style.secondary = this.$theme.secondary || this.$style.secondary
         this.$style.hover = this.$theme.hover || this.$style.hover
-        this.$style.lightBackground = this.$theme.lightBackground || this.$style.lightBackground
-        this.$style.darkBackground = this.$theme.darkBackground || this.$style.darkBackground
         this.$style.padding = this.$theme.padding || this.$style.padding
         this.$style.fontSize = this.$theme.fontSize || this.$style.fontSize
         this.$style.rowHeight = this.$theme.rowHeight || this.$style.rowHeight
@@ -186,8 +178,6 @@
         bodyStyles.setProperty('--hover', this.$style.hover)
         bodyStyles.setProperty('--primaryText', this.$style.primaryText)
         bodyStyles.setProperty('--secondaryText', this.$style.secondaryText)
-        bodyStyles.setProperty('--lightBackground', this.$style.lightBackground)
-        bodyStyles.setProperty('--darkBackground', this.$style.darkBackground)
         bodyStyles.setProperty('--padding', this.$style.padding)
         bodyStyles.setProperty('--fontSize', this.$style.fontSize)
         bodyStyles.setProperty('--rowHeight', this.$style.rowHeight)
