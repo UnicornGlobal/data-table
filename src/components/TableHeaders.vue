@@ -94,7 +94,6 @@
       }
 
       .header-cell:last-child {
-        justify-content: flex-end;
 
         .arrow-spacer {
           display: none;

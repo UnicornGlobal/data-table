@@ -81,6 +81,7 @@
   $darkBackground: #333;
   $padding: 1em;
   $fontSize: 0.9em;
+  $rowHeight: 55px;
 
   :root {
     --primary: $primary;
@@ -92,6 +93,7 @@
     --darkBackground: $darkBackground;
     --padding: $padding;
     --fontSize: $fontSize;
+    --rowHeight: $rowHeight;
   }
 
   :export {
@@ -104,6 +106,7 @@
     darkBackground: $darkBackground;
     padding: $padding;
     fontSize: $fontSize;
+    rowHeight: $rowHeight;
   }
 </style>
 
@@ -174,6 +177,7 @@
         this.$style.darkBackground = this.$theme.darkBackground || this.$style.darkBackground
         this.$style.padding = this.$theme.padding || this.$style.padding
         this.$style.fontSize = this.$theme.fontSize || this.$style.fontSize
+        this.$style.rowHeight = this.$theme.rowHeight || this.$style.rowHeight
 
         // Then set the css variables
         const bodyStyles = document.body.style
@@ -186,6 +190,7 @@
         bodyStyles.setProperty('--darkBackground', this.$style.darkBackground)
         bodyStyles.setProperty('--padding', this.$style.padding)
         bodyStyles.setProperty('--fontSize', this.$style.fontSize)
+        bodyStyles.setProperty('--rowHeight', this.$style.rowHeight)
       },
       setInnerWidth () {
         this.windowWidth = window.innerWidth

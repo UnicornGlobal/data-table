@@ -147,8 +147,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid rgb(216, 218, 225);
-    min-height: 56px;
+    border-bottom: 1px solid var(--primary);
+    min-height: var(--rowHeight);
+    height: var(--rowHeight);
     padding: 0 1em;
 
     @media(max-width: 480px) {

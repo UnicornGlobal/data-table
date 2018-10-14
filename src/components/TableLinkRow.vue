@@ -134,10 +134,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid rgb(216, 218, 225);
-    height: 55px;
+    border-bottom: 1px solid var(--primary);
+    height: var(--rowHeight);
     color: rgb(0, 0, 0);
-    padding: 0 1em;
+    padding: 0 var(--padding);
 
     &:hover {
       background-color: #f7f8f9;
@@ -150,8 +150,7 @@
 
     .list-row-field {
       flex: 1;
-      padding-left: 5px;
-      padding-right: 5px;
+      padding: 0 3px;
     }
 
     .list-row-field:first-child {
@@ -159,7 +158,6 @@
     }
 
     .list-row-field:last-child {
-      padding-right: 0.5em;
 
       @media(max-width: 1023px) and (min-width: 481px) {
         padding-right: 20px;

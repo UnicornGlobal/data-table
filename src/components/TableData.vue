@@ -5,8 +5,7 @@
     style="flex-grow: 0">
     <avatar-or-initials
       class="item-avatar"
-      round
-      size="35"
+      size="50"
       :image="getProperty(data, field.image)"
       :title="data[field.field]">
     </avatar-or-initials>
