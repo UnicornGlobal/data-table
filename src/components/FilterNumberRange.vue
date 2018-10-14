@@ -22,7 +22,7 @@
   .value-input {
     display: flex;
     flex-direction: row;
-    margin-bottom: 1em;
+    margin-bottom: var(--padding);
 
     button {
       border: 0;

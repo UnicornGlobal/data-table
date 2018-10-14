@@ -150,16 +150,16 @@
     border-bottom: 1px solid var(--primary);
     min-height: var(--rowHeight);
     height: var(--rowHeight);
-    padding: 0 1em;
+    padding: 0 var(--padding);
 
     @media(max-width: 480px) {
       min-height: 65px;
-      padding-left: 0.5em;
+      padding-left: calc(var(--padding) / 2);
     }
 
     @media(max-width: 680px) {
       min-height: 65px;
-      padding-left: 0.5em;
+      padding-left: calc(var(--padding) / 2);
     }
 
     .list-row-field {

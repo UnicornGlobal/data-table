@@ -145,7 +145,7 @@
 
     @media(max-width: 480px) {
       height: 65px;
-      padding-left: 0.5em;
+      padding-left: calc(var(--padding) / 2);
     }
 
     .list-row-field {
@@ -263,9 +263,9 @@
 
       .list-row-field {
         display: inline-block;
-        margin-right: 1em;
+        margin-right: var(--padding);
         background-color: lightgreen;
-        padding: 0.5em;
+        padding: calc(var(--padding) / 2);
         border-radius: 4px;
         color: black;
         font-size: 12px;
