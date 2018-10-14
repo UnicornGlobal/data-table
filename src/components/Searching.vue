@@ -10,8 +10,6 @@
 
 <style lang="scss" scoped>
   .search-div {
-    border-bottom: 1px solid var(--primary);
-
     div {
       padding: var(--padding);
 

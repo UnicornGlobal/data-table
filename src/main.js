@@ -18,6 +18,22 @@ DataTable.install = function(Vue, options) {
   if (options.assets && options.assets.dropdown) {
     Vue.prototype.$assets.dropdown = options.assets.dropdown
   }
+
+  if (options.assets && options.assets.checkbox) {
+    Vue.prototype.$assets.checkbox = options.assets.checkbox
+  }
+
+  if (options.assets && options.assets.checkmark) {
+    Vue.prototype.$assets.checkmark = options.assets.checkmark
+  }
+
+  if (options.assets && options.assets.crossmark) {
+    Vue.prototype.$assets.crossmark = options.assets.crossmark
+  }
+
+  if (options.assets && options.assets.close) {
+    Vue.prototype.$assets.close = options.assets.close
+  }
 }
 
 export default DataTable

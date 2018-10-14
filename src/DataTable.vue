@@ -6,38 +6,67 @@
         :is="options.config.actionComponent.component">
       </component>
     </div>
-    <filtering
-      v-if="options.config.filtering.enabled"
-      :filters="options.config.filtering.filters"
-      :dataset="dataset">
-    </filtering>
-    <searching
-      v-if="options.config.search.enabled"
-      :config="options.config.search">
-    </searching>
-    <table-headers
-      v-if="processedData.length && showHeaders && !smallScreen"
-      :config="options.config"
-      :fields="options.fields"
-      :styler="getStyle"
-      :controls="options.controls || []">
-    </table-headers>
-    <table-body
-      v-if="processedData.length"
-      :dataset="processedData"
-      :fields="options.fields"
-      :styler="getStyle"
-      :linking="options.config.linking"
-      :mobileType="options.config.mobileType"
-      :showLabelOnMobile="options.config.showLabelOnMobile"
-      :smallScreen="smallScreen"
-      :controls="options.controls || []">
-    </table-body>
-    <div v-else class="no-results">
-      No Results. Please broaden your search parameters.
+    <div class="filtering-card" :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''">
+      <filtering
+        v-if="options.config.filtering.enabled"
+        :filters="options.config.filtering.filters"
+        :dataset="dataset">
+      </filtering>
+      <searching
+        v-if="options.config.search.enabled"
+        :config="options.config.search">
+      </searching>
+    </div>
+    <div class="table-card" :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''">
+      <table-headers
+        v-if="processedData.length && showHeaders && !smallScreen"
+        :config="options.config"
+        :fields="options.fields"
+        :styler="getStyle"
+        :controls="options.controls || []">
+      </table-headers>
+      <table-body
+        v-if="processedData.length"
+        :dataset="processedData"
+        :fields="options.fields"
+        :styler="getStyle"
+        :linking="options.config.linking"
+        :mobileType="options.config.mobileType"
+        :showLabelOnMobile="options.config.showLabelOnMobile"
+        :smallScreen="smallScreen"
+        :controls="options.controls || []">
+      </table-body>
+      <div v-else class="no-results">
+        <div v-if="options.config.search && options.config.search.emptyTerm">
+          {{ options.config.search.emptyTerm }}
+        </div>
+        <div v-else>
+          No Results. Please broaden your search parameters.
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+  .filtering-card {
+    border: 3px solid var(--primary);
+    background: white;
+
+    &.gapped {
+      margin-bottom: calc(var(--padding) * 1.5);
+    }
+  }
+
+  .table-card {
+    border: 3px solid var(--primary);
+    background: white;
+  }
+
+  .no-results {
+    padding: var(--padding);
+  }
+</style>
 
 <style module lang="scss">
   $primary: #000;
