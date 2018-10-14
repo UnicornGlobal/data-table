@@ -68,7 +68,6 @@ describe('FilterDropdown.vue', () => {
 
     let options = filter.findAll('option')
     expect(options.at(0).attributes('value')).toBe('')
-    expect(options.at(0).attributes('value')).toBe('')
     expect(options.at(0).text()).toBe('placeholder')
     expect(options.at(1).attributes('value')).toBe('One')
     expect(options.at(1).text()).toBe('One')
