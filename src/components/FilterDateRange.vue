@@ -1,83 +1,28 @@
 <template>
   <div>
-    <button
-      class="close-tab"
-      @click="closeFilter">
-      <close-button></close-button>
-    </button>
-    <span>
-      From
-    </span>
-    <div class="date-input">
-      <datatable-date-picker
-        ref="pickFrom"
-        name="dateFrom"
-        :value="filter.from"
-        @dateFrom="setDateFrom">
-      </datatable-date-picker>
-      <button
-        tabindex="-1"
-        @click="setDateFrom({date:null})">
-        <close-button></close-button>
-      </button>
-    </div>
-    <span>
-      To
-    </span>
-    <div class="date-input">
-      <datatable-date-picker
-        ref="pickTo"
-        name="dateTo"
-        :value="filter.to"
-        @dateTo="setDateTo">
-      </datatable-date-picker>
-      <button
-        tabindex="-1"
-        @click="setDateTo({date:null})">
-        <close-button></close-button>
-      </button>
-    </div>
+    <close-button @close="$emit('close')"></close-button>
+    <date-input
+      title="From"
+      name="dateFrom"
+      ref="dateFrom"
+      :value="filter.from"
+      :event="setDateFrom">
+    </date-input>
+    <date-input
+      title="To"
+      name="dateTo"
+      ref="dateTo"
+      :value="filter.to"
+      :event="setDateTo">
+    </date-input>
     <input hidden ref="from" v-model="filter.from"/>
     <input hidden ref="to" v-model="filter.to"/>
   </div>
 </template>
 
-<style lang="scss" scoped>
-  @import '../styles/filters/close-tab.scss';
-
-  // Label from / to
-  span {
-    margin-bottom: 0.3em;
-  }
-
-  .date-input {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1em;
-
-    button {
-      border: 0;
-      background-color: white;
-      padding: 0;
-      margin: 0;
-      height: 38px;
-      width: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-
-      svg {
-        height: 20px;
-        width: 20px;
-      }
-    }
-  }
-</style>
-
 <script>
-  import CloseButton from './Icons/close-button.svg'
-  import DatatableDatePicker from './DatePicker.vue'
+  import CloseButton from './CloseButton.vue'
+  import DateInput from './DateInput.vue'
 
   export default {
     props: {
@@ -88,7 +33,7 @@
     },
     components: {
       CloseButton,
-      DatatableDatePicker
+      DateInput
     },
 
     /**
@@ -98,18 +43,20 @@
      *
      * We dispatch an event to force a refresh
      */
+    mounted() {
+      if (!this.$refs.from.value) {
+        this.$nextTick(() => this.$refs.dateFrom.$refs.dateInput.$refs.inputArea.focus())
+      }
+    },
     methods: {
-      closeFilter() {
-        this.$emit('close')
-      },
-      setDateFrom(e) {
-        this.$refs.from.value = e.date
+      setDateFrom(date) {
+        this.$refs.from.value = date
         this.$refs.from.dispatchEvent(new Event('input', {
           'bubbles': true
         }))
       },
-      setDateTo(e) {
-        this.$refs.to.value = e.date
+      setDateTo(date) {
+        this.$refs.to.value = date
         this.$refs.to.dispatchEvent(new Event('input', {
           'bubbles': true
         }))

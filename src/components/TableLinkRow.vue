@@ -122,7 +122,170 @@
   </router-link>
 </template>
 
-<style lang="scss" scoped src="../styles/table-link-row.scss"></style>
+<style lang="scss" scoped>
+  .list-row-field[secondary="true"] {
+    @media(max-width: 1023px) {
+      display: none !important;
+    }
+  }
+
+  .list-row, .mobile-scroll {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--primary);
+    height: var(--rowHeight);
+    color: rgb(0, 0, 0);
+    padding: 0 var(--padding);
+
+    &:hover {
+      background-color: #f7f8f9;
+    }
+
+    @media(max-width: 480px) {
+      height: calc(var(--rowHeight) + 10px);
+      padding-left: calc(var(--padding) / 2);
+    }
+
+    .list-row-field {
+      flex: 1;
+      padding: 0 3px;
+    }
+
+    .list-row-field:first-child {
+      flex: 0;
+    }
+
+    .list-row-field:last-child {
+
+      @media(max-width: 1023px) and (min-width: 481px) {
+        padding-right: 20px;
+      }
+
+      @media(max-width: 480px) {
+        padding-right: 20px;
+      }
+
+      div {
+        text-align: right;
+      }
+    }
+  }
+
+  .list-row:last-child {
+    @media(max-width: 480px) {
+      margin-bottom: calc(var(--rowHeight) + 10px);
+    }
+  }
+
+  .mobile-screen {
+    text-decoration: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--primary);
+    color: rgb(0, 0, 0);
+    padding-left: 2px;
+    display: grid;
+    grid-template-columns: 100px 6fr;
+    align-items: center;
+
+    .thumbnail {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &.no-image {
+      grid-template-columns: 72px 6fr;
+    }
+
+    &:hover {
+      background-color: var(--hover);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 70px 3fr;
+    }
+
+    .label-config {
+      .label {
+        font-size: .9em;
+        display: inline-block;
+        padding-left: 3px;
+        padding-right: 3px;
+      }
+
+      .field-contents {
+        padding-left: 3px;
+        padding-right: 3px;
+        display: flex;
+        align-items: flex-end;
+      }
+    }
+
+    .list-row-field {
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+
+    .rest {
+      .list-row-field {
+        color: rgba(0, 0, 0, 0.6)
+      }
+
+      .list-row-field:nth-of-type(1) {
+        color: rgb(0, 0, 0);
+        font-weight: 900 !important;
+        font-size: 15px !important;
+        padding-bottom: 5px;
+      }
+    }
+
+    .right-cont {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      max-width: 120px;
+      flex-wrap: wrap;
+    }
+
+    .mobile-right {
+      text-align: right;
+      margin-right: 2px;
+
+      .list-row-field {
+        display: inline-block;
+        margin-right: var(--padding);
+        background-color: lightgreen;
+        padding: calc(var(--padding) / 2);
+        border-radius: 4px;
+        color: black;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .no-image {
+    .rest {
+      .list-row-field {
+        color: rgba(0, 0, 0, 0.6)
+      }
+
+      .list-row-field:nth-of-type(1) {
+        color: rgb(0, 0, 0);
+        padding-bottom: 0px;
+      }
+    }
+  }
+</style>
 
 <script>
   import TableData from './TableData.vue'

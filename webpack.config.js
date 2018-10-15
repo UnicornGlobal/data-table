@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: './src/DataTable.vue',
+  entry: './src/main.js',
   mode: 'development',
   plugins: [
     new VueLoaderPlugin()
@@ -35,9 +35,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'css-loader'
-        ]
+        loader: 'css-loader',
+        options: {
+          modules: true
+        }
       },
       {
         test: /\.(scss|sass)$/,

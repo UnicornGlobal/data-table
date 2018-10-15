@@ -2,11 +2,13 @@
   <div
     v-if="filter.type === 'dropdown'">
     <label
+      v-if="filter.text"
       :for="'filter-' + filter.filter">
       {{ filter.text }}
     </label>
     <select
       v-model="filter.value"
+      :style="dropdownStyle"
       :name="`${filter.filter}`">
       <option value="">
         {{ filter.placeholder }}
@@ -24,20 +26,22 @@
   div {
     display: flex;
     align-items: center;
+    margin: calc(var(--padding) / 2);
   }
 
   label {
-    margin-right: 0.7em;
+    margin-right: var(--padding);
     font-size: .9rem;
   }
 
   select {
+    cursor: pointer;
     padding: 0 0 0 10px;
+    border: 1px solid var(--primary);
     background-size: 15px 13px;
     background-repeat: no-repeat;
     background-origin: content-box;
     background-position: right 10px center;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAflBMVEUAAAAvZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/svZ/tg0db9AAAAKXRSTlMAAQUKDhIUFRgcHR4gJCcoNU5WV11eX2FiaH6FlJ63yszP1+bp8ff5/R3tDSEAAAFCSURBVGje7c3HUgNBFENRgcE2Occmwxj0/z/IZso1oaeng3rjenephQ5gWZZlWdYut7h+XIsvz56u9nvD+YbkjdR4Jvmz6gwXfyTJW6HhSJLNamgoFdc+NsuhoVPc9rFVOoZKcZ3HZglg3TU0ius9NgvgnRQrbvD4gj1SrAwNfgNfYmVk8BU4pVQZG5sDAJdKxWMcAX7lTm0IlYAhU4KGSJkxJMqsIVAijGIlyihUIo0iJdrwKvdqI1tJMjKVRCNLSTYylAwjWckyEpVMI0nJNhKUAiNaKTK8yoPaiFKKjQhFYMwqHuMY0CoiI6jIjIAiNCYVqTGhiA2v8qk2vIrciFAExqwiMWYUkRFUflVGQBEak4rUmFDEhleRGx6lgjFSqhgDpZLRU6oZHaWisVWqGq1S2QBOPvh2CMuyLMuyrF3qHzdJFFyfRs27AAAAAElFTkSuQmCC);
   }
 </style>
 
@@ -51,6 +55,11 @@
       options: {
         type: Array,
         required: true
+      }
+    },
+    computed: {
+      dropdownStyle() {
+        return `background-image: ${this.$assets.dropdown};`
       }
     },
     methods: {

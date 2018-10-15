@@ -1,76 +1,26 @@
 <template>
   <div>
-    <button
-      @click="closeFilter"
-      class="close-tab">
-      <close-button></close-button>
-    </button>
-    <span>
-      Amount from:
-    </span>
-    <div class="value-input">
-      <input
-        type="text"
-        v-model="filter.from"
-        ref="amountFrom" />
-      <button
-        tabindex="-1"
-        @click="clearAmountFrom">
-        <close-button></close-button>
-      </button>
-    </div>
-    <span>
-      Amount to:
-    </span>
-    <div class="value-input">
-      <input
-        type="text"
-        v-model="filter.to"
-        ref="amountTo" />
-      <button
-        tabindex="-1"
-        @click="clearAmountTo">
-        <close-button></close-button>
-      </button>
-    </div>
+    <close-button @close="$emit('close')"></close-button>
+    <value-input
+      label="Amount from:"
+      ref="from"
+      target="from"
+      :value="filter.from"
+      @input="handleInput">
+    </value-input>
+    <value-input
+      label="Amount to:"
+      ref="to"
+      target="to"
+      :value="filter.to"
+      @input="handleInput">
+    </value-input>
   </div>
 </template>
 
-<style lang="scss" scoped>
-  @import '../styles/filters/close-tab.scss';
-
-  // Label from / to
-  span {
-    margin-bottom: 0.3em;
-  }
-
-  .value-input {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1em;
-
-    button {
-      border: 0;
-      background-color: white;
-      padding: 0;
-      margin: 0;
-      height: 38px;
-      width: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-
-      svg {
-        height: 20px;
-        width: 20px;
-      }
-    }
-  }
-</style>
-
 <script>
-  import CloseButton from './Icons/close-button.svg'
+  import CloseButton from './CloseButton.vue'
+  import ValueInput from './ValueInput.vue'
 
   export default {
     props: {
@@ -80,23 +30,17 @@
       }
     },
     components: {
-      CloseButton
+      CloseButton,
+      ValueInput
+    },
+    mounted() {
+      this.$refs.from.$refs.inputBox.focus()
     },
     methods: {
-      closeFilter() {
-        this.$emit('close')
-      },
-      clearAmountFrom() {
-        this.$refs.amountFrom.value = null
-        this.$refs.amountFrom.dispatchEvent(new Event('input', {
-          'bubbles': true
-        }))
-      },
-      clearAmountTo() {
-        this.$refs.amountTo.value = null
-        this.$refs.amountTo.dispatchEvent(new Event('input', {
-          'bubbles': true
-        }))
+      handleInput(value, target) {
+        this.filter[target] = value
+        this.$parent.$forceUpdate()
+        this.$forceUpdate()
       }
     }
   }
