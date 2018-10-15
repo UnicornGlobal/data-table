@@ -45,6 +45,9 @@ describe('TableHeaders', () => {
       }
     })
 
+    expect(headers.vm.config.sorting.ascending).toBe(true)
+    expect(headers.vm.config.sorting.field).toBe('index')
+
     headers.vm.sort({field: 'name', sort: 'xx'})
     expect(headers.vm.config.sorting.ascending).toBe(true)
     expect(headers.vm.config.sorting.field).toBe('xx')
