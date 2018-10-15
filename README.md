@@ -83,7 +83,7 @@ The `options` prop is an object with the following props
     - `label` - label if type is link
     - `props` - Either a callback function or object if type is `component`
     - `events` - Events config if type is component
-    
+
 #### Example setup
 
 ```
@@ -195,9 +195,36 @@ The `options` prop is an object with the following props
             ]
         }
     }
-    
 ```
 
-            
-            
-     
+#### Basic Theme Support
+
+You can set a basic theme on the datatable.
+
+It uses CSS modules _and_ variables and a little bit of upfront processing to override the included defaults.
+
+To pass in the theme you now need to `Vue.use(DataTable)`
+
+You can also add custom assets for dropdowns, checkboxes, etc.
+
+##### Example
+
+```
+// In the host application
+import DataTable from 'unicorn-vue-datatable'
+
+// This example will override these theme variables.
+Vue.use(DataTable, {
+  theme: {
+    primary: '#DAB',
+    secondary: '#343',
+    padding: '1em',
+    gap: true, // adds a gap between the filtering and the table
+    rowHeight: '65px'
+  },
+  // you can also add custom assets
+  assets: {
+    dropdown: 'url(data:image/svg+xml;utf8,<svg><path stroke="#000" d="m2,2 15,15m0-15-15,15"/></svg>)'
+  }
+})
+```

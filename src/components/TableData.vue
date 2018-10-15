@@ -5,8 +5,7 @@
     style="flex-grow: 0">
     <avatar-or-initials
       class="item-avatar"
-      round
-      size="35"
+      size="50"
       :image="getProperty(data, field.image)"
       :title="data[field.field]">
     </avatar-or-initials>
@@ -30,31 +29,35 @@
     </template>
     <template
       v-else>
-      <check-mark
+      <div
         v-if="getProperty(data, field.field)"
+        :style="`background-image: ${ this.$assets.checkmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
         width="20px"
         height="20px">
-      </check-mark>
-      <close-button
+      </div>
+      <div
         v-else
+        :style="`background-image: ${ this.$assets.crossmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
         width="20px"
         height="20px">
-      </close-button>
+      </div>
     </template>
   </div>
   <div
     v-else-if="field.type === 'boolean-inverted'"
     :class="field.field">
-    <check-mark-inverted
+    <div
       v-if="getProperty(data, field.field)"
+      :style="`background-image: ${ this.$assets.crossmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
       width="20px"
       height="20px">
-    </check-mark-inverted>
-    <close-button-inverted
+    </div>
+    <div
       v-else
+      :style="`background-image: ${ this.$assets.checkmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
       width="20px"
       height="20px">
-    </close-button-inverted>
+    </div>
   </div>
   <div
     v-else-if="field.type === 'third_party'"
@@ -120,7 +123,8 @@
 
 <style lang="scss" scoped>
   div {
-    font-size: .9em;
+    font-size: var(--fontSize);
+    color: var(--primaryText);
 
     &.image {
       min-width: 58px;
@@ -146,19 +150,11 @@
 
 <script>
   import AvatarOrInitials from 'vue-avatar-or-initials'
-  import CheckMark from './Icons/check.svg'
-  import CheckMarkInverted from './Icons/check-inverted.svg'
-  import CloseButton from './Icons/close-button.svg'
-  import CloseButtonInverted from './Icons/close-button-inverted.svg'
   import moment from 'moment'
 
   export default {
     components: {
-      AvatarOrInitials,
-      CheckMark,
-      CloseButton,
-      CheckMarkInverted,
-      CloseButtonInverted
+      AvatarOrInitials
     },
     props: ['field', 'data'],
     methods: {

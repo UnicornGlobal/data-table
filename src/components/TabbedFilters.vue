@@ -4,24 +4,26 @@
       class="tabs"
       role="tablist">
       <div
+        v-if="getTitle(tab)"
         v-for="(tab, index) in filter.tabs"
         class="tab"
-        :class="index === activeTab ? 'active' : ''"
-        @click="setActive(index)">
+        :class="index + 1 === activeTab ? 'active' : ''"
+        @click="setActive(index + 1)">
         {{ getTitle(tab) }}
       </div>
     </div>
     <div>
       <div
+        v-if="activeTab > 0"
         v-for="(tab, index) in filter.tabs">
         <filter-date-range
-          v-if="tab.type === 'date' && index === activeTab"
+          v-if="tab.type === 'date' && index + 1 === activeTab"
           :filter="tab"
           @close="setActive(0)" 
           class="filter-tab-content">
         </filter-date-range>
         <filter-number-range
-          v-if="tab.type === 'range' && index === activeTab"
+          v-if="tab.type === 'range' && index + 1 === activeTab"
           :filter="tab"
           @close="setActive(0)"
           class="filter-tab-content">
@@ -34,11 +36,11 @@
 <style lang="scss" scoped>
   .filter-tab-content {
     position: absolute;
-    z-index: 999;
-    left: 2em;
+    z-index: 9;
+    left: calc(var(--padding) * 2);
     background: white;
-    border: 1px solid rgb(233, 234, 235);
-    padding: 2em 1em 0em;
+    border: 1px solid var(--primary);
+    padding: var(--padding);
     min-width: 300px;
     max-width: 600px;
     display: flex;
@@ -48,19 +50,34 @@
   .tabs {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid rgb(233, 234, 235);
+    border-bottom: 1px solid var(--primary);
     align-items: center;
 
     .tab {
-      padding: 0.7em;
+      padding: calc(var(--padding) / 2) var(--padding);
+      border-top: 1px solid var(--primary);
+      border-right: 1px solid var(--primary);
+      border-left: 1px solid var(--primary);
+      margin-left: -1px;
+      border-radius: 3px 5px 0 0;
       min-width: 65px;
       height: auto;
       font-size: .9rem;
       overflow-wrap: normal;
 
+      &:first-of-type {
+        margin-left: 0;
+        border-left: none;
+      }
+
+      &:hover {
+        background: var(--hover);
+        cursor: pointer;
+      }
+
       &.active {
-        background: lightgrey;
-        color: rgb(84, 129, 255);
+        background: var(--primary);
+        color: var(--primaryText);
       }
     }
   }
@@ -109,33 +126,37 @@
 
         if (tab.type === 'date') {
           if (!tab.from && !tab.to) {
-            return `${tab.name} (All)`
+            return `${tab.name || 'Date'} (All)`
           }
 
           if (tab.from && !tab.to) {
-            return `${tab.name} (Since ${tab.from})`
+            return `${tab.name || ''} (Since ${tab.from})`.trim()
           }
 
           if (!tab.from && tab.to) {
-            return `${tab.name} (Before ${tab.to})`
+            return `${tab.name || ''} (Before ${tab.to})`.trim()
           }
         }
 
         if (tab.type === 'range') {
           if (!tab.from && !tab.to) {
-            return `${tab.name} (All)`
+            return `${tab.name || 'Range'} (All)`
           }
 
           if (tab.from && !tab.to) {
-            return `${tab.name} (Above ${tab.from})`
+            return `${tab.name || ''} (Above ${tab.from})`.trim()
           }
 
           if (!tab.from && tab.to) {
-            return `${tab.name} (Below ${tab.to})`
+            return `${tab.name || ''} (Below ${tab.to})`.trim()
           }
         }
 
-        return `${tab.name} (${tab.from} - ${tab.to})`
+        if (tab.from && tab.to) {
+          return `${tab.name || 'From'} (${tab.from} to ${tab.to})`
+        }
+
+        return 'Error'
       }
     }
   }

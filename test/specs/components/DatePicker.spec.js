@@ -6,7 +6,15 @@ import sinon from 'sinon'
 describe('DatePicker.vue', () => {
   it('initializes', () => {
     let localVue = createLocalVue()
-    let picker = shallowMount(DatePicker, {localVue, propsData: {name: 'date', value: '12-12-1900', format: 'DD-MM-YYYY'}})
+    let picker = shallowMount(DatePicker, {
+      localVue,
+      propsData: {
+        name: 'date',
+        value: '12-12-1900',
+        format: 'DD-MM-YYYY'
+      }
+    })
+
     expect(picker.vm.picker).toBeInstanceOf(Pickaday)
     expect(picker.vm.inputName).toEqual('date')
     expect(picker.vm.format).toEqual('DD-MM-YYYY')
@@ -15,19 +23,51 @@ describe('DatePicker.vue', () => {
 
   it('sets default input-name', () => {
     let localVue = createLocalVue()
-    let picker = shallowMount(DatePicker, {localVue, propsData: {value: '12-12-1900', format: 'DD-MM-YYYY'}})
+    let picker = shallowMount(DatePicker, {
+      localVue,
+      propsData: {
+        value: '12-12-1900',
+        format: 'DD-MM-YYYY'
+      }
+    })
+
     expect(picker.vm.inputName).toEqual('date')
   })
 
   it('sets new date', async () => {
     let localVue = createLocalVue()
-    let picker = shallowMount(DatePicker, {localVue, propsData: {name: 'date', value: '12-12-1900', format: 'DD-MM-YYYY'}})
+    let picker = shallowMount(DatePicker, {
+      localVue,
+      propsData: {
+        name: 'date',
+        value: '12-12-1900',
+        format: 'DD-MM-YYYY'
+      }
+    })
+
     expect(picker.vm.value).toEqual('12-12-1900')
 
     let setDate = sinon.spy(picker.vm.picker, 'setDate')
-    picker.setProps({value: '14-12-1900'})
+    picker.setProps({ value: '14-12-1900' })
     await picker.vm.$nextTick()
     expect(setDate.called).toEqual(true)
     setDate.restore()
+  })
+
+  it('destroys correctly', async () => {
+    let localVue = createLocalVue()
+    let picker = shallowMount(DatePicker, {
+      localVue,
+      propsData: {
+        name: 'date',
+        value: '12-12-1900',
+        format: 'DD-MM-YYYY'
+      }
+    })
+
+    expect(picker.vm.value).toEqual('12-12-1900')
+    expect(picker.vm.picker).toBeInstanceOf(Pickaday)
+    picker.destroy()
+    expect(picker.vm.picker).toBeNull()
   })
 })

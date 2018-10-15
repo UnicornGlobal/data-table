@@ -6,38 +6,103 @@
         :is="options.config.actionComponent.component">
       </component>
     </div>
-    <filtering
-      v-if="options.config.filtering.enabled"
-      :filters="options.config.filtering.filters"
-      :dataset="dataset">
-    </filtering>
-    <searching
-      v-if="options.config.search.enabled"
-      :config="options.config.search">
-    </searching>
-    <table-headers
-      v-if="processedData.length && showHeaders && !smallScreen"
-      :config="options.config"
-      :fields="options.fields"
-      :styler="getStyle"
-      :controls="options.controls || []">
-    </table-headers>
-    <table-body
-      v-if="processedData.length"
-      :dataset="processedData"
-      :fields="options.fields"
-      :styler="getStyle"
-      :linking="options.config.linking"
-      :mobileType="options.config.mobileType"
-      :showLabelOnMobile="options.config.showLabelOnMobile"
-      :smallScreen="smallScreen"
-      :controls="options.controls || []">
-    </table-body>
-    <div v-else class="no-results">
-      No Results. Please broaden your search parameters.
+    <div
+      v-if="options.config.filtering.enabled || options.config.search.enabled"
+      :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''"
+      class="filtering-card">
+      <filtering
+        v-if="options.config.filtering.enabled"
+        :filters="options.config.filtering.filters"
+        :dataset="dataset">
+      </filtering>
+      <searching
+        v-if="options.config.search.enabled"
+        :config="options.config.search">
+      </searching>
+    </div>
+    <div class="table-card" :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''">
+      <table-headers
+        v-if="processedData.length && showHeaders && !smallScreen"
+        :config="options.config"
+        :fields="options.fields"
+        :styler="getStyle"
+        :controls="options.controls || []">
+      </table-headers>
+      <table-body
+        v-if="processedData.length"
+        :dataset="processedData"
+        :fields="options.fields"
+        :styler="getStyle"
+        :linking="options.config.linking"
+        :mobileType="options.config.mobileType"
+        :showLabelOnMobile="options.config.showLabelOnMobile"
+        :smallScreen="smallScreen"
+        :controls="options.controls || []">
+      </table-body>
+      <div v-else class="no-results">
+        <div v-if="options.config.search && options.config.search.emptyTerm">
+          {{ options.config.search.emptyTerm }}
+        </div>
+        <div v-else>
+          No Results. Please broaden your search parameters.
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+  .filtering-card {
+    border: 3px solid var(--primary);
+    background: white;
+
+    &.gapped {
+      margin-bottom: calc(var(--padding) * 1.5);
+    }
+  }
+
+  .table-card {
+    border: 3px solid var(--primary);
+    background: white;
+  }
+
+  .no-results {
+    padding: var(--padding);
+  }
+</style>
+
+<style module lang="scss">
+  $primary: #000;
+  $secondary: #111;
+  $hover: #eee;
+  $primaryText: #234;
+  $secondaryText: #234;
+  $padding: 1em;
+  $fontSize: 0.9em;
+  $rowHeight: 55px;
+
+  :root {
+    --primary: $primary;
+    --secondary: $secondary;
+    --hover: $hover;
+    --primaryText: $primaryText;
+    --secondaryText: $secondaryText;
+    --padding: $padding;
+    --fontSize: $fontSize;
+    --rowHeight: $rowHeight;
+  }
+
+  :export {
+    primary: $primary;
+    secondary: $secondary;
+    hover: $hover;
+    primaryText: $primaryText;
+    secondaryText: $secondaryText;
+    padding: $padding;
+    fontSize: $fontSize;
+    rowHeight: $rowHeight;
+  }
+</style>
 
 <script>
   import Filtering from './components/Filtering.vue'
@@ -75,6 +140,7 @@
       }
     },
     mounted () {
+      this.setTheme()
       this.processData()
       this.watchConfig()
       this.windowWidth = window.innerWidth
@@ -94,6 +160,28 @@
       }
     },
     methods: {
+      setTheme() {
+        // Set the configured theme
+        this.$style.primary = this.$theme.primary || this.$style.primary
+        this.$style.primaryText = this.$theme.primaryText || this.$style.primaryText
+        this.$style.secondaryText = this.$theme.secondaryText || this.$style.secondaryText
+        this.$style.secondary = this.$theme.secondary || this.$style.secondary
+        this.$style.hover = this.$theme.hover || this.$style.hover
+        this.$style.padding = this.$theme.padding || this.$style.padding
+        this.$style.fontSize = this.$theme.fontSize || this.$style.fontSize
+        this.$style.rowHeight = this.$theme.rowHeight || this.$style.rowHeight
+
+        // Then set the css variables
+        const bodyStyles = document.body.style
+        bodyStyles.setProperty('--primary', this.$style.primary)
+        bodyStyles.setProperty('--secondary', this.$style.secondary)
+        bodyStyles.setProperty('--hover', this.$style.hover)
+        bodyStyles.setProperty('--primaryText', this.$style.primaryText)
+        bodyStyles.setProperty('--secondaryText', this.$style.secondaryText)
+        bodyStyles.setProperty('--padding', this.$style.padding)
+        bodyStyles.setProperty('--fontSize', this.$style.fontSize)
+        bodyStyles.setProperty('--rowHeight', this.$style.rowHeight)
+      },
       setInnerWidth () {
         this.windowWidth = window.innerWidth
       },
@@ -246,54 +334,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .search-div {
-    min-height: 65px;
-  }
-
-  .search-bar-label {
-    width: 18px;
-    height: 18px;
-    margin-top: 10px;
-    margin-right: 8px;
-    position: absolute;
-    background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%239DA3B3%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20d%3D%22M505%20442.7L405.3%20343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3%2044-79.7%2044-128C416%2093.1%20322.9%200%20208%200S0%2093.1%200%20208s93.1%20208%20208%20208c48.3%200%2092.7-16.4%20128-44v16.3c0%206.4%202.5%2012.5%207%2017l99.7%2099.7c9.4%209.4%2024.6%209.4%2033.9%200l28.3-28.3c9.4-9.4%209.4-24.6.1-34zM208%20336c-70.7%200-128-57.2-128-128%200-70.7%2057.2-128%20128-128%2070.7%200%20128%2057.2%20128%20128%200%2070.7-57.2%20128-128%20128z%22/%3E%3C/svg%3E);
-  }
-
-  .data-table {
-    position: relative;
-    overflow-x: auto;
-
-    @media(max-width: 480px) {
-      margin: 0;
-    }
-
-    .action-component-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-    }
-  }
-
-  .controls {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-
-    a {
-      background-color: rgb(84, 129, 255);
-      border: 1px solid rgb(216, 218, 225);
-      color: rgb(255, 255, 255);
-      text-decoration: none;
-      padding: 7px 20px;
-      text-align: center;
-      display: block;
-    }
-  }
-
-  div.no-results {
-    padding-left: 20px;
-    padding-bottom: 20px;
-  }
-</style>

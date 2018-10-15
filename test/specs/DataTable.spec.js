@@ -10,6 +10,20 @@ describe('DataTable.vue', () => {
     let dataTable = shallowMount(DataTable, {
       attachToDocument: true,
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -43,6 +57,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [
           {
@@ -119,6 +147,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [
           {
@@ -180,6 +222,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -229,6 +285,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [
           {
@@ -433,6 +503,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -461,6 +545,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -491,6 +589,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -526,6 +638,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -556,6 +682,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -587,6 +727,20 @@ describe('DataTable.vue', () => {
 
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [
           {
@@ -648,6 +802,20 @@ describe('DataTable.vue', () => {
     let localVue = createLocalVue()
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          secondary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -673,6 +841,20 @@ describe('DataTable.vue', () => {
     let localVue = createLocalVue()
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {
@@ -698,6 +880,20 @@ describe('DataTable.vue', () => {
     let localVue = createLocalVue()
     let dataTable = shallowMount(DataTable, {
       localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
       propsData: {
         dataset: [],
         options: {

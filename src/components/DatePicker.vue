@@ -2,11 +2,16 @@
   <input
     type="text"
     :value="value"
-    class="input" />
+    ref="inputArea"
+    class="date-input" />
 </template>
 
 <style lang="scss">
   @import '~pikaday/scss/pikaday';
+
+  input.date-input {
+    border: 1px solid var(--primary) !important;
+  }
 </style>
 
 <script type="text/javascript">
@@ -24,6 +29,10 @@
       value(value) {
         this.picker.setDate(value)
       }
+    },
+    destroyed() {
+      this.picker.destroy()
+      this.picker = null
     },
     mounted() {
       const getDate = this.getDate
