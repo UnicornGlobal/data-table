@@ -1,26 +1,29 @@
 <template>
-  <div class="search-div">
-    <div>
-      <input
-        v-model="config.term"
-        :placeholder="config.placeholder" />
-    </div>
+  <div>
+    <input
+      v-model="config.term"
+      :placeholder="config.placeholder" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .search-div {
-    div {
-      padding: var(--padding);
+  div {
+    padding: var(--padding);
 
-      input, input:focus {
-        color: var(--primaryText);
-        border: 1px solid var(--primary);
-      }
+    input {
+      color: var(--primaryText);
+      border: 1px solid var(--primary);
+      width: 100%;
+      height: calc(var(--padding) * 3);
+      padding: 0 calc(var(--padding) / 2);
+    }
 
-      input::placeholder {
-        color: var(--primary);
-      }
+    input:focus {
+      outline: var(--primary) auto 5px;
+    }
+
+    input::placeholder {
+      color: var(--primary);
     }
   }
 </style>
