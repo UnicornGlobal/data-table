@@ -146,6 +146,11 @@
     },
     methods: {
       sort(field) {
+        // Allow custom field sort configuration
+        if (field.sort) {
+          field.field = field.sort
+        }
+
         if (this.config.sorting.field === field.field) {
           this.config.sorting.ascending = !this.config.sorting.ascending
         }
