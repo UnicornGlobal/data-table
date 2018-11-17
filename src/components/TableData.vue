@@ -5,7 +5,7 @@
     style="flex-grow: 0">
     <avatar-or-initials
       class="item-avatar"
-      size="50"
+      :size="this.$theme.rowHeight.slice(0, -2) * 0.66"
       :image="getProperty(data, field.image)"
       :title="data[field.field]">
     </avatar-or-initials>

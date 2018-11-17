@@ -26,13 +26,14 @@
   .filters {
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid var(--primary);
+    border-bottom: 1px solid var(--border);
   }
 
   .filter-checkbox, .filter-dropdown {
     flex: 1;
     padding: calc(var(--padding) / 2);
     flex-basis: 170px;
+    align-self: center;
   }
 
   .filter-tabbed {
