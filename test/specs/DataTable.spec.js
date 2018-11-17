@@ -628,7 +628,8 @@ describe('DataTable.vue', () => {
 
     dataTable.vm.filterTabs({}, {tabs: [{type: 'date'}, {type: 'range'}]})
     expect(byDate.called).toBe(true)
-    expect(byRange.called).toBe(true)
+    expect(byRange.called).toBe(false)
+
     byRange.restore()
     byDate.restore()
   })
