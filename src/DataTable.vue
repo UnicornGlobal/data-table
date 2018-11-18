@@ -316,19 +316,18 @@
       },
       filterTabs (dataItem, filter) {
         const config = filter
-        let show = true
 
         for (let tab of config.tabs) {
-          if (tab.type === 'date') {
-            return this.dateTabFilter(dataItem, tab)
+          if (tab.type === 'date' && !this.dateTabFilter(dataItem, tab)) {
+            return false
           }
 
-          if (tab.type === 'range') {
-            return this.rangeTabFilter(dataItem, tab)
+          if (tab.type === 'range' && !this.rangeTabFilter(dataItem, tab)) {
+            return false
           }
         }
 
-        return show
+        return true
       },
       dateTabFilter (dataItem, tab) {
         let date = dataItem[tab.field].split(' ')[0]
