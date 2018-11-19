@@ -15,7 +15,7 @@
     "datatable",
     "table"
   ],
-  "author": "Steve Ops",
+  "author": "Steve Ops, Darryn Ten",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/darrynten/vue-data-table/issues"
