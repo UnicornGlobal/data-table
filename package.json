@@ -25,7 +25,7 @@
     "index.js",
     "index.js.map"
   ],
-  "homepage": "https://github.com/darrynten/data-table#readme",
+  "homepage": "https://github.com/UnicornGlobal/data-table#readme",
   "dependencies": {
     "@unicorns/avatars": "^1.1.2",
     "moment": "^2.23.0",
