@@ -142,7 +142,7 @@ describe('DataTable.vue', () => {
     processData.restore()
   })
 
-  it('it computes showHeaders and processedData', async () => {
+  it('it computes showHeaders when true', async () => {
     let localVue = createLocalVue()
 
     let dataTable = shallowMount(DataTable, {
@@ -214,7 +214,383 @@ describe('DataTable.vue', () => {
 
     await dataTable.vm.$nextTick()
     expect(dataTable.vm.showHeaders).toEqual(true)
+  })
+
+  it('it computes showHeaders when false', async () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallowMount(DataTable, {
+      localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
+      propsData: {
+        dataset: [
+          {
+            'is_active': true,
+            'menu_items': [],
+            'name': 'xx'
+          }
+        ],
+        options: {
+          config: {
+            headers: {
+              enabled: false
+            },
+            search: {
+              enabled: true,
+              field: 'name',
+              term: null,
+              placeholder: 'Search'
+            },
+            sorting: {
+              enabled: false
+            },
+            filtering: {
+              enabled: false
+            }
+          },
+          fields: [
+            {
+              type: 'text',
+              name: 'Name',
+              field: 'name',
+              header: true,
+              sortable: true,
+              grow: 2
+            },
+            {
+              type: 'boolean',
+              name: 'Status',
+              field: 'is_active',
+              yes: 'Active',
+              no: 'Inactive',
+              header: true
+            },
+            {
+              type: 'count',
+              name: 'Count',
+              field: 'menu_items',
+              header: true
+            }
+          ]
+        }
+      }
+    })
+
+    await dataTable.vm.$nextTick()
+    expect(dataTable.vm.showHeaders).toEqual(false)
+  })
+
+  it('it computes processedData', async () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallowMount(DataTable, {
+      localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
+      propsData: {
+        dataset: [
+          {
+            'is_active': true,
+            'menu_items': [],
+            'name': 'xx'
+          }
+        ],
+        options: {
+          config: {
+            search: {
+              enabled: false
+            },
+            sorting: {
+              enabled: false
+            },
+            filtering: {
+              enabled: false
+            }
+          },
+          fields: [
+            {
+              type: 'text',
+              name: 'Name',
+              field: 'name',
+              header: true,
+              sortable: true,
+              grow: 2
+            },
+            {
+              type: 'boolean',
+              name: 'Status',
+              field: 'is_active',
+              yes: 'Active',
+              no: 'Inactive',
+              header: true
+            },
+            {
+              type: 'count',
+              name: 'Count',
+              field: 'menu_items',
+              header: true
+            }
+          ]
+        }
+      }
+    })
+
+    await dataTable.vm.$nextTick()
     expect(dataTable.vm.processedData).toEqual(dataTable.vm.processData())
+  })
+
+  it('it computes action component style top and bottom', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallowMount(DataTable, {
+      localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
+      propsData: {
+        dataset: [
+          {
+            'is_active': true,
+            'menu_items': [],
+            'name': 'xx'
+          }
+        ],
+        options: {
+          config: {
+            search: {
+              enabled: false
+            },
+            sorting: {
+              enabled: false
+            },
+            filtering: {
+              enabled: false
+            },
+            actionComponent: {
+              enabled: true,
+              offset: {
+                top: '-10px',
+                bottom: '20px'
+              }
+            }
+          },
+          fields: [
+            {
+              type: 'text',
+              name: 'Name',
+              field: 'name',
+              header: true,
+              sortable: true,
+              grow: 2
+            },
+            {
+              type: 'boolean',
+              name: 'Status',
+              field: 'is_active',
+              yes: 'Active',
+              no: 'Inactive',
+              header: true
+            },
+            {
+              type: 'count',
+              name: 'Count',
+              field: 'menu_items',
+              header: true
+            }
+          ]
+        }
+      }
+    })
+
+    expect(dataTable.vm.actionComponentStyle).toEqual('margin-top: -10px; margin-bottom: 20px')
+  })
+
+  it('it computes action component style only top', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallowMount(DataTable, {
+      localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
+      propsData: {
+        dataset: [
+          {
+            'is_active': true,
+            'menu_items': [],
+            'name': 'xx'
+          }
+        ],
+        options: {
+          config: {
+            search: {
+              enabled: false
+            },
+            sorting: {
+              enabled: false
+            },
+            filtering: {
+              enabled: false
+            },
+            actionComponent: {
+              enabled: true,
+              offset: {
+                bottom: '20px'
+              }
+            }
+          },
+          fields: [
+            {
+              type: 'text',
+              name: 'Name',
+              field: 'name',
+              header: true,
+              sortable: true,
+              grow: 2
+            },
+            {
+              type: 'boolean',
+              name: 'Status',
+              field: 'is_active',
+              yes: 'Active',
+              no: 'Inactive',
+              header: true
+            },
+            {
+              type: 'count',
+              name: 'Count',
+              field: 'menu_items',
+              header: true
+            }
+          ]
+        }
+      }
+    })
+
+    expect(dataTable.vm.actionComponentStyle).toEqual('margin-top: 0px; margin-bottom: 20px')
+  })
+
+  it('it computes action component style only bottom', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallowMount(DataTable, {
+      localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
+      propsData: {
+        dataset: [
+          {
+            'is_active': true,
+            'menu_items': [],
+            'name': 'xx'
+          }
+        ],
+        options: {
+          config: {
+            search: {
+              enabled: false
+            },
+            sorting: {
+              enabled: false
+            },
+            filtering: {
+              enabled: false
+            },
+            actionComponent: {
+              enabled: true,
+              offset: {
+                top: '20px'
+              }
+            }
+          },
+          fields: [
+            {
+              type: 'text',
+              name: 'Name',
+              field: 'name',
+              header: true,
+              sortable: true,
+              grow: 2
+            },
+            {
+              type: 'boolean',
+              name: 'Status',
+              field: 'is_active',
+              yes: 'Active',
+              no: 'Inactive',
+              header: true
+            },
+            {
+              type: 'count',
+              name: 'Count',
+              field: 'menu_items',
+              header: true
+            }
+          ]
+        }
+      }
+    })
+
+    expect(dataTable.vm.actionComponentStyle).toEqual('margin-top: 20px; margin-bottom: 0px')
   })
 
   it('watches config', async () => {
@@ -584,7 +960,7 @@ describe('DataTable.vue', () => {
     expect(dataTable.vm.filterCheckbox({active: []}, {field: 'active', value: false, collection: true})).toBe(false)
   })
 
-  it('filters by tabs', () => {
+  it('filters by tab and show date', () => {
     let localVue = createLocalVue()
 
     let dataTable = shallowMount(DataTable, {
@@ -623,12 +999,251 @@ describe('DataTable.vue', () => {
       }
     })
 
-    let byDate = sinon.stub(dataTable.vm, 'dateTabFilter').returns(true)
-    let byRange = sinon.stub(dataTable.vm, 'rangeTabFilter').returns(true)
+    let byDate = sinon.spy(dataTable.vm, 'dateTabFilter')
+    let byRange = sinon.spy(dataTable.vm, 'rangeTabFilter')
 
-    dataTable.vm.filterTabs({}, {tabs: [{type: 'date'}, {type: 'range'}]})
+    const result = dataTable.vm.filterTabs({
+      created: '2018-09-10 12:16:46',
+      quantity: 10
+    },
+    {
+      tabs: [
+        {
+          type: 'date',
+          field: 'created',
+          from: '01-01-2010',
+          to: null
+        },
+        {
+          type: 'range',
+          field: 'quantity',
+          from: 5,
+          to: 11
+        }
+      ]
+    })
+
+    expect(result).toBe(true)
+
     expect(byDate.called).toBe(true)
     expect(byRange.called).toBe(true)
+
+    byRange.restore()
+    byDate.restore()
+  })
+
+  it('filters by tab and hide date', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallowMount(DataTable, {
+      localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {
+              enabled: true,
+              field: 'name',
+              term: 'xx'
+            },
+            linking: {}
+          }
+        }
+      }
+    })
+
+    let byDate = sinon.spy(dataTable.vm, 'dateTabFilter')
+    let byRange = sinon.spy(dataTable.vm, 'rangeTabFilter')
+
+    const result = dataTable.vm.filterTabs({
+      created: '2018-09-10 12:16:46',
+      quantity: 10
+    },
+    {
+      tabs: [
+        {
+          type: 'date',
+          field: 'created',
+          from: '10-10-2010',
+          to: '01-01-2012'
+        },
+        {
+          type: 'range',
+          field: 'quantity',
+          from: 5,
+          to: 11
+        }
+      ]
+    })
+
+    expect(result).toBe(false)
+
+    expect(byDate.called).toBe(true)
+    expect(byRange.called).toBe(false)
+
+    byRange.restore()
+    byDate.restore()
+  })
+
+  it('filters by tab and show range', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallowMount(DataTable, {
+      localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {
+              enabled: true,
+              field: 'name',
+              term: 'xx'
+            },
+            linking: {}
+          }
+        }
+      }
+    })
+
+    let byDate = sinon.spy(dataTable.vm, 'dateTabFilter')
+    let byRange = sinon.spy(dataTable.vm, 'rangeTabFilter')
+
+    const result = dataTable.vm.filterTabs({
+      created: '2018-10-10 10:10:10',
+      quantity: 10
+    },
+    {
+      tabs: [
+        {
+          type: 'date',
+          field: 'created',
+          from: '2010-10-10',
+          to: '2020-10-10'
+        },
+        {
+          type: 'range',
+          field: 'quantity',
+          from: 5,
+          to: 11
+        }
+      ]
+    })
+
+    expect(result).toBe(true)
+
+    expect(byDate.called).toBe(true)
+    expect(byRange.called).toBe(true)
+
+    byRange.restore()
+    byDate.restore()
+  })
+
+  it('filters by tab and hide range', () => {
+    let localVue = createLocalVue()
+
+    let dataTable = shallowMount(DataTable, {
+      localVue,
+      mocks: {
+        $style: {
+          primary: '#000',
+          secondary: '#111',
+          primaryText: '#444',
+          secondaryText: '#555',
+          padding: '1em',
+          fontSize: '2em',
+          rowHeight: '60px'
+        },
+        $theme: {
+          primary: '#fff'
+        }
+      },
+      propsData: {
+        dataset: [],
+        options: {
+          config: {
+            sorting: {
+              field: 'address.street',
+              ascending: false
+            },
+            filtering: {},
+            search: {
+              enabled: true,
+              field: 'name',
+              term: 'xx'
+            },
+            linking: {}
+          }
+        }
+      }
+    })
+
+    let byDate = sinon.spy(dataTable.vm, 'dateTabFilter')
+    let byRange = sinon.spy(dataTable.vm, 'rangeTabFilter')
+
+    const result = dataTable.vm.filterTabs({
+      created: '2018-10-10 10:10:10',
+      quantity: 10
+    },
+    {
+      tabs: [
+        {
+          type: 'date',
+          field: 'created',
+          from: '2010-10-10',
+          to: '2020-10-10'
+        },
+        {
+          type: 'range',
+          field: 'quantity',
+          from: 5,
+          to: 9
+        }
+      ]
+    })
+
+    expect(result).toBe(false)
+
+    expect(byDate.called).toBe(true)
+    expect(byRange.called).toBe(true)
+
     byRange.restore()
     byDate.restore()
   })

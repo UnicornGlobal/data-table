@@ -5,7 +5,7 @@ This is a vue2 datatable with support for sortable columns, filtering and search
 #### Installation
 
 ```
-npm install unicorn-vue-datatable --save
+npm install @unicorns/datatable --save
 ```
 
 #### Usage
@@ -18,7 +18,7 @@ npm install unicorn-vue-datatable --save
     </div>
 </template>
 <script>
-    import DataTable from 'unicorn-vue-datatable'
+    import DataTable from '@unicorns/data-table'
     
     export default {
         components: {
@@ -211,7 +211,7 @@ You can also add custom assets for dropdowns, checkboxes, etc.
 
 ```
 // In the host application
-import DataTable from 'unicorn-vue-datatable'
+import DataTable from '@unicorns/datatable'
 
 // This example will override these theme variables.
 Vue.use(DataTable, {
