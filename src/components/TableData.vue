@@ -5,7 +5,7 @@
     style="flex-grow: 0">
     <avatar-or-initials
       class="item-avatar"
-      size="50"
+      :size="this.$theme.rowHeight.slice(0, -2) * 0.66"
       :image="getProperty(data, field.image)"
       :title="data[field.field]">
     </avatar-or-initials>
@@ -149,7 +149,7 @@
 </style>
 
 <script>
-  import AvatarOrInitials from 'vue-avatar-or-initials'
+  import AvatarOrInitials from '@unicorns/avatars'
   import moment from 'moment'
 
   export default {

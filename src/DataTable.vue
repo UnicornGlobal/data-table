@@ -1,6 +1,6 @@
 <template>
   <div class="data-table">
-    <div class="action-component-container">
+    <div class="action-component-container" :style="actionComponentStyle">
       <component
         v-if="options.config.actionComponent"
         :is="options.config.actionComponent.component">
@@ -52,8 +52,17 @@
 </template>
 
 <style scoped lang="scss">
+  .data-table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .action-component-container {
+    align-self: flex-end;
+  }
+
   .filtering-card {
-    border: 3px solid var(--primary);
+    border: 3px solid var(--border);
     background: white;
 
     &.gapped {
@@ -62,7 +71,7 @@
   }
 
   .table-card {
-    border: 3px solid var(--primary);
+    border: 3px solid var(--border);
     background: white;
   }
 
@@ -77,6 +86,11 @@
   $hover: #eee;
   $primaryText: #234;
   $secondaryText: #234;
+  $border: #fff;
+  $headers: #ddd;
+  $headerWeight: 200;
+  $headerFont: sans-serif;
+  $divider: #eee;
   $padding: 1em;
   $fontSize: 0.9em;
   $rowHeight: 55px;
@@ -87,6 +101,11 @@
     --hover: $hover;
     --primaryText: $primaryText;
     --secondaryText: $secondaryText;
+    --border: $border;
+    --headers: $headers;
+    --headerWeight: $headerWeight;
+    --headerFont: $headerFont;
+    --divider: $divider;
     --padding: $padding;
     --fontSize: $fontSize;
     --rowHeight: $rowHeight;
@@ -98,6 +117,11 @@
     hover: $hover;
     primaryText: $primaryText;
     secondaryText: $secondaryText;
+    border: $border;
+    headers: $headers;
+    headerWeight: $headerWeight;
+    headerFont: $headerFont;
+    divider: $divider;
     padding: $padding;
     fontSize: $fontSize;
     rowHeight: $rowHeight;
@@ -111,7 +135,6 @@
   import TableBody from './components/TableBody.vue'
 
   export default {
-    name: 'data-table',
     components: {
       Filtering,
       Searching,
@@ -157,6 +180,28 @@
       },
       smallScreen () {
         return this.windowWidth && this.windowWidth <= 500 ? true : false
+      },
+      actionComponentStyle () {
+        if (!this.options.config.actionComponent) {
+          return false
+        }
+
+        if (!this.options.config.actionComponent.offset) {
+          return false
+        }
+
+        let top = '0px'
+        let bottom = '0px'
+
+        if (this.options.config.actionComponent.offset.top) {
+          top = this.options.config.actionComponent.offset.top
+        }
+
+        if (this.options.config.actionComponent.offset.bottom) {
+          bottom = this.options.config.actionComponent.offset.bottom
+        }
+
+        return `margin-top: ${top}; margin-bottom: ${bottom}`
       }
     },
     methods: {
@@ -166,6 +211,11 @@
         this.$style.primaryText = this.$theme.primaryText || this.$style.primaryText
         this.$style.secondaryText = this.$theme.secondaryText || this.$style.secondaryText
         this.$style.secondary = this.$theme.secondary || this.$style.secondary
+        this.$style.border = this.$theme.border || this.$style.border
+        this.$style.headers = this.$theme.headers || this.$style.headers
+        this.$style.headerWeight = this.$theme.headerWeight || this.$style.headerWeight
+        this.$style.headerFont = this.$theme.headerFont || this.$style.headerFont
+        this.$style.divider = this.$theme.divider || this.$style.divider
         this.$style.hover = this.$theme.hover || this.$style.hover
         this.$style.padding = this.$theme.padding || this.$style.padding
         this.$style.fontSize = this.$theme.fontSize || this.$style.fontSize
@@ -178,6 +228,11 @@
         bodyStyles.setProperty('--hover', this.$style.hover)
         bodyStyles.setProperty('--primaryText', this.$style.primaryText)
         bodyStyles.setProperty('--secondaryText', this.$style.secondaryText)
+        bodyStyles.setProperty('--border', this.$style.border)
+        bodyStyles.setProperty('--headers', this.$style.headers)
+        bodyStyles.setProperty('--headerWeight', this.$style.headerWeight)
+        bodyStyles.setProperty('--headerFont', this.$style.headerFont)
+        bodyStyles.setProperty('--divider', this.$style.divider)
         bodyStyles.setProperty('--padding', this.$style.padding)
         bodyStyles.setProperty('--fontSize', this.$style.fontSize)
         bodyStyles.setProperty('--rowHeight', this.$style.rowHeight)
@@ -229,6 +284,7 @@
         }
 
         this.processedDataset = dataset
+
         return dataset
       },
       search (dataset) {
@@ -259,28 +315,32 @@
       },
       filterTabs (dataItem, filter) {
         const config = filter
-        let show = true
 
         for (let tab of config.tabs) {
-          if (tab.type === 'date') {
-            show = this.dateTabFilter(dataItem, tab)
+          if (tab.type === 'date' && !this.dateTabFilter(dataItem, tab)) {
+            return false
           }
 
-          if (tab.type === 'range') {
-            show = this.rangeTabFilter(dataItem, tab)
+          if (tab.type === 'range' && !this.rangeTabFilter(dataItem, tab)) {
+            return false
           }
         }
 
-        return show
+        return true
       },
       dateTabFilter (dataItem, tab) {
         let date = dataItem[tab.field].split(' ')[0]
+        let show = true
 
         if (tab.from && date < tab.from) {
-          return false
+          show = false
         }
 
-        return !(tab.to && date > tab.to)
+        if (tab.to && date > tab.to) {
+          show = false
+        }
+
+        return show
       },
       rangeTabFilter (dataItem, tab) {
         let value = dataItem[tab.field]
