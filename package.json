@@ -2,6 +2,8 @@
   "name": "@unicorns/data-table",
   "version": "1.3.0",
   "description": "Vue component for rendering data-tables",
+  "author": "Unicorn Global et al",
+  "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
@@ -16,8 +18,6 @@
     "datatable",
     "table"
   ],
-  "author": "Unicorn Global et al",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/UnicornGlobal/data-table/issues"
   },
