@@ -135,7 +135,6 @@
   import TableBody from './components/TableBody.vue'
 
   export default {
-    name: 'data-table',
     components: {
       Filtering,
       Searching,
