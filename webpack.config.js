@@ -13,13 +13,13 @@ module.exports = {
     publicPath: './',
     filename: 'index.js',
     libraryTarget: 'umd',
-    library: 'vue-data-table',
+    library: '@unicorns/datatable',
     umdNamedDefine: true
   },
   externals: {
     moment: 'moment',
     pikaday: 'pikaday',
-    'vue-avatar-or-initials': 'vue-avatar-or-initials'
+    '@unicorns/datatable': '@unicorns/datatable'
   },
   resolve: {
     alias: {

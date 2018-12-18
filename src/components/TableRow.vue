@@ -147,7 +147,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid var(--primary);
+    border-bottom: 1px solid var(--divider);
     min-height: var(--rowHeight);
     height: var(--rowHeight);
     padding: 0 var(--padding);

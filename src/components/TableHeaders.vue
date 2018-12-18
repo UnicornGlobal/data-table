@@ -46,7 +46,7 @@
     min-width: 100%;
     right: 0;
     left: 0;
-    background-color: var(--primary);
+    background-color: var(--headers);
 
     @media (max-width: 480px) {
       padding: var(--padding) 0;
@@ -55,7 +55,7 @@
     .headers {
       display: flex;
       justify-content: space-between;
-      border-bottom: 2px solid var(--primary);
+      border-bottom: 2px solid var(--divider);
       min-height: var(--rowHeight);
       padding: 0 var(--padding);
 
@@ -73,6 +73,7 @@
           align-self: center;
           color: var(--secondaryText);
           display: flex;
+          font-family: var(--headerFont);
 
           b {
             color: var(--seondaryText);
@@ -94,6 +95,7 @@
       }
 
       .header-cell:last-child {
+        justify-content: flex-end;
 
         .arrow-spacer {
           display: none;
