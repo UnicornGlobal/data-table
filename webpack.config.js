@@ -18,8 +18,7 @@ module.exports = {
   },
   externals: {
     moment: 'moment',
-    pikaday: 'pikaday',
-    '@unicorns/datatable': '@unicorns/datatable'
+    '@unicorns/avatars': '@unicorns/avatars'
   },
   resolve: {
     alias: {
@@ -88,7 +87,7 @@ module.exports = {
             ]
           }
         }
-      },
+      }
     ]
   },
   devServer: {
