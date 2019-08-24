@@ -29,7 +29,7 @@
   "homepage": "https://github.com/UnicornGlobal/data-table#readme",
   "dependencies": {
     "@unicorns/avatars": "^1.1.2",
-    "moment": "^2.23.0",
+    "moment": "^2.24.0",
     "pikaday": "^1.8.0"
   },
   "devDependencies": {
