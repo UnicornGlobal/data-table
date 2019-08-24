@@ -13,7 +13,7 @@ module.exports = {
     publicPath: './',
     filename: 'index.js',
     libraryTarget: 'umd',
-    library: '@unicorns/datatable',
+    library: '@unicorns/data-table',
     umdNamedDefine: true
   },
   externals: {
