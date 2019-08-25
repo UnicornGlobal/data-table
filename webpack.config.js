@@ -13,13 +13,12 @@ module.exports = {
     publicPath: './',
     filename: 'index.js',
     libraryTarget: 'umd',
-    library: '@unicorns/datatable',
+    library: '@unicorns/data-table',
     umdNamedDefine: true
   },
   externals: {
     moment: 'moment',
-    pikaday: 'pikaday',
-    '@unicorns/datatable': '@unicorns/datatable'
+    '@unicorns/avatars': '@unicorns/avatars'
   },
   resolve: {
     alias: {
@@ -88,7 +87,7 @@ module.exports = {
             ]
           }
         }
-      },
+      }
     ]
   },
   devServer: {
