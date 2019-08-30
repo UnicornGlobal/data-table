@@ -74,6 +74,8 @@
           color: var(--secondaryText);
           display: flex;
           font-family: var(--headerFont);
+          font-size: 14px;
+          font-weight: bold;
 
           b {
             color: var(--seondaryText);

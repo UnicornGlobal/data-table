@@ -71,7 +71,7 @@
   }
 
   .table-card {
-    border: 3px solid var(--border);
+    border: var(--border);
     background: white;
   }
 
@@ -86,11 +86,11 @@
   $hover: #eee;
   $primaryText: #234;
   $secondaryText: #234;
-  $border: #fff;
-  $headers: #ddd;
+  $border: '1px solid #fff';
+  $headers: #eee;
   $headerWeight: 200;
   $headerFont: sans-serif;
-  $divider: #eee;
+  $divider: '1px solid #eee';
   $padding: 1em;
   $fontSize: 0.9em;
   $rowHeight: 55px;
