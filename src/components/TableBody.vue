@@ -90,11 +90,13 @@
       },
       mobileType: {
         type: String,
-        required: false
+        required: false,
+        default: 'no-image'
       },
       showLabelOnMobile: {
         type: Boolean,
-        required: false
+        required: false,
+        default: true
       },
       smallScreen: {
         type: Boolean,

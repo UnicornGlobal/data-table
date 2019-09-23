@@ -55,7 +55,7 @@
     .headers {
       display: flex;
       justify-content: space-between;
-      border-bottom: 2px solid var(--divider);
+      border-bottom: var(--divider);
       min-height: var(--rowHeight);
       padding: 0 var(--padding);
 
@@ -74,6 +74,8 @@
           color: var(--secondaryText);
           display: flex;
           font-family: var(--headerFont);
+          font-size: 14px;
+          font-weight: bold;
 
           b {
             color: var(--seondaryText);
