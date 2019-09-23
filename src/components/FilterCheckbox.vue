@@ -20,22 +20,38 @@
     flex-basis: 200px;
     font-size: .9em;
   }
-
   input[type=checkbox] {
-    cursor: pointer;
-    border: 1px solid var(--primary);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background-color: white;
     background-image: none;
-  }
-
-  input[type=checkbox]:checked {
     border: 1px solid var(--primary);
+    display: inline-block;
+    position: relative;
+    padding: 7px !important;
+    top: 0.25rem;
+    cursor: pointer;
+
+    &:focus {
+      border: 1px solid var(--primary);
+      outline-offset: 1px;
+    }
+
+    &:checked {
+      outline: 1px solid var(--primary);
+      background-color: white;
+      outline-offset: 0;
+
+      &:after {
+        position: absolute;
+        top: 0;
+        left: 3px;
+        padding: 0;
+      }
+    }
   }
 
-  input[type=checkbox]:focus {
-    outline: 1px solid var(--primary);
-    outline-offset: 0;
-  }
 </style>
 
 <script>
