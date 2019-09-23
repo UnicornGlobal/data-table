@@ -37,6 +37,7 @@
       <div class="rest">
         <div
           v-for="(field, index) in filteredFields"
+          :key="index"
           class="list-row-field"
           :style="styler(field)"
           :secondary="field.secondary === true">
@@ -75,6 +76,7 @@
         <div class="rest">
           <div
             v-for="(field, index) in rest"
+            :key="index"
             class="list-row-field"
             :style="styler(field)"
             :secondary="field.secondary === true">
