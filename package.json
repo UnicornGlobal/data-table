@@ -70,7 +70,7 @@
     "style-loader": "^0.23.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vue": "2.6.10",
-    "vue-loader": "^15.4.2",
+    "vue-loader": "^15.7.1",
     "vue-svg-loader": "^0.12.0",
     "vue-template-compiler": "2.6.10",
     "webpack": "^4.39.2",
