@@ -67,7 +67,7 @@
       </div>
     </div>
     <div
-      v-else-if="mobileType === 'no-image'"
+      v-else
       class="mobile-screen no-image">
       <div class="thumbnail">
         <div class="list-row-field">
@@ -147,7 +147,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid var(--divider);
+    border-bottom: var(--divider);
     min-height: var(--rowHeight);
     height: var(--rowHeight);
     padding: 0 var(--padding);

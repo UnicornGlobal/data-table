@@ -1,7 +1,7 @@
 import DataTable from './DataTable.vue'
 
-DataTable.install = function(Vue, options) {
-  Vue.prototype.$theme = options.theme
+DataTable.install = async function(Vue, options) {
+  Vue.prototype.$theme = await options.theme
 
   if (!options.theme.primary) {
     options.theme.primary = '#000'
