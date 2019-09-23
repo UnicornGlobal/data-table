@@ -55,7 +55,7 @@
     .headers {
       display: flex;
       justify-content: space-between;
-      border-bottom: 2px solid var(--divider);
+      border-bottom: var(--divider);
       min-height: var(--rowHeight);
       padding: 0 var(--padding);
 

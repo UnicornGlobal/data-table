@@ -70,7 +70,7 @@
           </table-data>
         </div>
       </div>
-      <div class="flex">
+      <div class="flex" style="justify-content: flex-end; margin-right: 20px">
         <div class="rest">
           <div
             v-for="(field, index) in rest"
@@ -79,9 +79,9 @@
             :secondary="field.secondary === true">
             <div
               v-if="showLabelOnMobile"
-              :class="`label-config ${index !== 0 ? 'grid' : ''}`">
+              :class="`label-config grid`">
               <span
-                v-if="!field.displayRightOnMobile && index !== 0"
+                v-if="!field.displayRightOnMobile"
                 class="label">
                 {{field.name}}:
               </span>
@@ -117,6 +117,7 @@
             </div>
           </div>
         </div>
+        <div style="margin-left: 20px">&gt;</div>
       </div>
     </div>
   </router-link>
@@ -317,7 +318,8 @@
       },
       showLabelOnMobile: {
         type: Boolean,
-        required: false
+        required: false,
+        default: true
       },
       smallScreen: {
         type: Boolean,
