@@ -5,6 +5,7 @@
     :to="link(data)">
     <div
       v-for="(field, index) in fields"
+      :key="index"
       class="list-row-field"
       :style="styler(field)"
       :secondary="field.secondary === true">
