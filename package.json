@@ -1,6 +1,6 @@
 {
   "name": "@unicorns/data-table",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Vue component for rendering data-tables",
   "author": "Unicorn Global et al",
   "license": "MIT",
@@ -28,10 +28,11 @@
   ],
   "homepage": "https://github.com/UnicornGlobal/data-table#readme",
   "dependencies": {
-    "@unicorns/avatars": "^2.0.0"
+    "@unicorns/avatars": "^2.0.1"
   },
   "peerDependencies": {
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "pikaday": "^1.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -62,6 +63,7 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^6.2.0",
     "mocha-webpack": "2.0.0-beta.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "nyc": "^14.1.1",
     "pikaday": "^1.8.0",
