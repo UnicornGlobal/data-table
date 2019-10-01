@@ -8,6 +8,18 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin()
   ],
+  entry: {
+    index: './src/main.js'
+  },
+  optimization: {
+    minimize: true,
+    splitChunks: {
+      chunks: 'all'
+    },
+    removeAvailableModules: true,
+    providedExports: true,
+    usedExports: true
+  },
   output: {
     path: path.resolve(__dirname, './'),
     publicPath: './',
@@ -17,7 +29,9 @@ module.exports = {
     umdNamedDefine: true
   },
   externals: {
+    vue: 'vue',
     moment: 'moment',
+    pikaday: 'pikaday',
     '@unicorns/avatars': '@unicorns/avatars'
   },
   resolve: {
@@ -37,7 +51,8 @@ module.exports = {
         loader: 'css-loader',
         options: {
           modules: true
-        }
+        },
+        exclude: /node_modules/
       },
       {
         test: /\.(scss|sass)$/,
@@ -45,7 +60,8 @@ module.exports = {
           'style-loader',
           'css-loader',
           'sass-loader'
-        ]
+        ],
+        exclude: /node_modules/,
       },
       {
         test: /\.js$/,
