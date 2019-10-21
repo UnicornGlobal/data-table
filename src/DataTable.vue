@@ -3,7 +3,8 @@
     <div class="action-component-container" :style="actionComponentStyle">
       <component
         v-if="options.config.actionComponent"
-        :is="options.config.actionComponent.component">
+        :is="options.config.actionComponent.component"
+        v-bind="options.config.actionComponent.props || {}">
       </component>
     </div>
     <div
