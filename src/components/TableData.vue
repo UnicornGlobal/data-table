@@ -7,7 +7,7 @@
       class="item-avatar"
       :size="this.$theme.rowHeight.slice(0, -2) * 0.66"
       :image="getProperty(data, field.image)"
-      :title="data[field.field]">
+      :title="getProperty(data, field.field)">
     </avatar-or-initials>
   </div>
   <div
