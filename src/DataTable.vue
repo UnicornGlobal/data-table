@@ -63,7 +63,7 @@
   }
 
   .filtering-card {
-    border: 3px solid var(--border);
+    border: var(--border);
     background: white;
 
     &.gapped {
