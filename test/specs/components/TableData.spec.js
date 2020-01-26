@@ -2,7 +2,7 @@ import TableData from '../../../src/components/TableData.vue'
 import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
 
 describe('TableData.vue', () => {
-  it('gets number property', () => {
+  it('gets number property when decimal_places is not set', () => {
     let localVue = createLocalVue()
 
     let tableData = shallowMount(TableData, {
@@ -13,14 +13,28 @@ describe('TableData.vue', () => {
       }
     })
 
-    expect(tableData.vm.getProperty({name: 'test', nested: {id: 3}}, 'nested.id')).toBe('3.00')
+    expect(tableData.vm.getProperty({name: 'test', nested: {id: 3}}, 'nested.id')).toBe('3')
     expect(tableData.vm.getProperty({name: 'test', nested: {id: '3'}}, 'nested.id')).toBe('3')
     expect(tableData.vm.getProperty({
       name: 'test',
       nested: {id: '3', list: [9, 5, 7]}
-    }, 'nested.list.1')).toBe('5.00')
+    }, 'nested.list.1')).toBe('5')
     expect(tableData.vm.getProperty({name: 'test', nested: {id: '3', list: [9, 5, 7]}}, undefined)).toBe(null)
     expect(tableData.vm.count([1, 3])).toBe(2)
+  })
+
+  it('gets number property when decimal_places is set', () => {
+    let localVue = createLocalVue()
+
+    let tableData = shallowMount(TableData, {
+      localVue,
+      propsData: {
+        data: {name: 'test', id: 3},
+        field: {field: 'id', type: 'number', decimal_places: 2}
+      }
+    })
+
+    expect(tableData.vm.getProperty({name: 'test', id: 3}, 'id')).toBe('3.00')
   })
 
   it('formats price/amount', () => {

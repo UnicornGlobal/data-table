@@ -1,151 +1,156 @@
 <template>
-  <div
-    v-if="field.type === 'image'"
-    :class="field.field"
-    style="flex-grow: 0">
-    <avatar-or-initials
-      class="item-avatar"
-      :size="this.$theme.rowHeight.slice(0, -2) * 0.66"
-      :image="getProperty(data, field.image)"
-      :title="data[field.field]">
-    </avatar-or-initials>
-  </div>
-  <div
-    v-else-if="field.type === 'text'"
-    :class="field.field">
-    {{ getProperty(data, field.field) }}
-  </div>
-  <div
-    v-else-if="field.type === 'count'"
-    :class="field.field">
-    {{ count(getProperty(data, field.field))}}
-  </div>
-  <div
-    v-else-if="field.type === 'boolean'"
-    :class="field.field">
-    <template
-      v-if="field.yes">
-      {{ getProperty(data, field.field) ? field.yes : field.no }}
-    </template>
-    <template
-      v-else>
-      <div
-        v-if="getProperty(data, field.field)"
-        :style="`background-image: ${ this.$assets.checkmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
-        width="20px"
-        height="20px">
-      </div>
-      <div
-        v-else
-        :style="`background-image: ${ this.$assets.crossmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
-        width="20px"
-        height="20px">
-      </div>
-    </template>
-  </div>
-  <div
-    v-else-if="field.type === 'boolean-inverted'"
-    :class="field.field">
     <div
-      v-if="getProperty(data, field.field)"
-      :style="`background-image: ${ this.$assets.crossmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
-      width="20px"
-      height="20px">
+            v-if="field.type === 'image'"
+            :class="field.field"
+            style="flex-grow: 0">
+        <avatar-or-initials
+                class="item-avatar"
+                :size="this.$theme.rowHeight.slice(0, -2) * 0.66"
+                :image="getProperty(data, field.image)"
+                :title="data[field.field]">
+        </avatar-or-initials>
     </div>
     <div
-      v-else
-      :style="`background-image: ${ this.$assets.checkmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
-      width="20px"
-      height="20px">
+            v-else-if="field.type === 'text'"
+            :class="field.field">
+        {{ getProperty(data, field.field) }}
     </div>
-  </div>
-  <div
-    v-else-if="field.type === 'third_party'"
-    :class="field.field">
+    <div
+            v-else-if="field.type === 'number'"
+            :class="field.field">
+        {{ getNumber(data, field.field) }}
+    </div>
+    <div
+            v-else-if="field.type === 'count'"
+            :class="field.field">
+        {{ count(getProperty(data, field.field))}}
+    </div>
+    <div
+            v-else-if="field.type === 'boolean'"
+            :class="field.field">
+        <template
+                v-if="field.yes">
+            {{ getProperty(data, field.field) ? field.yes : field.no }}
+        </template>
+        <template
+                v-else>
+            <div
+                    v-if="getProperty(data, field.field)"
+                    :style="`background-image: ${ this.$assets.checkmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
+                    width="20px"
+                    height="20px">
+            </div>
+            <div
+                    v-else
+                    :style="`background-image: ${ this.$assets.crossmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
+                    width="20px"
+                    height="20px">
+            </div>
+        </template>
+    </div>
+    <div
+            v-else-if="field.type === 'boolean-inverted'"
+            :class="field.field">
+        <div
+                v-if="getProperty(data, field.field)"
+                :style="`background-image: ${ this.$assets.crossmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
+                width="20px"
+                height="20px">
+        </div>
+        <div
+                v-else
+                :style="`background-image: ${ this.$assets.checkmark }; background-repeat: no-repeat; width: 20px; height: 20px;`"
+                width="20px"
+                height="20px">
+        </div>
+    </div>
+    <div
+            v-else-if="field.type === 'third_party'"
+            :class="field.field">
     <span v-if="getProperty(data, field.field)">
       Third Party
     </span>
-    <span v-else>
+        <span v-else>
       First Party
     </span>
-  </div>
-  <div
-    v-else-if="field.type === 'property'"
-    :class="field.field">
-    {{ field.symbol ? field.symbol : '' }} {{ getProperty(data, field.field) }}
-  </div>
-  <div
-    v-else-if="field.type === 'component'"
-    :class="field.field"
-    style="flex-grow: 0">
-    <component
-      :is="getComponentName()"
-      v-bind="getProps()"
-      v-on="getComponentEvents()">
-    </component>
-  </div>
-  <div
-    v-else-if="field.type === 'currency'"
-    :class="field.field">
-    {{ formatAsCurrency(getProperty(data, field.field), field.symbol) }}
-  </div>
-  <div
-    v-else-if="field.type === 'datetime'"
-    :class="field.field">
+    </div>
+    <div
+            v-else-if="field.type === 'property'"
+            :class="field.field">
+        {{ field.symbol ? field.symbol : '' }} {{ getProperty(data, field.field) }}
+    </div>
+    <div
+            v-else-if="field.type === 'component'"
+            :class="field.field"
+            style="flex-grow: 0">
+        <component
+                :is="getComponentName()"
+                v-bind="getProps()"
+                v-on="getComponentEvents()">
+        </component>
+    </div>
+    <div
+            v-else-if="field.type === 'currency'"
+            :class="field.field">
+        {{ formatAsCurrency(getProperty(data, field.field), field.symbol) }}
+    </div>
+    <div
+            v-else-if="field.type === 'datetime'"
+            :class="field.field">
     <span class="year">
       {{formatDate(getProperty(data, field.field)).year}}
     </span>
-    <span class="delimiter">,</span>
-    <span class="time">
+        <span class="delimiter">,</span>
+        <span class="time">
       {{formatDate(getProperty(data, field.field)).time}}
     </span>
-  </div>
-  <div
-    v-else-if="field.type === 'date'"
-    :class="field.field">
+    </div>
+    <div
+            v-else-if="field.type === 'date'"
+            :class="field.field">
     <span class="year">
       {{formatDate(getProperty(data, field.field)).year}}
     </span>
-  </div>
-  <div
-    v-else-if="field.type === 'time'"
-    :class="field.field">
+    </div>
+    <div
+            v-else-if="field.type === 'time'"
+            :class="field.field">
     <span class="year">
       {{formatDate(getProperty(data, field.field)).time}}
     </span>
-  </div>
-  <div
-    v-else-if="field.type === 'custom'"
-    :class="field.field"
-    v-html="getCustomContent()">
-  </div>
+    </div>
+    <div
+            v-else-if="field.type === 'custom'"
+            :class="field.field"
+            v-html="getCustomContent()">
+    </div>
 </template>
 
 <style lang="scss" scoped>
-  div {
-    font-size: var(--fontSize);
-    color: var(--primaryText);
+    div {
+        font-size: var(--fontSize);
+        color: var(--primaryText);
 
-    &.image {
-      min-width: 58px;
+        &.image {
+            min-width: 58px;
+        }
     }
-  }
 
-  .year, .time {
-    display: inline-block;
-  }
-
-  .time {
-    margin-left: 10px;
-  }
-
-  @media only screen and (max-width: 600px) {
-    .datetime {
-      .time, .delimiter {
-        display: none;
-      }
+    .year, .time {
+        display: inline-block;
     }
-  }
+
+    .time {
+        margin-left: 10px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .datetime {
+            .time, .delimiter {
+                display: none;
+            }
+        }
+    }
 </style>
 
 <script>
@@ -158,6 +163,14 @@
     },
     props: ['field', 'data'],
     methods: {
+      getNumber () {
+        let value = this.data[this.field.field]
+        value = parseFloat(`${value}`)
+        return value.toLocaleString(undefined, {
+          style: 'decimal',
+          minimumFractionDigits: this.field.decimal_places || 0
+        })
+      },
       getProperty (data, field) {
         if (!field) {
           return null
@@ -178,8 +191,7 @@
         if (typeof value === 'number') {
           return value.toLocaleString(undefined, {
             style: 'decimal',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
+            minimumFractionDigits: this.field.decimal_places || 0,
           })
         }
 
@@ -233,7 +245,7 @@
           time
         }
       },
-      formatAsCurrency(value, symbol = 'R', decimals = 2) {
+      formatAsCurrency (value, symbol = 'R', decimals = 2) {
         value = Number.parseFloat(value)
 
         if (Number.isNaN(value)) {
