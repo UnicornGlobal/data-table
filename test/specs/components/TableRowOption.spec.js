@@ -7,6 +7,27 @@ describe('TableRowOption', () => {
     expect(Object.keys(TableRowOption.computed)).toEqual(expect.arrayContaining(['componentName', 'componentProps', 'componentEvents']))
   })
 
+  it('invokes onClick callback from control of type "link"', function () {
+    let localVue = createLocalVue()
+    let clicked = false
+    let option = shallowMount(TableRowOption, {
+      localVue,
+      propsData: {
+        config: {
+          type: 'link',
+          href: '#',
+          label: 'Link',
+          onClick: (data, _event) => {
+            clicked = true
+          }
+        },
+        data: [1, 2]
+      }
+    })
+    option.trigger('click')
+    expect(clicked).toBe(false)
+  })
+
   it('computes component props when its an object', () => {
     let localVue = createLocalVue()
     let option = shallowMount(TableRowOption, {
