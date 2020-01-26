@@ -231,6 +231,27 @@ describe('TableData.vue', () => {
     expect(option.vm.getCustomContent()).toBe('customValue')
   })
 
+  it('gets boolean field', () => {
+    let localVue = createLocalVue()
+    let option = shallowMount(TableData, {
+      localVue,
+      propsData: {
+        field: {
+          type: 'boolean',
+          field: 'valid',
+          yes: 'is valid',
+          no: 'not valid'
+        },
+        data: {valid: 1}
+      }
+    })
+
+    expect(option.vm.getProperty({valid: 1}, 'valid')).toBe(true)
+    expect(option.vm.getProperty({valid: true}, 'valid')).toBe(true)
+    expect(option.vm.getProperty({valid: 0}, 'valid')).toBe(false)
+    expect(option.vm.getProperty({valid: false}, 'valid')).toBe(false)
+  })
+
   it('formats date', () => {
     let localVue = createLocalVue()
     let option = shallowMount(TableData, {

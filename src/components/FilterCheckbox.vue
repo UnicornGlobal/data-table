@@ -25,7 +25,6 @@
     cursor: pointer;
     border: 1px solid var(--primary);
     background-color: white;
-    background-image: none;
   }
 
   input[type=checkbox]:checked {

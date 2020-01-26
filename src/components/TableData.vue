@@ -188,6 +188,10 @@
           }
         })
 
+        if(this.field.type === 'boolean'){
+          return !!value
+        }
+
         if (typeof value === 'number') {
           return value.toLocaleString(undefined, {
             style: 'decimal',
