@@ -83,4 +83,25 @@ describe('TableRowOption', () => {
     expect(option.vm.componentName).toBe('div')
     expect(option.vm.componentEvents).toHaveProperty('click')
   })
+
+  it('invokes onClick callback from control of type "link"', function () {
+    let localVue = createLocalVue()
+    let clicked = false
+    let option = shallowMount(TableRowOption, {
+      localVue,
+      propsData: {
+        config: {
+          type: 'link',
+          href: '#',
+          label: 'Link',
+          onClick: (data, _event) => {
+            clicked = true
+          }
+        },
+        data: [1, 2]
+      }
+    })
+    option.trigger('click')
+    expect(clicked).toBe(false)
+  })
 })

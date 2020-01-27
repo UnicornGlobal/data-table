@@ -1,7 +1,7 @@
 import TableData from '../../../src/components/TableData.vue'
 import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
 
-describe.only('TableData.vue', () => {
+describe('TableData.vue', () => {
   it('gets number property when decimal_places is not set', () => {
     let localVue = createLocalVue()
 
