@@ -294,25 +294,7 @@
         })
       },
       filterCheckbox (row, filter) {
-        let value = row[filter.field]
-        let show = false
-
-        show = !filter.collection && value
-
-        if (!filter.collection && filter.value) {
-          show = true
-        }
-
-        // TODO empty collections
-        if (filter.collection && value.length > 0) {
-          show = true
-        }
-
-        if (filter.value && filter.collection) {
-          show = true
-        }
-
-        return show
+        return (row[filter.field] && filter.value) || (!row[filter.field] && !filter.value)
       },
       filterTabs (dataItem, filter) {
         const config = filter

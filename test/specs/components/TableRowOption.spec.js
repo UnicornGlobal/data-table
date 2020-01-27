@@ -1,5 +1,5 @@
 import TableRowOption from '../../../src/components/TableRowOption.vue'
-import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 import sinon from 'sinon'
 
 describe('TableRowOption', () => {
