@@ -87,7 +87,7 @@ describe('TableRowOption', () => {
 
   it('invokes onClick callback from control of type "link"', function () {
     let localVue = createLocalVue()
-    let handleClick = sinon.spy()
+    const handleClick = sinon.spy()
     let option = shallowMount(TableRowOption, {
       localVue,
       stubs: ['router-link'],
