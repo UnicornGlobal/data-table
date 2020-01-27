@@ -18,6 +18,7 @@
       class="controls list-row-field">
       <table-row-option
         v-for="(control, key) in controls"
+        v-if="showControl(control, data)"
         :key="key"
         :config="control"
         :data="data">
@@ -124,6 +125,17 @@
           </div>
         </div>
       </div>
+    </div>
+    <div
+            v-if="controls && controls.length"
+            class="controls list-row-field">
+      <table-row-option
+              v-for="(control, key) in controls"
+              v-if="showControl(control, data)"
+              :key="key"
+              :config="control"
+              :data="data">
+      </table-row-option>
     </div>
   </div>
 </template>
@@ -377,6 +389,16 @@
         }
 
         return ''
+      },
+      showControl (control, data) {
+        if (control.show === undefined) {
+          return true
+        }
+        if (typeof control.show === 'function') {
+          return control.show(data)
+        }
+
+        return control.show
       }
     }
   }

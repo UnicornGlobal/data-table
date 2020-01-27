@@ -1,10 +1,12 @@
 import TableRow from '../../../src/components/TableRow.vue'
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
+import TableRowOption from '../../../src/components/TableRowOption.vue'
 
 describe('TableRow', () => {
   it('computes screen size', () => {
     let localVue = createLocalVue()
     let row = shallowMount(TableRow, {
+      localVue,
       propsData: {
         data: {},
         fields: [],
@@ -19,6 +21,7 @@ describe('TableRow', () => {
   it('it computes values', () => {
     let localVue = createLocalVue()
     let row = shallowMount(TableRow, {
+      localVue,
       propsData: {
         data: {},
         fields: [],
@@ -85,5 +88,80 @@ describe('TableRow', () => {
 
     field = {value: (data) => 'value', styledBackground: {enabled: true, config: {value: 'Name'}}, field: 'user.name'}
     expect(table.vm.getStyle(field)).toBe('background-color: Name')
+  })
+
+  it('mounts controls when "show" option is undefined', () => {
+    let localVue = createLocalVue()
+    let row = shallowMount(TableRow, {
+      stubs: {
+        RouterLink: RouterLinkStub
+      },
+      propsData: {
+        data: {name: 'name'},
+        fields: [{field: 'name', type: 'text'}],
+        styler: function () {},
+        controls: [{type: 'link', href: '#', label: 'Sample link'}]
+      }
+    })
+
+    let link = row.find(TableRowOption)
+    expect(link.exists()).toBe(true)
+  })
+
+  it('does not mount controls when "show" option is false', () => {
+    let localVue = createLocalVue()
+    let row = shallowMount(TableRow, {
+      localVue,
+      stubs: {
+        RouterLink: RouterLinkStub
+      },
+      propsData: {
+        data: {name: 'name'},
+        fields: [{field: 'name', type: 'text'}],
+        styler: function () {},
+        controls: [{type: 'link', href: '#', label: 'Sample link', show: false}]
+      }
+    })
+
+    let link = row.find(TableRowOption)
+    expect(link.exists()).toBe(false)
+  })
+
+  it('does not mount controls when "show" option is a callback returning false', () => {
+    let localVue = createLocalVue()
+    let row = shallowMount(TableRow, {
+      localVue,
+      stubs: {
+        RouterLink: RouterLinkStub
+      },
+      propsData: {
+        data: {name: 'name'},
+        fields: [{field: 'name', type: 'text'}],
+        styler: function () {},
+        controls: [{type: 'link', href: '#', label: 'Sample link', show: (data) => false}]
+      }
+    })
+
+    let link = row.find(TableRowOption)
+    expect(link.exists()).toBe(false)
+  })
+
+  it('mounts controls when "show" option is a callback returning true', () => {
+    let localVue = createLocalVue()
+    let row = shallowMount(TableRow, {
+      localVue,
+      stubs: {
+        RouterLink: RouterLinkStub
+      },
+      propsData: {
+        data: {name: 'name'},
+        fields: [{field: 'name', type: 'text'}],
+        styler: function () {},
+        controls: [{type: 'link', href: '#', label: 'Sample link', show: (data) => true}]
+      }
+    })
+
+    let link = row.find(TableRowOption)
+    expect(link.exists()).toBe(true)
   })
 })

@@ -1,9 +1,10 @@
 import TableRowOption from '../../../src/components/TableRowOption.vue'
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
+import sinon from 'sinon'
 
 describe('TableRowOption', () => {
   it('has props and computed props', () => {
-    expect(TableRowOption.props).toEqual(expect.arrayContaining(['config', 'data']))
+    expect(TableRowOption.props).toMatchObject({'config': {'type': null}, 'data': {'type': null}})
     expect(Object.keys(TableRowOption.computed)).toEqual(expect.arrayContaining(['componentName', 'componentProps', 'componentEvents']))
   })
 
@@ -86,22 +87,21 @@ describe('TableRowOption', () => {
 
   it('invokes onClick callback from control of type "link"', function () {
     let localVue = createLocalVue()
-    let clicked = false
+    let handleClick = sinon.spy()
     let option = shallowMount(TableRowOption, {
       localVue,
+      stubs: ['router-link'],
       propsData: {
         config: {
           type: 'link',
           href: '#',
           label: 'Link',
-          onClick: (data, _event) => {
-            clicked = true
-          }
+          onClick: handleClick
         },
         data: [1, 2]
       }
     })
     option.trigger('click')
-    expect(clicked).toBe(false)
+    expect(handleClick.called).toBe(true)
   })
 })
