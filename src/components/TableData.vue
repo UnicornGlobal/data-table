@@ -15,11 +15,11 @@
             :class="field.field">
         {{ getProperty(data, field.field) }}
     </div>
-  <div
-          v-else-if="field.type === 'number'"
-          :class="field.field">
-    {{ getProperty(data, field.field) }}
-  </div>
+    <div
+            v-else-if="field.type === 'number'"
+            :class="field.field">
+        {{ getProperty(data, field.field) }}
+    </div>
     <div
             v-else-if="field.type === 'count'"
             :class="field.field">
@@ -188,7 +188,7 @@
           })
         }
 
-        if(this.field.type === 'boolean'){
+        if (this.field.type === 'boolean') {
           return !!value
         }
 
