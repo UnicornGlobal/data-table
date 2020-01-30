@@ -151,7 +151,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    align-items: start;
+    align-items: center;
     flex-wrap: wrap;
   }
 
