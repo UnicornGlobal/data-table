@@ -4,7 +4,11 @@ import sinon from 'sinon'
 
 describe('TableRowOption', () => {
   it('has props and computed props', () => {
-    expect(TableRowOption.props).toMatchObject({config: {type: null}, data: {type: null}})
+    expect(TableRowOption.props).toMatchObject({
+        config: {type: null},
+        data: {type: null}
+      }
+    )
     expect(Object.keys(TableRowOption.computed)).toEqual(expect.arrayContaining(['componentName', 'componentProps', 'componentEvents']))
   })
 
