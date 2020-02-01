@@ -1,132 +1,132 @@
 <template>
-  <div class="data-table">
-    <div class="action-component-container" :style="actionComponentStyle">
-      <component
-        v-if="options.config.actionComponent"
-        :is="options.config.actionComponent.component"
-        v-bind="options.config.actionComponent.props || {}">
-      </component>
-    </div>
-    <div
-      v-if="options.config.filtering.enabled || options.config.search.enabled"
-      :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''"
-      class="filtering-card">
-      <filtering
-        v-if="options.config.filtering.enabled"
-        :filters="options.config.filtering.filters"
-        :dataset="dataset">
-      </filtering>
-      <searching
-        v-if="options.config.search.enabled"
-        :config="options.config.search">
-      </searching>
-    </div>
-    <div class="table-card" :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''">
-      <table-headers
-        v-if="processedData.length && showHeaders && !smallScreen"
-        :config="options.config"
-        :fields="options.fields"
-        :styler="getStyle"
-        :controls="options.controls || []">
-      </table-headers>
-      <table-body
-        v-if="processedData.length"
-        :dataset="processedData"
-        :fields="options.fields"
-        :styler="getStyle"
-        :linking="options.config.linking"
-        :mobileType="options.config.mobileType"
-        :showLabelOnMobile="options.config.showLabelOnMobile"
-        :smallScreen="smallScreen"
-        :controls="options.controls || []">
-      </table-body>
-      <div v-else class="no-results">
-        <div v-if="options.config.search && options.config.search.emptyTerm">
-          {{ options.config.search.emptyTerm }}
+    <div class="data-table">
+        <div class="action-component-container" :style="actionComponentStyle">
+            <component
+                    v-if="options.config.actionComponent"
+                    :is="options.config.actionComponent.component"
+                    v-bind="options.config.actionComponent.props || {}">
+            </component>
         </div>
-        <div v-else>
-          No Results. Please broaden your search parameters.
+        <div
+                v-if="options.config.filtering.enabled || options.config.search.enabled"
+                :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''"
+                class="filtering-card">
+            <filtering
+                    v-if="options.config.filtering.enabled"
+                    :filters="options.config.filtering.filters"
+                    :dataset="dataset">
+            </filtering>
+            <searching
+                    v-if="options.config.search.enabled"
+                    :config="options.config.search">
+            </searching>
         </div>
-      </div>
+        <div class="table-card" :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''">
+            <table-headers
+                    v-if="processedData.length && showHeaders && !smallScreen"
+                    :config="options.config"
+                    :fields="options.fields"
+                    :styler="getStyle"
+                    :controls="options.controls || []">
+            </table-headers>
+            <table-body
+                    v-if="processedData.length"
+                    :dataset="processedData"
+                    :fields="options.fields"
+                    :styler="getStyle"
+                    :linking="options.config.linking"
+                    :mobileType="options.config.mobileType"
+                    :showLabelOnMobile="options.config.showLabelOnMobile"
+                    :smallScreen="smallScreen"
+                    :controls="options.controls || []">
+            </table-body>
+            <div v-else class="no-results">
+                <div v-if="options.config.search && options.config.search.emptyTerm">
+                    {{ options.config.search.emptyTerm }}
+                </div>
+                <div v-else>
+                    No Results. Please broaden your search parameters.
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <style scoped lang="scss">
-  .data-table {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .action-component-container {
-    align-self: flex-end;
-  }
-
-  .filtering-card {
-    border: var(--border);
-    background: white;
-
-    &.gapped {
-      margin-bottom: calc(var(--padding) * 1.5);
+    .data-table {
+        display: flex;
+        flex-direction: column;
     }
-  }
 
-  .table-card {
-    border: var(--border);
-    background: white;
-  }
+    .action-component-container {
+        align-self: flex-end;
+    }
 
-  .no-results {
-    padding: var(--padding);
-  }
+    .filtering-card {
+        border: var(--border);
+        background: white;
+
+        &.gapped {
+            margin-bottom: calc(var(--padding) * 1.5);
+        }
+    }
+
+    .table-card {
+        border: var(--border);
+        background: white;
+    }
+
+    .no-results {
+        padding: var(--padding);
+    }
 </style>
 
 <style module lang="scss">
-  $primary: #000;
-  $secondary: #111;
-  $hover: #eee;
-  $primaryText: #234;
-  $secondaryText: #234;
-  $border: '1px solid #fff';
-  $headers: #eee;
-  $headerWeight: 200;
-  $headerFont: sans-serif;
-  $divider: '1px solid #eee';
-  $padding: 1em;
-  $fontSize: 0.9em;
-  $rowHeight: 55px;
+    $primary: #000;
+    $secondary: #111;
+    $hover: #eee;
+    $primaryText: #234;
+    $secondaryText: #234;
+    $border: '1px solid #fff';
+    $headers: #eee;
+    $headerWeight: 200;
+    $headerFont: sans-serif;
+    $divider: '1px solid #eee';
+    $padding: 1em;
+    $fontSize: 0.9em;
+    $rowHeight: 55px;
 
-  :root {
-    --primary: $primary;
-    --secondary: $secondary;
-    --hover: $hover;
-    --primaryText: $primaryText;
-    --secondaryText: $secondaryText;
-    --border: $border;
-    --headers: $headers;
-    --headerWeight: $headerWeight;
-    --headerFont: $headerFont;
-    --divider: $divider;
-    --padding: $padding;
-    --fontSize: $fontSize;
-    --rowHeight: $rowHeight;
-  }
+    :root {
+        --primary: $primary;
+        --secondary: $secondary;
+        --hover: $hover;
+        --primaryText: $primaryText;
+        --secondaryText: $secondaryText;
+        --border: $border;
+        --headers: $headers;
+        --headerWeight: $headerWeight;
+        --headerFont: $headerFont;
+        --divider: $divider;
+        --padding: $padding;
+        --fontSize: $fontSize;
+        --rowHeight: $rowHeight;
+    }
 
-  :export {
-    primary: $primary;
-    secondary: $secondary;
-    hover: $hover;
-    primaryText: $primaryText;
-    secondaryText: $secondaryText;
-    border: $border;
-    headers: $headers;
-    headerWeight: $headerWeight;
-    headerFont: $headerFont;
-    divider: $divider;
-    padding: $padding;
-    fontSize: $fontSize;
-    rowHeight: $rowHeight;
-  }
+    :export {
+        primary: $primary;
+        secondary: $secondary;
+        hover: $hover;
+        primaryText: $primaryText;
+        secondaryText: $secondaryText;
+        border: $border;
+        headers: $headers;
+        headerWeight: $headerWeight;
+        headerFont: $headerFont;
+        divider: $divider;
+        padding: $padding;
+        fontSize: $fontSize;
+        rowHeight: $rowHeight;
+    }
 </style>
 
 <script>
@@ -180,7 +180,7 @@
         return this.processedDataset
       },
       smallScreen () {
-        return this.windowWidth && this.windowWidth <= 500 ? true : false
+        return !!(this.windowWidth && this.windowWidth <= 500)
       },
       actionComponentStyle () {
         if (!this.options.config.actionComponent) {
@@ -206,7 +206,7 @@
       }
     },
     methods: {
-      setTheme() {
+      setTheme () {
         // Set the configured theme
         this.$style.primary = this.$theme.primary || this.$style.primary
         this.$style.primaryText = this.$theme.primaryText || this.$style.primaryText
@@ -250,7 +250,7 @@
         let dataset = this.dataset.slice()
 
         if (this.options.config.filtering.enabled) {
-          for (let filter of this.options.config.filtering.filters) {
+          for (const filter of this.options.config.filtering.filters) {
             if (!filter.enabled) {
               continue
             }
@@ -294,7 +294,7 @@
         })
       },
       filterCheckbox (row, filter) {
-        let value = row[filter.field]
+        const value = row[filter.field]
         let show = false
 
         show = !filter.collection && value
@@ -317,7 +317,7 @@
       filterTabs (dataItem, filter) {
         const config = filter
 
-        for (let tab of config.tabs) {
+        for (const tab of config.tabs) {
           if (tab.type === 'date' && !this.dateTabFilter(dataItem, tab)) {
             return false
           }
@@ -330,7 +330,7 @@
         return true
       },
       dateTabFilter (dataItem, tab) {
-        let date = dataItem[tab.field].split(' ')[0]
+        const date = dataItem[tab.field].split(' ')[0]
         let show = true
 
         if (tab.from && date < tab.from) {
@@ -344,7 +344,7 @@
         return show
       },
       rangeTabFilter (dataItem, tab) {
-        let value = dataItem[tab.field]
+        const value = dataItem[tab.field]
         let show = true
 
         if (tab.from && value < tab.from) {
