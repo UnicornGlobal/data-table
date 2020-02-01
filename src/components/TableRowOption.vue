@@ -45,6 +45,9 @@
         return {}
       },
       componentEvents () {
+        if (typeof this.config.events === 'function') {
+          return this.config.events(this.data)
+        }
         return this.config.events || {}
       }
     },
