@@ -8,7 +8,7 @@
             </component>
         </div>
         <div
-                v-if="options.config.filtering.enabled || options.config.search.enabled"
+                v-if="(options.config.filtering.enabled || options.config.search.enabled) && loaded"
                 :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''"
                 class="filtering-card">
             <filtering
@@ -40,6 +40,9 @@
                     :smallScreen="smallScreen"
                     :controls="options.controls || []">
             </table-body>
+            <div v-else-if="!loaded" class="no-results" style="text-align: center">
+              Loading...
+            </div>
             <div v-else class="no-results">
                 <div v-if="options.config.search && options.config.search.emptyTerm">
                     {{ options.config.search.emptyTerm }}
@@ -150,6 +153,11 @@
       options: {
         type: Object,
         required: true
+      },
+      loaded: {
+        type: Boolean,
+        required: false,
+        default: true
       }
     },
     data () {
@@ -256,22 +264,39 @@
             }
 
             dataset = dataset.filter(row => {
-              let show = true
               if (filter.type === 'checkbox') {
-                show = this.filterCheckbox(row, filter)
+                return this.filterCheckbox(row, filter)
               }
 
               if (filter.type === 'tabbed') {
-                show = this.filterTabs(row, filter)
+                return this.filterTabs(row, filter)
               }
 
               if (filter.type === 'dropdown') {
-                if (filter.value) {
-                  show = row[filter.field] === filter.value
+                if (!filter.value) {
+                  return true
+                }
+
+                if (filter.value && filter.field.indexOf('.') < 0) {
+                  return row[filter.field] === filter.value
+                }
+
+                const val = filter.field.split('.').reduce((o,i)=> {
+                  if (null !== row[o] && null !== row[o][i]) {
+                    return row[o][i]
+                  }
+
+                  if (null !== row[o]) {
+                    return row[o]
+                  }
+                })
+
+                if (undefined !== typeof val) {
+                  return val === filter.value
                 }
               }
 
-              return show
+              return true
             })
           }
         }
