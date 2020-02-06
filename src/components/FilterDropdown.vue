@@ -64,15 +64,29 @@
     },
     methods: {
       value (option) {
-        if (typeof option === 'object') {
+        if (null === option) {
+          return
+        }
+
+        if (typeof option === 'function') {
+          return option.value()
+        }
+
+        if (typeof option === 'object' && null !== option.value) {
           return option.value
         }
+
         return option
       },
       label (option) {
+        if (null === option) {
+          return
+        }
+
         if (typeof option === 'object') {
           return option.label
         }
+
         return option
       }
     }

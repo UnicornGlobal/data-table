@@ -62,7 +62,29 @@
     },
     methods: {
       dropdownDataSet(filter, data) {
-        return [...new Set(data.map(obj => obj[filter.field]))]
+        if (typeof data == 'undefined') {
+          return []
+        }
+
+        const returnSet = [...new Set(data.map(obj => {
+          if (filter.field.indexOf('.') < 0) {
+            return obj[filter.field]
+          }
+
+          return filter.field.split('.').reduce((o,i)=> {
+            if (null !== obj[o] && null !== obj[o][i]) {
+              return obj[o][i]
+            }
+
+            if (null !== obj[o]) {
+              return obj[o]
+            }
+          })
+        }))]
+
+        return returnSet.filter(function (el) {
+          return el != null
+        })
       }
     },
     props: {
@@ -77,4 +99,3 @@
     }
   }
 </script>
-
