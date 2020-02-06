@@ -205,6 +205,14 @@
         return field.length
       },
       getProps () {
+        if (this.field.props && typeof this.field.props === 'function') {
+          return this.field.props(this.data)
+        }
+
+        if (this.field.props && typeof this.field.props === 'object') {
+          return this.field.props
+        }
+
         if (this.field.requireProps.propsFromData.enabled) {
           const propFields = this.field.requireProps.propsFromData.propFields
           const props = {}
