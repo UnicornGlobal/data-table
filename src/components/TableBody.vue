@@ -8,6 +8,7 @@
         :data="data"
         :styler="styler"
         :key="key"
+        :controls="controls"
         :linking="linking"
         :mobileType="mobileType"
         :showLabelOnMobile="showLabelOnMobile"

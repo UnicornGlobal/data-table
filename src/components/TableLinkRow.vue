@@ -14,6 +14,17 @@
         :field="field">
       </table-data>
     </div>
+    <div
+      v-if="controls && controls.length"
+      class="controls list-row-field">
+      <table-row-option
+        v-for="(control, key) in controls"
+        v-if="showControl(control, data)"
+        :key="key"
+        :config="control"
+        :data="data">
+      </table-row-option>
+    </div>
   </router-link>
   <router-link
     v-else
@@ -122,6 +133,17 @@
         </div>
         <div style="margin-left: 20px">&gt;</div>
       </div>
+      <div
+              v-if="controls && controls.length"
+              class="controls list-row-field">
+        <table-row-option
+                v-for="(control, key) in controls"
+                v-if="showControl(control, data)"
+                :key="key"
+                :config="control"
+                :data="data">
+        </table-row-option>
+      </div>
     </div>
   </router-link>
 </template>
@@ -131,6 +153,14 @@
     @media(max-width: 1023px) {
       display: none !important;
     }
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   .list-row, .mobile-scroll {
@@ -293,10 +323,12 @@
 
 <script>
   import TableData from './TableData.vue'
+  import TableRowOption from './TableRowOption.vue'
 
   export default {
     components: {
-      TableData
+      TableData,
+      TableRowOption
     },
     props: {
       data: {
@@ -310,6 +342,10 @@
       styler: {
         type: Function,
         required: true
+      },
+      controls: {
+        type: Array,
+        required: false
       },
       linking: {
         type: Object,
@@ -390,6 +426,16 @@
         }
 
         return ''
+      },
+      showControl (control, data) {
+        if (control.show === undefined) {
+          return true
+        }
+        if (typeof control.show === 'function') {
+          return control.show(data)
+        }
+
+        return control.show
       }
     }
   }
