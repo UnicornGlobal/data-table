@@ -68,7 +68,7 @@
           return
         }
 
-        if (typeof option === 'function') {
+        if (typeof option.value === 'function') {
           return option.value()
         }
 

@@ -167,18 +167,26 @@
         if (!field) {
           return null
         }
-        let path = field.split('.')
-        let value = data
 
-        path.forEach(function (prop) {
-          let index = parseInt(prop)
+        let value = data[field] || null
 
-          if (isNaN(index)) {
-            value = value[prop]
-          } else {
-            value = value[index]
-          }
-        })
+        if (field.indexOf('.') > -1) {
+          value = field.split('.').reduce((o,i)=> {
+            if ('object' == typeof o) {
+              if (null !== o[i]) {
+                return o[i]
+              }
+            }
+
+            if (null !== data && null !== data[o] && null !== data[o][i]) {
+              return data[o][i]
+            }
+
+            if (null !== data && null !== data[o]) {
+              return data[o]
+            }
+          })
+        }
 
         if (this.field.type === 'number') {
           value = parseFloat(`${value}`)
