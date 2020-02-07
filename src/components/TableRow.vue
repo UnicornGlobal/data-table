@@ -164,6 +164,10 @@
     height: var(--rowHeight);
     padding: 0 var(--padding);
 
+    &:hover {
+      background-color: var(--hover);
+    }
+
     @media(max-width: 480px) {
       min-height: 65px;
       padding-left: calc(var(--padding) / 2);
