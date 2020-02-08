@@ -34,7 +34,7 @@
         :secondary="false"
         style="flex: 1 1 0%">
         <div>
-          Options
+          {{ config && config.headers && config.headers.optionsHeader ? 'Options' : '' }}
         </div>
       </div>
     </div>
