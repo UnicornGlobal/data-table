@@ -174,7 +174,7 @@
     }
 
     @media(max-width: 680px) {
-      min-height: 65px;
+      min-height: 85px;
       padding-left: calc(var(--padding) / 2);
     }
 

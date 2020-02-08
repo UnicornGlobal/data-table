@@ -98,6 +98,7 @@
     $padding: 1em;
     $fontSize: 0.9em;
     $rowHeight: 55px;
+    $rowMobileHeight: 80px;
 
     :root {
         --primary: $primary;
@@ -113,6 +114,7 @@
         --padding: $padding;
         --fontSize: $fontSize;
         --rowHeight: $rowHeight;
+        --rowMobileHeight: $rowMobileHeight;
     }
 
     :export {
@@ -129,6 +131,7 @@
         padding: $padding;
         fontSize: $fontSize;
         rowHeight: $rowHeight;
+        rowMobileHeight: $rowMobileHeight;
     }
 </style>
 
@@ -188,6 +191,7 @@
         return this.processedDataset
       },
       smallScreen () {
+        return false
         return !!(this.windowWidth && this.windowWidth <= 500)
       },
       actionComponentStyle () {
@@ -383,11 +387,11 @@
         return show
       },
       getStyle (field) {
-        if (field.grow) {
+        if (field.grow || field.grow === 0) {
           return 'flex: ' + field.grow
         }
 
-        if (field.type === 'image') {
+        if (field.type === 'image' && !field.secondary) {
           return 'flex: 0; min-width: 50px;'
         }
 

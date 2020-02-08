@@ -2,7 +2,7 @@
     <div
             v-if="field.type === 'image'"
             :class="field.field"
-            style="flex-grow: 0">
+            style="flex-grow: 0; flex:0;">
         <avatar-or-initials
                 class="item-avatar"
                 :size="this.$theme.rowHeight.slice(0, -2) * 0.66"

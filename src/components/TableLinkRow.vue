@@ -178,7 +178,12 @@
     }
 
     @media(max-width: 480px) {
-      height: calc(var(--rowHeight) + 10px);
+      height: calc(var(--rowMobileHeight));
+      padding-left: calc(var(--padding) / 2);
+    }
+
+    @media(max-width: 680px) {
+      min-height: 85px;
       padding-left: calc(var(--padding) / 2);
     }
 
@@ -194,11 +199,11 @@
     .list-row-field:last-child {
 
       @media(max-width: 1023px) and (min-width: 481px) {
-        padding-right: 20px;
+        padding-right: 0px;
       }
 
       @media(max-width: 480px) {
-        padding-right: 20px;
+        padding-right: 0px;
       }
 
       div {
