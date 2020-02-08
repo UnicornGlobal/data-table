@@ -265,9 +265,7 @@
           time
         }
       },
-      formatAsCurrency (value, symbol = 'R', decimals = 2) {
-        value = Number.parseFloat(value)
-
+      formatAsCurrency (value, symbol = 'R', decimals = 0) {
         if (Number.isNaN(value)) {
           value = 0
         }
