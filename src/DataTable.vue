@@ -295,7 +295,7 @@
                   }
                 })
 
-                if (undefined !== typeof val) {
+                if ('undefined' !== typeof val) {
                   return val === filter.value
                 }
               }
