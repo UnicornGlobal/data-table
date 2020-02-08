@@ -266,7 +266,7 @@
         }
       },
       formatAsCurrency (value, symbol = 'R', decimals = 0) {
-        if (Number.isNaN(value)) {
+        if (null === value) {
           value = 0
         }
 
