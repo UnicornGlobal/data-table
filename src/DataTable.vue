@@ -192,7 +192,8 @@
       },
       smallScreen () {
         return false
-        return !!(this.windowWidth && this.windowWidth <= 500)
+        // Disabled for now while we rework the mobile layouts
+        // return !!(this.windowWidth && this.windowWidth <= 500)
       },
       actionComponentStyle () {
         if (!this.options.config.actionComponent) {
