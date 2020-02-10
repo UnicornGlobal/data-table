@@ -287,6 +287,10 @@
                 }
 
                 const val = filter.field.split('.').reduce((o, i) => {
+                  if (row === null || row[o] === null) {
+                    return false
+                  }
+
                   if (row[o] !== null && row[o][i] !== null) {
                     return row[o][i]
                   }
