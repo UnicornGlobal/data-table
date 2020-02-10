@@ -171,18 +171,18 @@
         let value = data[field] || null
 
         if (field.indexOf('.') > -1) {
-          value = field.split('.').reduce((o,i)=> {
-            if ('object' == typeof o) {
-              if (null !== o[i]) {
+          value = field.split('.').reduce((o, i) => {
+            if (typeof o === 'object') {
+              if (o[i] !== null) {
                 return o[i]
               }
             }
 
-            if (null !== data && null !== data[o] && null !== data[o][i]) {
+            if (data !== null && data[o] !== null && data[o][i] !== null) {
               return data[o][i]
             }
 
-            if (null !== data && null !== data[o]) {
+            if (data !== null && data[o] !== null) {
               return data[o]
             }
           })
@@ -266,7 +266,7 @@
         }
       },
       formatAsCurrency (value, symbol = 'R', decimals = 0) {
-        if (null === value) {
+        if (value === null) {
           value = 0
         }
 

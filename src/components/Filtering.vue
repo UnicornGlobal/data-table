@@ -62,7 +62,7 @@
     },
     methods: {
       dropdownDataSet(filter, data) {
-        if (typeof data == 'undefined') {
+        if (typeof data === 'undefined') {
           return []
         }
 
@@ -71,19 +71,19 @@
             return obj[filter.field]
           }
 
-          return filter.field.split('.').reduce((o,i)=> {
-            if (null !== obj[o] && null !== obj[o][i]) {
+          return filter.field.split('.').reduce((o, i) => {
+            if (obj[o] !== null && obj[o][i] !== null) {
               return obj[o][i]
             }
 
-            if (null !== obj[o]) {
+            if (obj[o] !== null) {
               return obj[o]
             }
           })
         }))]
 
         return returnSet.filter(function (el) {
-          return el != null
+          return el !== null && typeof el !== 'undefined'
         })
       }
     },

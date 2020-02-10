@@ -64,7 +64,11 @@
     },
     methods: {
       value (option) {
-        if (null === option) {
+        if (typeof option === 'undefined') {
+          return
+        }
+
+        if (option === null || option.value === null) {
           return
         }
 
@@ -72,7 +76,7 @@
           return option.value()
         }
 
-        if (typeof option === 'object' && null !== option.value) {
+        if (typeof option === 'object' && option.value !== null) {
           return option.value
         }
 

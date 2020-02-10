@@ -286,17 +286,17 @@
                   return row[filter.field] === filter.value
                 }
 
-                const val = filter.field.split('.').reduce((o,i)=> {
-                  if (null !== row[o] && null !== row[o][i]) {
+                const val = filter.field.split('.').reduce((o, i) => {
+                  if (row[o] !== null && row[o][i] !== null) {
                     return row[o][i]
                   }
 
-                  if (null !== row[o]) {
+                  if (row[o] !== null) {
                     return row[o]
                   }
                 })
 
-                if ('undefined' !== typeof val) {
+                if (typeof val !== 'undefined') {
                   return val === filter.value
                 }
               }
