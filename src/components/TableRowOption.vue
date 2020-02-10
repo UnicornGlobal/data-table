@@ -1,5 +1,5 @@
 <template>
-    <router-link v-if="config.type == 'link'"
+    <router-link v-if="config.type === 'link'"
                  :class="config.class"
                  :style="config.style"
                  :to="href"
@@ -8,7 +8,7 @@
         {{config.label}}
     </router-link>
     <component
-            v-else-if="config.type == 'component'"
+            v-else-if="config.type === 'component'"
             v-bind="componentProps"
             v-on="componentEvents"
             :is="componentName"

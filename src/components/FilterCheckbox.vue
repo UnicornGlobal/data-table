@@ -41,7 +41,7 @@
     &:checked {
       outline: 1px solid var(--primary);
       background-color: white;
-      outline-offset: 0;
+      outline-offset: 1;
 
       &:after {
         position: absolute;

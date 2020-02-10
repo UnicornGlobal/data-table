@@ -14,6 +14,17 @@
         :field="field">
       </table-data>
     </div>
+    <div
+      v-if="controls && controls.length"
+      class="controls list-row-field">
+      <table-row-option
+        v-for="(control, key) in controls"
+        v-if="showControl(control, data)"
+        :key="key"
+        :config="control"
+        :data="data">
+      </table-row-option>
+    </div>
   </router-link>
   <router-link
     v-else
@@ -122,6 +133,17 @@
         </div>
         <div style="margin-left: 20px">&gt;</div>
       </div>
+      <div
+              v-if="controls && controls.length"
+              class="controls list-row-field">
+        <table-row-option
+                v-for="(control, key) in controls"
+                v-if="showControl(control, data)"
+                :key="key"
+                :config="control"
+                :data="data">
+        </table-row-option>
+      </div>
     </div>
   </router-link>
 </template>
@@ -133,12 +155,20 @@
     }
   }
 
+  .controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
   .list-row, .mobile-scroll {
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid var(--divider);
+    border-bottom: var(--divider);
     height: var(--rowHeight);
     color: rgb(0, 0, 0);
     padding: 0 var(--padding);
@@ -148,7 +178,12 @@
     }
 
     @media(max-width: 480px) {
-      height: calc(var(--rowHeight) + 10px);
+      height: calc(var(--rowMobileHeight));
+      padding-left: calc(var(--padding) / 2);
+    }
+
+    @media(max-width: 680px) {
+      min-height: 85px;
       padding-left: calc(var(--padding) / 2);
     }
 
@@ -164,11 +199,11 @@
     .list-row-field:last-child {
 
       @media(max-width: 1023px) and (min-width: 481px) {
-        padding-right: 20px;
+        padding-right: 0px;
       }
 
       @media(max-width: 480px) {
-        padding-right: 20px;
+        padding-right: 0px;
       }
 
       div {
@@ -293,10 +328,12 @@
 
 <script>
   import TableData from './TableData.vue'
+  import TableRowOption from './TableRowOption.vue'
 
   export default {
     components: {
-      TableData
+      TableData,
+      TableRowOption
     },
     props: {
       data: {
@@ -310,6 +347,10 @@
       styler: {
         type: Function,
         required: true
+      },
+      controls: {
+        type: Array,
+        required: false
       },
       linking: {
         type: Object,
@@ -390,6 +431,16 @@
         }
 
         return ''
+      },
+      showControl (control, data) {
+        if (control.show === undefined) {
+          return true
+        }
+        if (typeof control.show === 'function') {
+          return control.show(data)
+        }
+
+        return control.show
       }
     }
   }

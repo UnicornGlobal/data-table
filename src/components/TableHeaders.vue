@@ -32,9 +32,9 @@
         v-if="controls && controls.length"
         class="header-cell"
         :secondary="false"
-        style="flex: 1 1 0%">
+        style="styler(field)">
         <div>
-          Options
+          {{ config && config.headers && config.headers.optionsHeader ? 'Options' : '' }}
         </div>
       </div>
     </div>
@@ -57,12 +57,16 @@
       justify-content: space-between;
       border-bottom: var(--divider);
       min-height: var(--rowHeight);
-      padding: 0 var(--padding);
+      padding-right: 20px;
+      padding-left: 20px;
 
       @media(max-width: 480px) {
         padding-right: 7px;
-        padding-left: calc(var(--padding) / 2);
         min-height: var(--rowHeight);
+      }
+
+      @media(max-width: 680px) {
+        padding-left: 7px !important;
       }
 
       .header-cell {
@@ -96,11 +100,25 @@
         }
       }
 
+      .header-cell:first-child {
+        justify-content: flex-start;
+
+        .arrow-spacer {
+          display: none;
+        }
+      }
+
       .header-cell:last-child {
         justify-content: flex-end;
 
         .arrow-spacer {
           display: none;
+        }
+      }
+
+      .empty-header-cell[secondary="true"] {
+        @media(max-width: 1023px) {
+          display: none !important;
         }
       }
 

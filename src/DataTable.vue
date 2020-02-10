@@ -8,7 +8,7 @@
             </component>
         </div>
         <div
-                v-if="options.config.filtering.enabled || options.config.search.enabled"
+                v-if="(options.config.filtering.enabled || options.config.search.enabled) && loaded"
                 :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''"
                 class="filtering-card">
             <filtering
@@ -40,6 +40,9 @@
                     :smallScreen="smallScreen"
                     :controls="options.controls || []">
             </table-body>
+            <div v-else-if="!loaded" class="no-results" style="text-align: center">
+              Loading...
+            </div>
             <div v-else class="no-results">
                 <div v-if="options.config.search && options.config.search.emptyTerm">
                     {{ options.config.search.emptyTerm }}
@@ -95,6 +98,7 @@
     $padding: 1em;
     $fontSize: 0.9em;
     $rowHeight: 55px;
+    $rowMobileHeight: 80px;
 
     :root {
         --primary: $primary;
@@ -110,6 +114,7 @@
         --padding: $padding;
         --fontSize: $fontSize;
         --rowHeight: $rowHeight;
+        --rowMobileHeight: $rowMobileHeight;
     }
 
     :export {
@@ -126,6 +131,7 @@
         padding: $padding;
         fontSize: $fontSize;
         rowHeight: $rowHeight;
+        rowMobileHeight: $rowMobileHeight;
     }
 </style>
 
@@ -150,6 +156,11 @@
       options: {
         type: Object,
         required: true
+      },
+      loaded: {
+        type: Boolean,
+        required: false,
+        default: true
       }
     },
     data () {
@@ -180,7 +191,9 @@
         return this.processedDataset
       },
       smallScreen () {
-        return !!(this.windowWidth && this.windowWidth <= 500)
+        return false
+        // Disabled for now while we rework the mobile layouts
+        // return !!(this.windowWidth && this.windowWidth <= 500)
       },
       actionComponentStyle () {
         if (!this.options.config.actionComponent) {
@@ -256,22 +269,43 @@
             }
 
             dataset = dataset.filter(row => {
-              let show = true
               if (filter.type === 'checkbox') {
-                show = this.filterCheckbox(row, filter)
+                return this.filterCheckbox(row, filter)
               }
 
               if (filter.type === 'tabbed') {
-                show = this.filterTabs(row, filter)
+                return this.filterTabs(row, filter)
               }
 
               if (filter.type === 'dropdown') {
-                if (filter.value) {
-                  show = row[filter.field] === filter.value
+                if (!filter.value) {
+                  return true
+                }
+
+                if (filter.value && filter.field.indexOf('.') < 0) {
+                  return row[filter.field] === filter.value
+                }
+
+                const val = filter.field.split('.').reduce((o, i) => {
+                  if (row === null || row[o] === null) {
+                    return false
+                  }
+
+                  if (row[o] !== null && row[o][i] !== null) {
+                    return row[o][i]
+                  }
+
+                  if (row[o] !== null) {
+                    return row[o]
+                  }
+                })
+
+                if (typeof val !== 'undefined') {
+                  return val === filter.value
                 }
               }
 
-              return show
+              return true
             })
           }
         }
@@ -358,11 +392,11 @@
         return show
       },
       getStyle (field) {
-        if (field.grow) {
+        if (field.grow || field.grow === 0) {
           return 'flex: ' + field.grow
         }
 
-        if (field.type === 'image') {
+        if (field.type === 'image' && !field.secondary) {
           return 'flex: 0; min-width: 50px;'
         }
 

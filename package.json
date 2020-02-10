@@ -1,6 +1,6 @@
 {
   "name": "@unicorns/data-table",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "description": "Vue component for rendering data-tables",
   "author": "Unicorn Global et al",
   "license": "MIT",

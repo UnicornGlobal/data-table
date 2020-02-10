@@ -8,6 +8,7 @@
         :data="data"
         :styler="styler"
         :key="key"
+        :controls="controls"
         :linking="linking"
         :mobileType="mobileType"
         :showLabelOnMobile="showLabelOnMobile"
@@ -46,13 +47,13 @@
 
   .row-link {
     &:nth-of-type(odd) {
-    border-left: 5px solid rgba(184,199,223, 0.7);
-  }
+      border-left: 5px solid rgba(184,199,223, 0.7);
+    }
 
-  &:nth-of-type(even) {
-    border-left: 5px solid rgb(230,237,249) ;
+    &:nth-of-type(even) {
+      border-left: 5px solid rgb(230,237,249) ;
+    }
   }
-}
 </style>
 
 <script>

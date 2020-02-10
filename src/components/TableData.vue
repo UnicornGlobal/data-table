@@ -2,7 +2,7 @@
     <div
             v-if="field.type === 'image'"
             :class="field.field"
-            style="flex-grow: 0">
+            style="flex-grow: 0; flex:0;">
         <avatar-or-initials
                 class="item-avatar"
                 :size="this.$theme.rowHeight.slice(0, -2) * 0.66"
@@ -167,18 +167,26 @@
         if (!field) {
           return null
         }
-        let path = field.split('.')
-        let value = data
 
-        path.forEach(function (prop) {
-          let index = parseInt(prop)
+        let value = data[field] || null
 
-          if (isNaN(index)) {
-            value = value[prop]
-          } else {
-            value = value[index]
-          }
-        })
+        if (field.indexOf('.') > -1) {
+          value = field.split('.').reduce((o, i) => {
+            if (typeof o === 'object') {
+              if (o[i] !== null) {
+                return o[i]
+              }
+            }
+
+            if (data !== null && data[o] !== null && data[o][i] !== null) {
+              return data[o][i]
+            }
+
+            if (data !== null && data[o] !== null) {
+              return data[o]
+            }
+          })
+        }
 
         if (this.field.type === 'number') {
           value = parseFloat(`${value}`)
@@ -205,6 +213,14 @@
         return field.length
       },
       getProps () {
+        if (this.field.props && typeof this.field.props === 'function') {
+          return this.field.props(this.data)
+        }
+
+        if (this.field.props && typeof this.field.props === 'object') {
+          return this.field.props
+        }
+
         if (this.field.requireProps.propsFromData.enabled) {
           const propFields = this.field.requireProps.propsFromData.propFields
           const props = {}
@@ -249,10 +265,8 @@
           time
         }
       },
-      formatAsCurrency (value, symbol = 'R', decimals = 2) {
-        value = Number.parseFloat(value)
-
-        if (Number.isNaN(value)) {
+      formatAsCurrency (value, symbol = 'R', decimals = 0) {
+        if (value === null) {
           value = 0
         }
 
