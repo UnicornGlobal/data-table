@@ -83,7 +83,7 @@
         return option
       },
       label (option) {
-        if (null === option) {
+        if (option === null) {
           return
         }
 
