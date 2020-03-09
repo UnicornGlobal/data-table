@@ -67,6 +67,10 @@
         }
 
         const returnSet = [...new Set(data.map(obj => {
+          if (filter.data && typeof filter.data === 'function') {
+            return filter.data(obj[filter.field])
+          }
+
           if (filter.field.indexOf('.') < 0) {
             return obj[filter.field]
           }

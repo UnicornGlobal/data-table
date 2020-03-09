@@ -282,6 +282,10 @@
                   return true
                 }
 
+                if (filter.value && filter.data && typeof filter.data === 'function') {
+                  return filter.data(row[filter.field]) === filter.value
+                }
+
                 if (filter.value && filter.field.indexOf('.') < 0) {
                   return row[filter.field] === filter.value
                 }
