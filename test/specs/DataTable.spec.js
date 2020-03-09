@@ -52,7 +52,7 @@ describe('DataTable.vue', () => {
     expect(element.text()).toEqual('No Results. Please broaden your search parameters.')
   })
 
-  it('Watches for changes in dataset and config', () => {
+  it('Watches for changes in dataset and config', async () => {
     let localVue = createLocalVue()
 
     let dataTable = shallowMount(DataTable, {
@@ -137,6 +137,8 @@ describe('DataTable.vue', () => {
         }
       ]
     })
+
+    await dataTable.vm.$nextTick()
 
     expect(processData.called).toEqual(true)
     processData.restore()
