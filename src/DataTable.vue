@@ -24,6 +24,7 @@
         <div class="table-card" :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''">
             <table-headers
                     v-if="processedData.length && showHeaders && !smallScreen"
+                    :total-records="processedData.length"
                     :config="options.config"
                     :fields="options.fields"
                     :styler="getStyle"
@@ -412,12 +413,23 @@
       },
       compare (a, b) {
         let field = this.options.config.sorting.field
+
         if (field.includes('.')) {
           const names = field.split('.')
           // Very naive but only allow 1 dot nested depth at the moment
           a = a[names[0]]
           b = b[names[0]]
           field = names[1]
+        }
+
+        if (a === null) {
+          a = []
+          a[field] = ''
+        }
+
+        if (b === null) {
+          b = []
+          b[field] = ''
         }
 
         if (a[field] < b[field]) {
