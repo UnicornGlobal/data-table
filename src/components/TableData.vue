@@ -5,7 +5,8 @@
             style="flex-grow: 0; flex:0;">
         <avatar-or-initials
                 class="item-avatar"
-                :size="this.$theme.rowHeight.slice(0, -2) * 0.66"
+                style="margin-left: -0.4rem; margin-right: 0.6rem; height: 35px;"
+                :size="35"
                 :image="getProperty(data, field.image)"
                 :title="getProperty(data, field.field)">
         </avatar-or-initials>
