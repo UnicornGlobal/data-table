@@ -32,7 +32,7 @@
         v-if="controls && controls.length"
         class="header-cell"
         :secondary="false"
-        style="styler(field)">
+        style="flex: 1 1 0%">
         <div>
           {{ config && config.headers && config.headers.optionsHeader ? 'Options' : '' }}
         </div>
