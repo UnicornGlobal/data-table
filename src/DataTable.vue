@@ -422,21 +422,24 @@
           field = names[1]
         }
 
-        if (a === null) {
+        if (a === null || a === undefined) {
           a = []
           a[field] = ''
         }
 
-        if (b === null) {
+        if (b === null || b === undefined) {
           b = []
           b[field] = ''
         }
 
-        if (a[field] < b[field]) {
+        const first = a[field] || ''
+        const second = b[field] || ''
+
+        if (first.toLowerCase() < second.toLowerCase()) {
           return this.options.config.sorting.ascending ? -1 : 1
         }
 
-        if (a[field] > b[field]) {
+        if (first.toLowerCase() > second.toLowerCase()) {
           return this.options.config.sorting.ascending ? 1 : -1
         }
 
