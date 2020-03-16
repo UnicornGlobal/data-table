@@ -173,7 +173,7 @@
     },
     computed: {
       headerStyle() {
-        if (this.totalRecords > 9) {
+        if (this.totalRecords > 10) {
           return 'margin-right: 0.7rem; margin-left: -0.1rem;'
         }
 
