@@ -435,11 +435,12 @@
         const first = a[field] || ''
         const second = b[field] || ''
 
-        if (first.toLowerCase() < second.toLowerCase()) {
+        // We can only sort strings
+        if (first.toString().toLowerCase() < second.toString().toLowerCase()) {
           return this.options.config.sorting.ascending ? -1 : 1
         }
 
-        if (first.toLowerCase() > second.toLowerCase()) {
+        if (first.toString().toLowerCase() > second.toString().toLowerCase()) {
           return this.options.config.sorting.ascending ? 1 : -1
         }
 
