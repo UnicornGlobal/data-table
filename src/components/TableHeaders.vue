@@ -1,6 +1,6 @@
 <template>
   <div class="header-bar">
-    <div class="headers">
+    <div class="headers" :style="headerStyle">
       <div
         v-if="field.header"
         v-for="(field) in fields"
@@ -164,6 +164,20 @@
       controls: {
         type: Array,
         required: false
+      },
+      totalRecords: {
+        type: Number,
+        required: false,
+        default: 0
+      }
+    },
+    computed: {
+      headerStyle() {
+        if (this.totalRecords > 9) {
+          return 'margin-right: 0.7rem; margin-left: -0.1rem;'
+        }
+
+        return 'margin-right: -0.15rem; margin-left: -0.25rem;'
       }
     },
     methods: {
