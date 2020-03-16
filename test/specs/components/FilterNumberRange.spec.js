@@ -28,7 +28,7 @@ describe('FilterNumberRange.vue', () => {
     expect(filter.emitted()).toHaveProperty('close')
   })
 
-  it('clears values', () => {
+  it('clears values', async () => {
     let localVue = createLocalVue()
     let filter = mount(FilterNumberRange, {
       localVue,
@@ -49,13 +49,17 @@ describe('FilterNumberRange.vue', () => {
     expect(filter.vm.$refs.to.$refs.inputBox.value).toBe('10')
 
     filter.vm.$refs.from.clear()
+    await filter.vm.$nextTick()
+
     expect(filter.vm.$refs.from.$refs.inputBox.value).toBe('')
 
     filter.vm.$refs.to.clear()
+    await filter.vm.$nextTick()
+
     expect(filter.vm.$refs.to.$refs.inputBox.value).toBe('')
   })
 
-  it('handles input', () => {
+  it('handles input', async () => {
     let localVue = createLocalVue()
     let filter = mount(FilterNumberRange, {
       localVue,
@@ -76,9 +80,11 @@ describe('FilterNumberRange.vue', () => {
     expect(filter.vm.$refs.to.$refs.inputBox.value).toBe('100')
 
     filter.vm.$refs.from.handleInput({ target: { value: 'x' } })
+    await filter.vm.$nextTick()
     expect(filter.vm.$refs.from.$refs.inputBox.value).toBe('x')
 
     filter.vm.$refs.from.handleInput({ target: { value: 'xxx' } })
+    await filter.vm.$nextTick()
     expect(filter.vm.$refs.from.$refs.inputBox.value).toBe('xxx')
   })
 })

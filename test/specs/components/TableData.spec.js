@@ -37,7 +37,7 @@ describe('TableData.vue', () => {
     expect(tableData.vm.getProperty({name: 'test', id: 3}, 'id')).toBe('3.00')
   })
 
-  it('formats price/amount', () => {
+  it('formats price/amount', async () => {
     let localVue = createLocalVue()
 
     let tableData = mount(TableData, {
@@ -79,6 +79,8 @@ describe('TableData.vue', () => {
         'name': 'yy'
       }
     })
+
+    await tableData.vm.$nextTick()
 
     expect(tableData.find('div').text()).toBe(tableData.vm.formatAsCurrency('NaN'))
   })
