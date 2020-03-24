@@ -3,14 +3,13 @@ const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    index: './src/main.js'
+  },
   mode: 'development',
   plugins: [
     new VueLoaderPlugin()
   ],
-  entry: {
-    index: './src/main.js'
-  },
   optimization: {
     minimize: true,
     splitChunks: {
@@ -32,7 +31,8 @@ module.exports = {
     vue: 'vue',
     moment: 'moment',
     pikaday: 'pikaday',
-    '@unicorns/avatars': '@unicorns/avatars'
+    '@unicorns/avatars': '@unicorns/avatars',
+    'vue-select': 'vue-select'
   },
   resolve: {
     alias: {
@@ -81,25 +81,25 @@ module.exports = {
         options: {
           svgo: {
             plugins: [
-              { removeDoctype: true },
-              { removeComments: true },
-              { removeMetadata: true },
-              { removeDesc: true },
-              { removeUselessDefs: true },
-              { removeXMLNS: true },
-              { removeEditorsNSData: true },
-              { removeEmptyAttrs: true },
-              { removeHiddenmElems: true },
-              { removeEmptyText: true },
-              { removeEmptyContainers: true },
-              { minifyStyles: true },
-              { removeUnknownsAndDefaults: true },
-              { removeUselessStrokeAndFill: true },
-              { removeUnusedNS: true },
-              { removeRasterImages: true },
-              { mergePaths: true },
-              { convertShapeToPath: true },
-              { removeScriptElement: true }
+              {removeDoctype: true},
+              {removeComments: true},
+              {removeMetadata: true},
+              {removeDesc: true},
+              {removeUselessDefs: true},
+              {removeXMLNS: true},
+              {removeEditorsNSData: true},
+              {removeEmptyAttrs: true},
+              {removeHiddenmElems: true},
+              {removeEmptyText: true},
+              {removeEmptyContainers: true},
+              {minifyStyles: true},
+              {removeUnknownsAndDefaults: true},
+              {removeUselessStrokeAndFill: true},
+              {removeUnusedNS: true},
+              {removeRasterImages: true},
+              {mergePaths: true},
+              {convertShapeToPath: true},
+              {removeScriptElement: true}
             ]
           }
         }

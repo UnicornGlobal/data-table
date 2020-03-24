@@ -2,51 +2,51 @@
     <div class="data-table">
         <div class="action-component-container" :style="actionComponentStyle">
             <component
-                    v-if="options.config.actionComponent"
-                    :is="options.config.actionComponent.component"
-                    v-bind="options.config.actionComponent.props || {}">
+                    v-if="settings.config.actionComponent"
+                    :is="settings.config.actionComponent.component"
+                    v-bind="settings.config.actionComponent.props || {}">
             </component>
         </div>
         <div
-                v-if="(options.config.filtering.enabled || options.config.search.enabled) && loaded"
-                :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''"
+                v-if="(settings.config.filtering.enabled || settings.config.search.enabled) && loaded"
+                :class="settings.config.headers && settings.config.headers.gap ? 'gapped' : ''"
                 class="filtering-card">
             <filtering
-                    v-if="options.config.filtering.enabled"
-                    :filters="options.config.filtering.filters"
+                    v-if="settings.config.filtering.enabled"
+                    :filters="settings.config.filtering.filters"
                     :dataset="dataset">
             </filtering>
             <searching
-                    v-if="options.config.search.enabled"
-                    :config="options.config.search">
+                    v-if="settings.config.search.enabled"
+                    :config="settings.config.search">
             </searching>
         </div>
-        <div class="table-card" :class="options.config.headers && options.config.headers.gap ? 'gapped' : ''">
+        <div class="table-card" :class="settings.config.headers && settings.config.headers.gap ? 'gapped' : ''">
             <table-headers
                     v-if="processedData.length && showHeaders && !smallScreen"
                     :total-records="processedData.length"
-                    :config="options.config"
-                    :fields="options.fields"
+                    :config="settings.config"
+                    :fields="settings.fields"
                     :styler="getStyle"
-                    :controls="options.controls || []">
+                    :controls="settings.controls || []">
             </table-headers>
             <table-body
                     v-if="processedData.length"
                     :dataset="processedData"
-                    :fields="options.fields"
+                    :fields="settings.fields"
                     :styler="getStyle"
-                    :linking="options.config.linking"
-                    :mobileType="options.config.mobileType"
-                    :showLabelOnMobile="options.config.showLabelOnMobile"
+                    :linking="settings.config.linking"
+                    :mobileType="settings.config.mobileType"
+                    :showLabelOnMobile="settings.config.showLabelOnMobile"
                     :smallScreen="smallScreen"
-                    :controls="options.controls || []">
+                    :controls="settings.controls || []">
             </table-body>
             <div v-else-if="!loaded" class="no-results" style="text-align: center">
-              Loading...
+                Loading...
             </div>
             <div v-else class="no-results">
-                <div v-if="options.config.search && options.config.search.emptyTerm">
-                    {{ options.config.search.emptyTerm }}
+                <div v-if="settings.config.search && settings.config.search.emptyTerm">
+                    {{ settings.config.search.emptyTerm }}
                 </div>
                 <div v-else>
                     No Results. Please broaden your search parameters.
@@ -166,6 +166,7 @@
     },
     data () {
       return {
+        settings: this.options,
         processedDataset: [],
         windowWidth: null
       }
@@ -173,12 +174,17 @@
     watch: {
       dataset () {
         this.processData()
+      },
+      settings: {
+        deep: true,
+        handler () {
+          this.processData()
+        }
       }
     },
     mounted () {
       this.setTheme()
       this.processData()
-      this.watchConfig()
       this.windowWidth = window.innerWidth
       this.$nextTick(() => {
         window.addEventListener('resize', this.setInnerWidth)
@@ -186,7 +192,7 @@
     },
     computed: {
       showHeaders () {
-        return !(this.options.config.headers && this.options.config.headers.enabled === false)
+        return !(this.settings.config.headers && this.settings.config.headers.enabled === false)
       },
       processedData () {
         return this.processedDataset
@@ -197,23 +203,23 @@
         // return !!(this.windowWidth && this.windowWidth <= 500)
       },
       actionComponentStyle () {
-        if (!this.options.config.actionComponent) {
+        if (!this.settings.config.actionComponent) {
           return false
         }
 
-        if (!this.options.config.actionComponent.offset) {
+        if (!this.settings.config.actionComponent.offset) {
           return false
         }
 
         let top = '0px'
         let bottom = '0px'
 
-        if (this.options.config.actionComponent.offset.top) {
-          top = this.options.config.actionComponent.offset.top
+        if (this.settings.config.actionComponent.offset.top) {
+          top = this.settings.config.actionComponent.offset.top
         }
 
-        if (this.options.config.actionComponent.offset.bottom) {
-          bottom = this.options.config.actionComponent.offset.bottom
+        if (this.settings.config.actionComponent.offset.bottom) {
+          bottom = this.settings.config.actionComponent.offset.bottom
         }
 
         return `margin-top: ${top}; margin-bottom: ${bottom}`
@@ -255,16 +261,11 @@
       setInnerWidth () {
         this.windowWidth = window.innerWidth
       },
-      watchConfig () {
-        this.$watch('options.config', () => {
-          return this.$nextTick(this.processData)
-        }, { deep: true })
-      },
       processData () {
         let dataset = this.dataset.slice()
 
-        if (this.options.config.filtering.enabled) {
-          for (const filter of this.options.config.filtering.filters) {
+        if (this.settings.config.filtering.enabled) {
+          for (const filter of this.settings.config.filtering.filters) {
             if (!filter.enabled) {
               continue
             }
@@ -279,35 +280,7 @@
               }
 
               if (filter.type === 'dropdown') {
-                if (!filter.value) {
-                  return true
-                }
-
-                if (filter.value && filter.data && typeof filter.data === 'function') {
-                  return filter.data(row[filter.field]) === filter.value
-                }
-
-                if (filter.value && filter.field.indexOf('.') < 0) {
-                  return row[filter.field] === filter.value
-                }
-
-                const val = filter.field.split('.').reduce((o, i) => {
-                  if (row === null || row[o] === null) {
-                    return false
-                  }
-
-                  if (row[o] !== null && row[o][i] !== null) {
-                    return row[o][i]
-                  }
-
-                  if (row[o] !== null) {
-                    return row[o]
-                  }
-                })
-
-                if (typeof val !== 'undefined') {
-                  return val === filter.value
-                }
+                return this.filterDropdown(row, filter)
               }
 
               return true
@@ -315,11 +288,11 @@
           }
         }
 
-        if (this.options.config.sorting.enabled) {
+        if (this.settings.config.sorting.enabled) {
           dataset.sort(this.compare)
         }
 
-        if (this.options.config.search.term) {
+        if (this.settings.config.search.term) {
           dataset = this.search(dataset)
         }
 
@@ -329,8 +302,73 @@
       },
       search (dataset) {
         return dataset.filter(row => {
-          return row[this.options.config.search.field].toLowerCase().search(this.options.config.search.term.toLowerCase()) > -1
+          return row[this.settings.config.search.field].toLowerCase().search(this.settings.config.search.term.toLowerCase()) > -1
         })
+      },
+      filterDropdown (row, filter) {
+        if (!filter.value) {
+          return true
+        }
+
+        if (filter.value && filter.data && typeof filter.data === 'function') {
+          return filter.data(row[filter.field]) === filter.value
+        }
+
+        if (filter.value && filter.field.indexOf('.') < 0) {
+          return this.doFilterByDropdown(filter.value, row[filter.field])
+        }
+
+        const val = filter.field.split('.').reduce((o, i) => {
+          if (row === null || row[o] === null) {
+            return false
+          }
+
+          if (row[o] !== null && row[o][i] !== null) {
+            return row[o][i]
+          }
+
+          if (row[o] !== null) {
+            return row[o]
+          }
+        })
+
+        if (typeof val !== 'undefined') {
+          return this.doFilterByDropdown(filter.value, val)
+        }
+
+        return false
+      },
+      doFilterByDropdown (filterValue, dataValue) {
+        //No filter selected
+        if(Array.isArray(filterValue) && filterValue.length === 0){
+          return true
+        }
+
+        //Empty data
+        if(Array.isArray(dataValue) && dataValue.length === 0){
+          return false
+        }
+        //Both arrays
+        if (Array.isArray(filterValue) && Array.isArray(dataValue)) {
+          return filterValue.some(fv => dataValue.includes(fv))
+        }
+
+        //Both scalar
+        if (!(Array.isArray(filterValue) || Array.isArray(dataValue))) {
+          return filterValue === dataValue
+        }
+
+        //Filter value is array
+        if (Array.isArray(filterValue)) {
+          return filterValue.some(fv => fv === dataValue)
+        }
+
+        //Data value is array
+        if (Array.isArray(dataValue)) {
+          return dataValue.some(dv => dv === filterValue)
+        }
+
+        return false
       },
       filterCheckbox (row, filter) {
         const value = row[filter.field]
@@ -412,7 +450,7 @@
         return 'flex: 1'
       },
       compare (a, b) {
-        let field = this.options.config.sorting.field
+        let field = this.settings.config.sorting.field
 
         if (field.includes('.')) {
           const names = field.split('.')
@@ -437,11 +475,11 @@
 
         // We can only sort strings
         if (first.toString().toLowerCase() < second.toString().toLowerCase()) {
-          return this.options.config.sorting.ascending ? -1 : 1
+          return this.settings.config.sorting.ascending ? -1 : 1
         }
 
         if (first.toString().toLowerCase() > second.toString().toLowerCase()) {
-          return this.options.config.sorting.ascending ? 1 : -1
+          return this.settings.config.sorting.ascending ? 1 : -1
         }
 
         return 0
