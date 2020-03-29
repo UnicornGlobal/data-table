@@ -5,8 +5,9 @@
                 :for="'filter-' + filter.filter">
             {{ filter.text }}
         </label>
-        <vue-select v-model="filter.value" :options="dropdownOptions" v-if="filter.multiple" :multiple="true"
-                    :reduce="item => item.value"/>
+        <vue-select ref="select" v-model="filter.value" :options="dropdownOptions" v-if="filter.multiple"
+                    :multiple="true"
+                    :reduce="item => item.value" placeholder="All"/>
         <select v-else v-model="filter.value" :style="dropdownStyle" :name="`${filter.filter}`">
             <option value="">
                 {{ filter.placeholder }}
@@ -20,15 +21,14 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
-    @import 'vue-select/src/scss/vue-select.scss';
-
+<style lang="scss">
     .v-select {
         width: 100%;
-        background-color: #FFFFFF;
-        border: solid 1px #CED4DA;
-        color: #495057;
         font-weight: bold;
+
+        .vs__dropdown-toggle {
+            width: 100%;
+        }
 
         .vs__dropdown-toggle {
             border: none;
@@ -63,6 +63,9 @@
         }
     }
 
+</style>
+
+<style lang="scss" scoped>
     div {
         display: flex;
         align-items: center;
@@ -86,11 +89,16 @@
 </style>
 
 <script>
-
   import VueSelect from 'vue-select'
+  import 'vue-select/dist/vue-select.css'
+  import { css } from 'styled-vue'
 
   export default {
     props: {
+      theme: {
+        type: Object,
+        required: false
+      },
       filter: {
         type: Object,
         required: true
@@ -110,8 +118,47 @@
         })
       }
     },
+    data () {
+      return {
+        multiselect: {
+          bg: '#FFFFFF',
+          border: 'solid 1px #CED4DA',
+          selectedBg: '#f0f0f0',
+          selectedBorder: '#3c3c3c80',
+          selectedColor: '#333',
+          deselectIconColor: '#3c3c3c80',
+          ...this.theme
+        }
+      }
+    },
+    globalStyle: css`
+      .v-select {
+        background-color: ${vm.multiselect.bg};
+        border: ${vm.multiselect.border};
+      }
+      .vs__dropdown-toggle .vs__selected-options span.vs__selected {
+        background-color: ${vm.multiselect.selectedBg};
+        border: ${vm.multiselect.selectedBorder};
+        color: ${vm.multiselect.selectedColor};
+      }
+      .vs__dropdown-toggle .vs__selected-options .vs__selected .vs__deselect svg{
+        fill: ${vm.multiselect.deselectIconColor};
+        stroke: ${vm.multiselect.deselectIconColor};
+      }
+    `,
+    watch: {
+      filter: {
+        deep: true,
+        handler (config) {
+          // this.setTheme(config)
+        }
+      }
+    },
     components: {
       VueSelect
+    },
+    mounted () {
+
     },
     methods: {
       value (option) {

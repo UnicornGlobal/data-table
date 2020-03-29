@@ -44,24 +44,19 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      {
-        test: /\.css$/,
-        loader: 'css-loader',
+        loader: 'vue-loader',
         options: {
-          modules: true
-        },
-        exclude: /node_modules/
+          compiler: require('styled-vue/compiler')
+        }
       },
       {
-        test: /\.(scss|sass)$/,
+        test: /\.(scss|sass|css)$/,
         use: [
+          'vue-style-loader',
           'style-loader',
           'css-loader',
           'sass-loader'
-        ],
-        exclude: /node_modules/,
+        ]
       },
       {
         test: /\.js$/,

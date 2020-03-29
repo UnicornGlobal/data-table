@@ -1,6 +1,11 @@
 import DataTable from './DataTable.vue'
 
-DataTable.install = async function(Vue, options) {
+import Vue from 'vue'
+import { StyledVue } from 'styled-vue'
+
+Vue.use(StyledVue)
+
+DataTable.install = async function (Vue, options) {
   Vue.prototype.$theme = await options.theme
 
   if (!options.theme.primary) {

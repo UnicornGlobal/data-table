@@ -16,6 +16,7 @@
             <filter-dropdown
                     v-if="filter.type === 'dropdown'"
                     :filter="filter"
+                    :theme="config.multiselect || {}"
                     :options="dropdownDataSet(filter, dataset)">
             </filter-dropdown>
         </div>
@@ -97,6 +98,10 @@
       }
     },
     props: {
+      config: {
+        type: Object,
+        required: true
+      },
       filters: {
         type: Array,
         required: true

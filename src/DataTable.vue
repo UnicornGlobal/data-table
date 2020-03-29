@@ -13,6 +13,7 @@
                 class="filtering-card">
             <filtering
                     v-if="settings.config.filtering.enabled"
+                    :config="settings"
                     :filters="settings.config.filtering.filters"
                     :dataset="dataset">
             </filtering>
@@ -135,6 +136,9 @@
         rowMobileHeight: $rowMobileHeight;
     }
 </style>
+
+<!--<style lang="scss">-->
+<!--</style>-->
 
 <script>
   import Filtering from './components/Filtering.vue'
