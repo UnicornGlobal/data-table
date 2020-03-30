@@ -22,6 +22,8 @@
 </template>
 
 <style lang="scss">
+    @import '~vue-select/src/scss/vue-select.scss';
+
     .v-select {
         width: 100%;
         font-weight: bold;
@@ -90,7 +92,6 @@
 
 <script>
   import VueSelect from 'vue-select'
-  import 'vue-select/dist/vue-select.css'
   import { css } from 'styled-vue'
 
   export default {
