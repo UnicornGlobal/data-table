@@ -72,8 +72,18 @@ The `options` prop is an object with the following props
                 - `type` - Tabbed filter type. Can be `date` or `range`
             - `field` - Field to filter
             - `value` - Initial value of checkbox or dropdown filter
-            - `placeholder` - Dropdown filter placeholder
+            - `placeholder` - Dropdown filter placeholder,
             - `options` - An array of options for dropdown filters. Can be strings or objects with `label` and `value` keys
+            - `multiple` - `true` or `false`. Whether dropdown filter can select multiple values
+            
+    - `multiselect` - If any of the dropdown filters has `multiple = true`, you can use this option to tweak the multi-select look and feel
+        - `bg` - Multi-select background color. Any valid css color value is acceptable
+        - `border` - Multi-select border. Any valid css border value is acceptable
+        - `selectedBg` - Selected item background color. Any valid css color value is acceptable
+        - `selectedColor` - Selected item color. Accepts any valid css color value
+        - `selectedBorder` - Selected item border. Accepts any valid css border value
+        - `deselectIconColor` - Deselect icon color. Accepts any valid css color value
+        
     - `linking` - Configuration for converting a whole table row into a link
         - `enabled` - True or false to enable/disable linking
         - `link` - A function called with row data and returns a router-link `:to` prop value
