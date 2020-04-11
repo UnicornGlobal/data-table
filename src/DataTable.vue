@@ -344,12 +344,12 @@
       },
       doFilterByDropdown (filterValue, dataValue) {
         //No filter selected
-        if(Array.isArray(filterValue) && filterValue.length === 0){
+        if (Array.isArray(filterValue) && filterValue.length === 0) {
           return true
         }
 
         //Empty data
-        if(Array.isArray(dataValue) && dataValue.length === 0){
+        if (Array.isArray(dataValue) && dataValue.length === 0) {
           return false
         }
         //Both arrays
@@ -477,6 +477,15 @@
         const first = a[field] || ''
         const second = b[field] || ''
 
+        if (typeof first === 'number' || typeof second === 'number') {
+          if (first > second) {
+            return this.settings.config.sorting.ascending ? 1 : -1
+          }
+          if (second > first) {
+            return this.settings.config.sorting.ascending ? -1 : 1
+          }
+          return 0
+        }
         // We can only sort strings
         if (first.toString().toLowerCase() < second.toString().toLowerCase()) {
           return this.settings.config.sorting.ascending ? -1 : 1
